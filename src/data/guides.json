@@ -1,0 +1,2758 @@
+[
+  {
+    "id": 2004,
+    "name": "HARRY HERMANAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 2002,
+    "name": "DANI YUDISTIRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1999,
+    "name": "MAS MULIYADI R",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1996,
+    "name": "M. SYAWQI SAMANHUDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1994,
+    "name": "LALU SAKIRMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1992,
+    "name": "HARYANTO",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1990,
+    "name": "SEPTIAN HARISWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1988,
+    "name": "NI WAYAN SUKRYANI UTAMI DEWI",
+    "gender": "female",
+    "specialties": [
+      "Dutch Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1985,
+    "name": "HENNY YUSNITA",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1920,
+    "name": "GUNAWAN APRIADI",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1918,
+    "name": "LILIK PURNAMA",
+    "gender": "female",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1910,
+    "name": "MUH. SHOLUHA IMADUL BILAD",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1906,
+    "name": "DEDI GUNAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1904,
+    "name": "DENDA SUKATNI WATI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1902,
+    "name": "HARIANTO TIO",
+    "gender": "male",
+    "specialties": [
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 1888,
+    "name": "HERU IMAN ALFARIZI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1887,
+    "name": "YANTI ASMARA",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1886,
+    "name": "NURMIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1884,
+    "name": "TEGUH SETIAWAN",
+    "gender": "male",
+    "specialties": [
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 1878,
+    "name": "M. ALWAN DAMANHURI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1876,
+    "name": "H. JUMAH RAMLI",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1874,
+    "name": "ABDUL WAHID AL ANSORI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1872,
+    "name": "HERRY SABWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1870,
+    "name": "MUSTIKA",
+    "gender": "female",
+    "specialties": [
+      "French Guide"
+    ]
+  },
+  {
+    "id": 1868,
+    "name": "NAPSIAH",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1866,
+    "name": "AHMAD SAZALI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1864,
+    "name": "HARMUNADI",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1862,
+    "name": "SWANDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1779,
+    "name": "ATIP FAHRUN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1777,
+    "name": "ADJI HUZAENI PAHRONI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1775,
+    "name": "AGUS SALIM",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1773,
+    "name": "ABDUL PRAYOGI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1770,
+    "name": "RIZAL FAHRURROZI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1768,
+    "name": "NUTRALIP",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1763,
+    "name": "AZIZ JUNAIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1760,
+    "name": "DENDA SISKA ROSANTI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1758,
+    "name": "YUNIA LASTRI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1756,
+    "name": "RADEN NYAKRASASIH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1754,
+    "name": "JUMANA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1752,
+    "name": "NI LUH GEDE KRISNARI GINA ANJANI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1749,
+    "name": "SUPARLAN, S.Pd., M.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1747,
+    "name": "EDUARDO DOS",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1744,
+    "name": "DENDA TIARA WULANDARI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1742,
+    "name": "IWAN SUYADI, S.E., M.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1740,
+    "name": "HERMAN URMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1736,
+    "name": "CATUR HERU SETYAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1734,
+    "name": "ASDI ARDI ARYA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1732,
+    "name": "NAUFAL PUTRADISASATRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1730,
+    "name": "AZMI LOMBOK",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1721,
+    "name": "FAUZAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1700,
+    "name": "ARIO PUTRADINATA, A.Md",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1698,
+    "name": "DENI SETIAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "French Guide"
+    ]
+  },
+  {
+    "id": 1696,
+    "name": "FEBRI LAKSANA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1694,
+    "name": "IRHAM KHALIP",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1692,
+    "name": "I WAYAN NATE",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1688,
+    "name": "MUHAMMAD SAIFUDDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1686,
+    "name": "MUSTAFA, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1685,
+    "name": "SUHANA ARI WIBOWO UMAR DANI",
+    "gender": "male",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1683,
+    "name": "SAHARA BUDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1681,
+    "name": "IDA BAGUS SUWANDA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1679,
+    "name": "ZAIDUN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1677,
+    "name": "ANGGITO ABIMAYU",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 1628,
+    "name": "AGUS MARYADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1626,
+    "name": "MUHAMAD TANWIR",
+    "gender": "male",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1624,
+    "name": "TANWIR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1622,
+    "name": "Drs. JUPNI AMRI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1620,
+    "name": "ADELLA AYU FEBRIYANTI",
+    "gender": "female",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1618,
+    "name": "SOPIAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1616,
+    "name": "HERMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1612,
+    "name": "RANAWIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 1610,
+    "name": "JULIANTO",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1607,
+    "name": "I MADE YOGI KUMARA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1605,
+    "name": "MUZAKIR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "French Guide"
+    ]
+  },
+  {
+    "id": 1603,
+    "name": "MUHAMMAD SAIPUL MAKBUL",
+    "gender": "male",
+    "specialties": [
+      "Indonesian Guide",
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 1601,
+    "name": "ARIFRAHMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1599,
+    "name": "Dr. JUMADIL. S.Pd,. M.Pd",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1596,
+    "name": "SAIFULLAH",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1594,
+    "name": "TAMRIN HARAHAP",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1592,
+    "name": "SADLI",
+    "gender": "male",
+    "specialties": [
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1590,
+    "name": "DASA KUSUMA",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1588,
+    "name": "MOHAMAD JULIAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1586,
+    "name": "HIDAYATULLAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1584,
+    "name": "FLORIANUS BARUK",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1582,
+    "name": "AMIRUDIN KALIA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1580,
+    "name": "RAMDAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1578,
+    "name": "NOVIA FARIDA ARIANI",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1576,
+    "name": "AHMAD GAZALI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1574,
+    "name": "MUHAMAD HAJAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1572,
+    "name": "HUSNI, M.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1569,
+    "name": "AGUS HERMANTO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1566,
+    "name": "NURSIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1563,
+    "name": "SUPRATMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Komodo Adventure and Sailing Guide",
+      "Russian Guide"
+    ]
+  },
+  {
+    "id": 1560,
+    "name": "MOHCHAMMAD SYAFAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1558,
+    "name": "MARTINUS DONI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1556,
+    "name": "LALU ARIS KUSNANDAR",
+    "gender": "male",
+    "specialties": [
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 1554,
+    "name": "ALFI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1551,
+    "name": "REZA HARMAN SUPLA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1549,
+    "name": "MUAMMAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1546,
+    "name": "AMALIA KARTIKA",
+    "gender": "female",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1545,
+    "name": "SAHWAN",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1543,
+    "name": "AKMALUDIN",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1541,
+    "name": "MARWI, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1538,
+    "name": "SYAMSUL BAHRI, S.H",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1536,
+    "name": "HANATAN SUGIONO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1528,
+    "name": "MUHAMMAD THABRANI ABRAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1526,
+    "name": "LALU SAMSUL ANHAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1524,
+    "name": "I MADE PUTRA ARLITHA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1522,
+    "name": "CHAERIL ANWAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1512,
+    "name": "IMAM FIRMANSYAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1510,
+    "name": "I GUSTI MADE OKA ARDANA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1508,
+    "name": "PANJI IRAWAN HADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1506,
+    "name": "MULIADI DARWIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1504,
+    "name": "ARDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1502,
+    "name": "NIDA EL RAMDANI",
+    "gender": "female",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1500,
+    "name": "HUSNI RAI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1498,
+    "name": "MAHSUN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1496,
+    "name": "ASA LIDARTO",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1494,
+    "name": "TEGUH IMAN PRIBADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1492,
+    "name": "ZULKARNAIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1485,
+    "name": "HANAFI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1483,
+    "name": "IDA BAGUS PUTU SRI ARDANA",
+    "gender": "male",
+    "specialties": [
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 1481,
+    "name": "ABDILLAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1479,
+    "name": "MUHAMMAD ROMZI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1477,
+    "name": "HERMAN",
+    "gender": "male",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1475,
+    "name": "AKMALUDDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1473,
+    "name": "HARI WIBOWO",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1472,
+    "name": "PROBO ADJI SUKMANTO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1469,
+    "name": "M. ZULHIRAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1467,
+    "name": "RANU WIRYADI",
+    "gender": "male",
+    "specialties": [
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 1465,
+    "name": "GALIH JINGGA KUMARA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1463,
+    "name": "KARIM ARMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1461,
+    "name": "ARDIANSYAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Italian Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 1459,
+    "name": "YULIA HARNEVA",
+    "gender": "female",
+    "specialties": [
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1457,
+    "name": "MUHAMAD YUSUF",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1455,
+    "name": "SAPOAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1452,
+    "name": "GRISSICA EKA WIBOWO",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1450,
+    "name": "JUANA MS",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1448,
+    "name": "CHANDRADINATA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1446,
+    "name": "I WAYAN KAMAS",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1441,
+    "name": "HELMI FAUZI HARHARAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1357,
+    "name": "MAULANA HILMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1340,
+    "name": "IDA WAYAN ADITA PUTRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1318,
+    "name": "YUNI SULPIA HARIANI, S.Pd., M.Par.",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1316,
+    "name": "WENDI KUFRABAWA, M.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1314,
+    "name": "ULFA AINUN ASYIQIN",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1312,
+    "name": "TURKI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1310,
+    "name": "SYAIFUDIN ZUHRI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1308,
+    "name": "SUDIRMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1306,
+    "name": "SRI HARIANI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1304,
+    "name": "SOPIAN HADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1302,
+    "name": "SAMSUL HADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1300,
+    "name": "SADELI SUKAHAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1298,
+    "name": "ROBBY SALAM",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1296,
+    "name": "RIO PERMANA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1294,
+    "name": "RAMLI AHMAD",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1292,
+    "name": "RAMDANI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1289,
+    "name": "SAUFI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1283,
+    "name": "AMILUDDIN",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1281,
+    "name": "LUKMAN HADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1279,
+    "name": "SATRIA WADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1277,
+    "name": "YOSEF SOLI MARTONOVAL",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1275,
+    "name": "KADRI",
+    "gender": "male",
+    "specialties": [
+      "German Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1272,
+    "name": "EKO KRIS HENRYAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1271,
+    "name": "RIZKY RAMADHAN PUTRA WIDHIE",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1270,
+    "name": "MUHAMMAD ADDRIZA FARINS",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1268,
+    "name": "JULIYAN YOURI HADY PUTRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1266,
+    "name": "M. ASWANDI. S",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1264,
+    "name": "RAMDANI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1262,
+    "name": "ABDUL RAHIM",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1260,
+    "name": "RAJIB HARRI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1256,
+    "name": "PAHRUL HADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1254,
+    "name": "RAMDAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1251,
+    "name": "H. DARMAIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1249,
+    "name": "SANTO YUSNAINI M.",
+    "gender": "male",
+    "specialties": [
+      "Korean Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1247,
+    "name": "RAHMAN HIDAYAT",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1236,
+    "name": "MARNI",
+    "gender": "female",
+    "specialties": [
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 1234,
+    "name": "MUHAMAD GANDI",
+    "gender": "male",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1232,
+    "name": "RADEN MUH. YUSI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1230,
+    "name": "NURHAYANI",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 1228,
+    "name": "NURASIAH",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 1226,
+    "name": "MUSLIHAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1224,
+    "name": "MUHAMMAD YUSRA KADRI",
+    "gender": "male",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1222,
+    "name": "MUHAMMAD TAUFIK",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1220,
+    "name": "MUHAMMAD HABIBI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1218,
+    "name": "MUHAMMAD ALIF RISNANDA ZALFA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1216,
+    "name": "WASKITO NUR HARYANTO",
+    "gender": "male",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1214,
+    "name": "ILHAM SYAH",
+    "gender": "male",
+    "specialties": [
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 1212,
+    "name": "KARYADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 1210,
+    "name": "FAUZIE L",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1208,
+    "name": "LALU ARIF ASAOTAN HAKIM",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1206,
+    "name": "LALU TEGUH WIBAWA BUKIT",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide"
+    ]
+  },
+  {
+    "id": 1203,
+    "name": "LALU MAHSAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1201,
+    "name": "LALU MUKMIN JAHAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1199,
+    "name": "LALU RATMAWA WIRAJUNA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1197,
+    "name": "AGUSTINO LEONARDO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1194,
+    "name": "MARIADI, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1192,
+    "name": "MURIDIN",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1190,
+    "name": "TAUFIK HARI SUBAGIO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1188,
+    "name": "NI MADE DARIANTHY",
+    "gender": "female",
+    "specialties": [
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1185,
+    "name": "TAUFIK SUADIYATNO",
+    "gender": "male",
+    "specialties": [
+      "Dutch Guide"
+    ]
+  },
+  {
+    "id": 1181,
+    "name": "FATHURRAHMAN",
+    "gender": "male",
+    "specialties": [
+      "French Guide"
+    ]
+  },
+  {
+    "id": 1177,
+    "name": "MIASA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1175,
+    "name": "MUHAMMAD TAUFIKURRAHMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1173,
+    "name": "ENDANG SRI WAHYUNI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1171,
+    "name": "DESAK MADE SRI ASTUTI",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1168,
+    "name": "AIDA",
+    "gender": "female",
+    "specialties": [
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 1166,
+    "name": "I WAYAN SUMARTA",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1162,
+    "name": "HARIANTO",
+    "gender": "male",
+    "specialties": [
+      "Indonesian Guide",
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 1160,
+    "name": "BUCHARI AHMAD",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1158,
+    "name": "H. DENNY TITA PRATAMA",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide",
+      "Indonesian Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1156,
+    "name": "LALU REZA TILAH ARDI GUNA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1154,
+    "name": "AHMAD HANAN, M.Pd.",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1152,
+    "name": "ASMUNI EHZA WAHYUDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1150,
+    "name": "PURNA IRAWAN, S.Pd., M.Tr.,Par.",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1148,
+    "name": "SAMSUL BOHARI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1145,
+    "name": "MULYADI,. S.PD, M.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1143,
+    "name": "MUHAMMAD ZULKARNAIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 1139,
+    "name": "ROBI RODIA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1136,
+    "name": "RATE",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1134,
+    "name": "MAULANA FIRDAUS",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 1131,
+    "name": "MUSTAHIK MALIKI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1128,
+    "name": "KAOLAN SADIDA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1121,
+    "name": "IKHSAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1119,
+    "name": "HIDAYATULLOH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1117,
+    "name": "HASANUDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1115,
+    "name": "GILANG NANDA SAPUTRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1113,
+    "name": "EVRIZAL AKBAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1111,
+    "name": "ERWIN RAHADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1101,
+    "name": "AURIYATUL  ACHMAD",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 1095,
+    "name": "JUNAIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1082,
+    "name": "LALU MUHAMAD ALULI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1078,
+    "name": "RAHMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1075,
+    "name": "SHAIFULLAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1074,
+    "name": "BOBY ANAF",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1071,
+    "name": "WAHYUDDIN RASYID",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1067,
+    "name": "TAUFIK RASIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1060,
+    "name": "I MADE SUGIARTA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1058,
+    "name": "FAHRIANA HAPSAH",
+    "gender": "female",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1056,
+    "name": "ZAENAL ABIDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 1017,
+    "name": "EKO HADIYANSYAH SURYA ATMAJA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1015,
+    "name": "ANDIKA WAHYUDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1013,
+    "name": "ANANDA PERMATA CHANDRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1011,
+    "name": "AHMAD SYARIF SYUKRON",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1007,
+    "name": "AHMAD JURJANI, A.Md.Par",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1005,
+    "name": "ADHAR DAFI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 1003,
+    "name": "SAIFUL HANAN",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 1000,
+    "name": "I GEDE PANDE SUHARTA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 999,
+    "name": "RIAN SUPRIADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 997,
+    "name": "I KETUT YUDIASA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 995,
+    "name": "BAHRAIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 993,
+    "name": "JURAIMI HASYIM, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 991,
+    "name": "NAZMI HERDANI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 989,
+    "name": "M. FAJRI",
+    "gender": "male",
+    "specialties": [
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 986,
+    "name": "LALU  RUSTANNAIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 984,
+    "name": "FERDINANDUS CANGKUNG",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 982,
+    "name": "SUFYAN HAKIM",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 980,
+    "name": "AFRIANUS DAMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 977,
+    "name": "M. BILYADI IZZUL ISLAM",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 975,
+    "name": "MAHRIANI",
+    "gender": "female",
+    "specialties": [
+      "Indonesian Guide",
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 973,
+    "name": "JUMARDI",
+    "gender": "male",
+    "specialties": [
+      "Dutch Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 971,
+    "name": "EUGENIUS CH. K. ROGA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 969,
+    "name": "VINSENSIUS JOKO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 967,
+    "name": "KAMARUDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 965,
+    "name": "SAIBI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 963,
+    "name": "SAM SAIMA H, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 961,
+    "name": "PARHAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 959,
+    "name": "CHAERUDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 957,
+    "name": "SIRDA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 955,
+    "name": "IMAM IKHSANUDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 937,
+    "name": "M. AGA KHAN",
+    "gender": "male",
+    "specialties": [
+      "German Guide"
+    ]
+  },
+  {
+    "id": 935,
+    "name": "MUHAMAD FAUZI",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 933,
+    "name": "AHMAD HARY JUNAIDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 931,
+    "name": "EDY JUNAEDI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 928,
+    "name": "FENDI FERDINAND",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 926,
+    "name": "DARWIN WITARSA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 924,
+    "name": "DANI SAPUTRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 922,
+    "name": "ZULKARNAEN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 920,
+    "name": "ZAENUDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 913,
+    "name": "JAYA PUTRA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 910,
+    "name": "LALU TRIANA FIRMANSYAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 908,
+    "name": "ANJONI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 906,
+    "name": "MASRIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide"
+    ]
+  },
+  {
+    "id": 903,
+    "name": "MUHAMMAD ABDUL KARIM",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 900,
+    "name": "KHOTIB FAKHRUDDIN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 898,
+    "name": "JAMI'AT",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 896,
+    "name": "SURYADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 894,
+    "name": "M. RAHMATUL RIZKY",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 890,
+    "name": "L. PARMA HANESWARA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 886,
+    "name": "YUSRI RAHMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 882,
+    "name": "SONY SETIAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 880,
+    "name": "BAYU KRIS APRIAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 876,
+    "name": "ISMA MAISUM",
+    "gender": "female",
+    "specialties": [
+      "Arabic Guide"
+    ]
+  },
+  {
+    "id": 875,
+    "name": "NI NYOMAN SAVITRISARI",
+    "gender": "female",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 874,
+    "name": "SOBRI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 871,
+    "name": "IFAN ABDILLAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 869,
+    "name": "RIZQI AKBAR SANTOSO",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 867,
+    "name": "MOH TAUFIQURRAHMAN",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "English Guide"
+    ]
+  },
+  {
+    "id": 865,
+    "name": "SUPIRMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Korean Guide"
+    ]
+  },
+  {
+    "id": 862,
+    "name": "TONI FASLAH, S.Pd",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 860,
+    "name": "UMAR SYAFIEQ",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 856,
+    "name": "ZULFIKAR ALI BHUTO NASUTION",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "French Guide"
+    ]
+  },
+  {
+    "id": 854,
+    "name": "ZULFAN ISHAK",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 852,
+    "name": "DJOKY HERMAWAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 850,
+    "name": "SYOFIAN YULIADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 848,
+    "name": "AULIA DIANA ZULFA",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 846,
+    "name": "NISA",
+    "gender": "female",
+    "specialties": [
+      "Mandarin Guide"
+    ]
+  },
+  {
+    "id": 838,
+    "name": "NURUL AINI",
+    "gender": "female",
+    "specialties": [
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 836,
+    "name": "FAHRURROZI GAFFAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 833,
+    "name": "MURA SATRIA UTAMA",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 827,
+    "name": "I NYOMAN SURIANA",
+    "gender": "male",
+    "specialties": [
+      "Italian Guide"
+    ]
+  },
+  {
+    "id": 825,
+    "name": "LALU GAE ARTA NUGRAHA",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 823,
+    "name": "LALU WIDIANING ARTHA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Komodo Adventure and Sailing Guide"
+    ]
+  },
+  {
+    "id": 810,
+    "name": "KETUT PASEK ARIANTA",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Japanese Guide"
+    ]
+  },
+  {
+    "id": 790,
+    "name": "SYAMSU HAEDY ANUGRAH",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 787,
+    "name": "AHYAR",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Spanish Guide"
+    ]
+  },
+  {
+    "id": 785,
+    "name": "EDI FIRMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "French Guide"
+    ]
+  },
+  {
+    "id": 783,
+    "name": "DWIE SRI HASMIARNI, A.Md.Par",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 781,
+    "name": "LALU FATHIN YUSUF",
+    "gender": "male",
+    "specialties": [
+      "Arabic Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 778,
+    "name": "LALU REKSA SUKMALANA PUTRA",
+    "gender": "male",
+    "specialties": [
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 776,
+    "name": "TANTOWI SURAHMAN",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 773,
+    "name": "ABDUL SYAHID",
+    "gender": "male",
+    "specialties": [
+      "German Guide"
+    ]
+  },
+  {
+    "id": 769,
+    "name": "EUGENIUS CAROL WATJTILA AKONG",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 766,
+    "name": "SURIADI",
+    "gender": "male",
+    "specialties": [
+      "English Guide"
+    ]
+  },
+  {
+    "id": 764,
+    "name": "ROMYSAH, A.Md.Par",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide",
+      "Malay Guide"
+    ]
+  },
+  {
+    "id": 692,
+    "name": "BAIQ PUTRI CAHYA CASTELLIA",
+    "gender": "female",
+    "specialties": [
+      "English Guide",
+      "Indonesian Guide"
+    ]
+  },
+  {
+    "id": 690,
+    "name": "Drs. H. LALU FATWIR UZALI, S.Pd.,M.Pd.",
+    "gender": "male",
+    "specialties": [
+      "English Guide",
+      "German Guide",
+      "Indonesian Guide"
+    ]
+  }
+]
