@@ -228,6 +228,9 @@ export const UI_TEXT: Record<
     sendWhatsAppBtn: string;
     showingCount: string;
     loadMoreBtn: string;
+    pagePrevBtn: string;
+    pageNextBtn: string;
+    pageLabel: string;
     viewAllStoriesBtn: string;
     viewAllDestinationsBtn: string;
     tripDateLabel: string;
@@ -301,6 +304,9 @@ export const UI_TEXT: Record<
     sendWhatsAppBtn: "Kirim Permintaan Resmi ke Tim LOTTA",
     showingCount: "Menampilkan",
     loadMoreBtn: "Tampilkan Lebih Banyak Guide",
+    pagePrevBtn: "Sebelumnya",
+    pageNextBtn: "Berikutnya",
+    pageLabel: "Halaman",
     viewAllStoriesBtn: "Lihat Semua 12 Cerita Destinasi",
     viewAllDestinationsBtn: "Lihat Semua 24 Destinasi Lengkap",
     tripDateLabel: "Tanggal Perjalanan",
@@ -373,6 +379,9 @@ export const UI_TEXT: Record<
     sendWhatsAppBtn: "Send Official Request to LOTTA Team",
     showingCount: "Showing",
     loadMoreBtn: "Load More Guides",
+    pagePrevBtn: "Previous",
+    pageNextBtn: "Next",
+    pageLabel: "Page",
     viewAllStoriesBtn: "Explore All 12 Destination Stories",
     viewAllDestinationsBtn: "Explore All 24 Destinations",
     tripDateLabel: "Trip Date",
@@ -445,6 +454,9 @@ export const UI_TEXT: Record<
     sendWhatsAppBtn: "Invia Richiesta Ufficiale al Team LOTTA",
     showingCount: "Mostrando",
     loadMoreBtn: "Mostra Altre Guide",
+    pagePrevBtn: "Precedente",
+    pageNextBtn: "Successivo",
+    pageLabel: "Pagina",
     viewAllStoriesBtn: "Vedi Tutte le 12 Storie",
     viewAllDestinationsBtn: "Vedi Tutte le 24 Destinazioni",
     tripDateLabel: "Data del Viaggio",

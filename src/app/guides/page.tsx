@@ -57,7 +57,8 @@ function GuidesContent() {
     "All Languages / Specialties"
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [visibleCount, setVisibleCount] = useState<number>(12);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const pageSize = 12;
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -81,7 +82,7 @@ function GuidesContent() {
     setGenderFilter("all");
     setSpecialtyFilter("All Languages / Specialties");
     setSearchQuery("");
-    setVisibleCount(12);
+    setCurrentPage(1);
   };
 
   const filteredGuides = useMemo(
@@ -94,10 +95,55 @@ function GuidesContent() {
     [genderFilter, specialtyFilter, searchQuery]
   );
 
+  const totalPages = Math.max(1, Math.ceil(filteredGuides.length / pageSize));
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+  const startIndex = (safeCurrentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, filteredGuides.length);
+
   const displayedGuides = useMemo(
-    () => filteredGuides.slice(0, visibleCount),
-    [filteredGuides, visibleCount]
+    () => filteredGuides.slice(startIndex, startIndex + pageSize),
+    [filteredGuides, startIndex, pageSize]
   );
+
+  const handlePageChange = (newPage: number) => {
+    const target = Math.min(Math.max(1, newPage), totalPages);
+    setCurrentPage(target);
+    if (typeof window !== "undefined") {
+      const el = document.getElementById("guide-roster-list");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
+  const paginationRange = useMemo(() => {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (safeCurrentPage <= 4) {
+      return [1, 2, 3, 4, 5, "...", totalPages];
+    }
+    if (safeCurrentPage >= totalPages - 3) {
+      return [
+        1,
+        "...",
+        totalPages - 4,
+        totalPages - 3,
+        totalPages - 2,
+        totalPages - 1,
+        totalPages,
+      ];
+    }
+    return [
+      1,
+      "...",
+      safeCurrentPage - 1,
+      safeCurrentPage,
+      safeCurrentPage + 1,
+      "...",
+      totalPages,
+    ];
+  }, [safeCurrentPage, totalPages]);
 
   const activePackageObj = useMemo(() => {
     return findPackage(selectedRoute);
@@ -372,7 +418,10 @@ function GuidesContent() {
           {/* Left Column (61.8%): STEP 3 — Guide Selection & 326 Guides Roster */}
           <div>
             {/* Guide Assignment Mode Selector */}
-            <div className="bg-forest-alt border border-forest-border rounded-2xl p-5 sm:p-6 mb-6 space-y-5">
+            <div
+              id="guide-roster-list"
+              className="bg-forest-alt border border-forest-border rounded-2xl p-5 sm:p-6 mb-6 space-y-5 scroll-mt-20"
+            >
               <div>
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-forest-header text-forest-sage text-[11px] font-extrabold uppercase tracking-wider mb-2">
                   {lang === "id"
@@ -486,7 +535,7 @@ function GuidesContent() {
                         type="button"
                         onClick={() => {
                           setGenderFilter(btn.value);
-                          setVisibleCount(12);
+                          setCurrentPage(1);
                         }}
                         className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition ${
                           genderFilter === btn.value
@@ -513,7 +562,7 @@ function GuidesContent() {
                       value={specialtyFilter}
                       onChange={(e) => {
                         setSpecialtyFilter(e.target.value);
-                        setVisibleCount(12);
+                        setCurrentPage(1);
                       }}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-forest-input text-sm font-bold text-forest-header focus:outline-none focus:ring-2 focus:ring-forest-primary"
                     >
@@ -541,7 +590,7 @@ function GuidesContent() {
                       value={searchQuery}
                       onChange={(e) => {
                         setSearchQuery(e.target.value);
-                        setVisibleCount(12);
+                        setCurrentPage(1);
                       }}
                       placeholder={t.searchNamePlaceholder}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-forest-input text-sm text-forest-header placeholder:text-forest-body/60 focus:outline-none focus:ring-2 focus:ring-forest-primary"
@@ -551,7 +600,27 @@ function GuidesContent() {
 
                 <div className="text-xs font-bold text-forest-body flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-forest-border/70">
                   <span>
-                    {t.showingCount} {displayedGuides.length} / {filteredGuides.length} Guide
+                    {filteredGuides.length > 0 ? (
+                      <>
+                        {lang === "id"
+                          ? `Menampilkan ${startIndex + 1}–${endIndex} dari ${filteredGuides.length} Guide`
+                          : lang === "en"
+                          ? `Showing ${startIndex + 1}–${endIndex} of ${filteredGuides.length} Guides`
+                          : `Mostrando ${startIndex + 1}–${endIndex} di ${filteredGuides.length} Guide`}
+                        {" • "}
+                        <span className="text-forest-header font-extrabold">
+                          {t.pageLabel} {safeCurrentPage} / {totalPages}
+                        </span>
+                      </>
+                    ) : (
+                      <span>
+                        {lang === "id"
+                          ? "0 Guide ditemukan"
+                          : lang === "en"
+                          ? "0 Guides found"
+                          : "0 Guide trovate"}
+                      </span>
+                    )}
                   </span>
                   {hasActiveFilter && (
                     <button
@@ -566,105 +635,193 @@ function GuidesContent() {
               </div>
             </div>
 
-            {/* Guides Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {displayedGuides.map((guide) => {
-                const isSelected = selectedGuide?.id === guide.id;
-                return (
-                  <div
-                    key={guide.id}
-                    className={`p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col justify-between gap-4 ${
-                      isSelected
-                        ? "bg-forest-card/90 border-forest-header shadow-md"
-                        : "bg-white border-forest-border hover:border-forest-primary"
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="font-extrabold text-sm sm:text-base text-forest-header leading-snug">
-                          {guide.name}
-                        </div>
-                        {isSelected && (
-                          <span className="shrink-0 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-forest-header text-white">
-                            {lang === "id" ? "Terpilih" : lang === "en" ? "Selected" : "Scelta"}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
-                        <span className="font-semibold text-forest-title">
-                          {guide.gender === "Female"
-                            ? lang === "id"
-                              ? "Pemandu Wanita"
-                              : lang === "en"
-                              ? "Female Guide"
-                              : "Guida Donna"
-                            : lang === "id"
-                            ? "Pemandu Pria"
-                            : lang === "en"
-                            ? "Male Guide"
-                            : "Guida Uomo"}
-                        </span>
-                        <span className="text-forest-border">•</span>
-                        <span className="text-[11px] font-bold text-forest-body">
-                          Lisensi HPI NTB
-                        </span>
-                      </div>
-
-                      <div className="mt-2.5 flex flex-wrap gap-1">
-                        {guide.specialties.map((spec) => (
-                          <span
-                            key={spec}
-                            className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-forest-pill text-forest-title border border-forest-border/60"
-                          >
-                            {SPECIALTY_LABELS[spec]?.[lang] || spec}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (isSelected) {
-                          setSelectedGuide(null);
-                        } else {
-                          setSelectedGuide(guide);
-                        }
-                      }}
-                      className={`w-full py-2.5 px-3 rounded-xl font-extrabold text-xs transition uppercase tracking-wider ${
-                        isSelected
-                          ? "bg-forest-header text-white hover:bg-forest-title"
-                          : "bg-forest-alt hover:bg-forest-primary text-forest-header hover:text-white border border-forest-border"
-                      }`}
-                    >
-                      {isSelected
-                        ? lang === "id"
-                          ? "✓ Guide Terpilih (Klik untuk Batal)"
-                          : lang === "en"
-                          ? "✓ Selected (Click to Remove)"
-                          : "✓ Selezionata (Clicca per Rimuovere)"
-                        : lang === "id"
-                        ? "+ Pilih Guide Ini"
-                        : lang === "en"
-                        ? "+ Select This Guide"
-                        : "+ Seleziona Guida"}
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-
-            {visibleCount < filteredGuides.length && (
-              <div className="mt-6 text-center">
+            {/* Guides Grid / Empty State */}
+            {displayedGuides.length === 0 ? (
+              <div className="p-8 sm:p-10 rounded-2xl bg-white border border-forest-border text-center space-y-3">
+                <div className="font-extrabold text-base text-forest-header">
+                  {lang === "id"
+                    ? "Tidak ada pemandu yang cocok dengan filter"
+                    : lang === "en"
+                    ? "No guides match your filter criteria"
+                    : "Nessuna guida corrisponde ai criteri"}
+                </div>
+                <p className="text-xs text-forest-body max-w-md mx-auto leading-relaxed">
+                  {lang === "id"
+                    ? "Silakan coba ubah kata kunci pencarian nama atau reset filter untuk menampilkan kembali seluruh 326 pemandu resmi."
+                    : lang === "en"
+                    ? "Try adjusting your search query or reset the filter to browse the full 326 official guide roster."
+                    : "Prova a modificare la ricerca o reimposta i filtri per vedere tutte le 326 guide."}
+                </p>
                 <button
                   type="button"
-                  onClick={() => setVisibleCount((prev) => prev + 24)}
-                  className="px-6 py-3.5 rounded-xl bg-forest-alt hover:bg-forest-card text-forest-header border-2 border-forest-border font-extrabold text-xs uppercase tracking-wider transition"
+                  onClick={resetAllGuideFilters}
+                  className="px-4 py-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition shadow-sm"
                 >
-                  {t.loadMoreBtn} ({filteredGuides.length - visibleCount} {lang === "id" ? "tersisa" : "remaining"})
+                  {lang === "id"
+                    ? "Tampilkan Semua 326 Guide"
+                    : lang === "en"
+                    ? "Show All 326 Guides"
+                    : "Mostra Tutte le 326 Guide"}
                 </button>
               </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {displayedGuides.map((guide) => {
+                  const isSelected = selectedGuide?.id === guide.id;
+                  return (
+                    <div
+                      key={guide.id}
+                      className={`p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col justify-between gap-4 ${
+                        isSelected
+                          ? "bg-forest-card/90 border-forest-header shadow-md"
+                          : "bg-white border-forest-border hover:border-forest-primary"
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="font-extrabold text-sm sm:text-base text-forest-header leading-snug">
+                            {guide.name}
+                          </div>
+                          {isSelected && (
+                            <span className="shrink-0 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-forest-header text-white">
+                              {lang === "id" ? "Terpilih" : lang === "en" ? "Selected" : "Scelta"}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
+                          <span className="font-semibold text-forest-title">
+                            {guide.gender === "Female"
+                              ? lang === "id"
+                                ? "Pemandu Wanita"
+                                : lang === "en"
+                                ? "Female Guide"
+                                : "Guida Donna"
+                              : lang === "id"
+                              ? "Pemandu Pria"
+                              : lang === "en"
+                              ? "Male Guide"
+                              : "Guida Uomo"}
+                          </span>
+                          <span className="text-forest-border">•</span>
+                          <span className="text-[11px] font-bold text-forest-body">
+                            Lisensi HPI NTB
+                          </span>
+                        </div>
+
+                        <div className="mt-2.5 flex flex-wrap gap-1">
+                          {guide.specialties.map((spec) => (
+                            <span
+                              key={spec}
+                              className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-forest-pill text-forest-title border border-forest-border/60"
+                            >
+                              {SPECIALTY_LABELS[spec]?.[lang] || spec}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (isSelected) {
+                            setSelectedGuide(null);
+                          } else {
+                            setSelectedGuide(guide);
+                          }
+                        }}
+                        className={`w-full py-2.5 px-3 rounded-xl font-extrabold text-xs transition uppercase tracking-wider ${
+                          isSelected
+                            ? "bg-forest-header text-white hover:bg-forest-title"
+                            : "bg-forest-alt hover:bg-forest-primary text-forest-header hover:text-white border border-forest-border"
+                        }`}
+                      >
+                        {isSelected
+                          ? lang === "id"
+                            ? "✓ Guide Terpilih (Klik untuk Batal)"
+                            : lang === "en"
+                            ? "✓ Selected (Click to Remove)"
+                            : "✓ Selezionata (Clicca per Rimuovere)"
+                          : lang === "id"
+                          ? "+ Pilih Guide Ini"
+                          : lang === "en"
+                          ? "+ Select This Guide"
+                          : "+ Seleziona Guida"}
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <nav
+                aria-label="Navigasi Halaman Guide"
+                className="mt-6 p-3 sm:p-4 rounded-2xl bg-white border border-forest-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3"
+              >
+                {/* Previous Button */}
+                <button
+                  type="button"
+                  disabled={safeCurrentPage <= 1}
+                  onClick={() => handlePageChange(safeCurrentPage - 1)}
+                  className={`w-full sm:w-auto px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                    safeCurrentPage <= 1
+                      ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                      : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                  }`}
+                >
+                  <span>←</span>
+                  <span>{t.pagePrevBtn}</span>
+                </button>
+
+                {/* Page Number Pills (Smart Windowing) */}
+                <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center">
+                  {paginationRange.map((item, idx) => {
+                    if (typeof item === "string") {
+                      return (
+                        <span
+                          key={`ellipsis-${idx}`}
+                          className="px-1.5 py-1 text-xs font-bold text-forest-body/60 select-none"
+                        >
+                          …
+                        </span>
+                      );
+                    }
+                    const isActive = item === safeCurrentPage;
+                    return (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={() => handlePageChange(item)}
+                        aria-current={isActive ? "page" : undefined}
+                        className={`min-w-[34px] sm:min-w-[36px] h-9 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center ${
+                          isActive
+                            ? "bg-forest-primary text-white shadow-md font-black"
+                            : "bg-forest-canvas hover:bg-forest-card text-forest-header border border-forest-border/80"
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Next Button */}
+                <button
+                  type="button"
+                  disabled={safeCurrentPage >= totalPages}
+                  onClick={() => handlePageChange(safeCurrentPage + 1)}
+                  className={`w-full sm:w-auto px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                    safeCurrentPage >= totalPages
+                      ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                      : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                  }`}
+                >
+                  <span>{t.pageNextBtn}</span>
+                  <span>→</span>
+                </button>
+              </nav>
             )}
           </div>
 
