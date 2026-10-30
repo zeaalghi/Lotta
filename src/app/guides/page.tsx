@@ -58,7 +58,7 @@ function GuidesContent() {
   );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const pageSize = 12;
+  const pageSize = 6;
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
 
   useEffect(() => {
@@ -758,25 +758,41 @@ function GuidesContent() {
             {totalPages > 1 && (
               <nav
                 aria-label="Navigasi Halaman Guide"
-                className="mt-6 p-3 sm:p-4 rounded-2xl bg-white border border-forest-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3"
+                className="mt-6 p-3.5 sm:p-4 rounded-2xl bg-white border border-forest-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3"
               >
-                {/* Previous Button */}
-                <button
-                  type="button"
-                  disabled={safeCurrentPage <= 1}
-                  onClick={() => handlePageChange(safeCurrentPage - 1)}
-                  className={`w-full sm:w-auto px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
-                    safeCurrentPage <= 1
-                      ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
-                      : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
-                  }`}
-                >
-                  <span>←</span>
-                  <span>{t.pagePrevBtn}</span>
-                </button>
+                {/* Previous & Next Buttons Wrapper for Mobile (side-by-side) / Desktop */}
+                <div className="flex items-center justify-between gap-2 w-full sm:w-auto order-2 sm:order-1">
+                  <button
+                    type="button"
+                    disabled={safeCurrentPage <= 1}
+                    onClick={() => handlePageChange(safeCurrentPage - 1)}
+                    className={`flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                      safeCurrentPage <= 1
+                        ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                        : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                    }`}
+                  >
+                    <span>←</span>
+                    <span>{t.pagePrevBtn}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={safeCurrentPage >= totalPages}
+                    onClick={() => handlePageChange(safeCurrentPage + 1)}
+                    className={`sm:hidden flex-1 px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                      safeCurrentPage >= totalPages
+                        ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                        : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                    }`}
+                  >
+                    <span>{t.pageNextBtn}</span>
+                    <span>→</span>
+                  </button>
+                </div>
 
                 {/* Page Number Pills (Smart Windowing) */}
-                <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center">
+                <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center order-1 sm:order-2">
                   {paginationRange.map((item, idx) => {
                     if (typeof item === "string") {
                       return (
@@ -807,12 +823,12 @@ function GuidesContent() {
                   })}
                 </div>
 
-                {/* Next Button */}
+                {/* Next Button (Desktop) */}
                 <button
                   type="button"
                   disabled={safeCurrentPage >= totalPages}
                   onClick={() => handlePageChange(safeCurrentPage + 1)}
-                  className={`w-full sm:w-auto px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                  className={`hidden sm:flex px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition items-center justify-center gap-1.5 order-3 ${
                     safeCurrentPage >= totalPages
                       ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
                       : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
