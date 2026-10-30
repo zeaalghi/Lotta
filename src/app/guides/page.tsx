@@ -560,40 +560,36 @@ function GuidesContent() {
                 </div>
               )}
 
-              {/* 3. Progressive Disclosure Toggle */}
-              <div className="pt-2 border-t border-forest-border/80">
-                <button
-                  type="button"
-                  onClick={() => setShowSpecificRoster((prev) => !prev)}
-                  className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-forest-border bg-white hover:bg-forest-card transition text-left"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-forest-pill text-forest-title flex items-center justify-center text-xs font-black shrink-0">
-                      +
-                    </div>
-                    <div>
-                      <div className="text-xs sm:text-sm font-extrabold text-forest-header">
-                        {lang === "id"
-                          ? "Punya rekomendasi nama atau ingin memilih pemandu tertentu? (Opsional)"
-                          : lang === "en"
-                          ? "Want to request a specific guide by name? (Optional)"
-                          : "Vuoi richiedere una guida specifica per nome? (Opzionale)"}
-                      </div>
-                      <div className="text-[11px] text-forest-body">
-                        {lang === "id"
-                          ? "Buka katalog untuk mencari dan memilih dari 326 pemandu resmi berlisensi HPI"
-                          : "Browse our full roster of 326 certified HPI local guides"}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-forest-pill text-xs font-extrabold text-forest-title">
-                    <span>
-                      {showSpecificRoster
-                        ? (lang === "id" ? "▲ Tutup Daftar" : "▲ Close Roster")
-                        : (lang === "id" ? "▼ Pilih Dari Daftar" : "▼ Choose from List")}
+              {/* 3. Optional Manual Selection Checkbox */}
+              <div className="pt-3 border-t border-forest-border/80">
+                <label className="flex items-start gap-3 cursor-pointer select-none group">
+                  <input
+                    type="checkbox"
+                    checked={showSpecificRoster}
+                    onChange={(e) => {
+                      const checked = e.target.checked;
+                      setShowSpecificRoster(checked);
+                      if (!checked) {
+                        setSelectedGuide(null);
+                      }
+                    }}
+                    className="w-4 h-4 mt-0.5 rounded border-forest-border text-forest-primary focus:ring-forest-primary cursor-pointer accent-forest-primary"
+                  />
+                  <div>
+                    <span className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition">
+                      {lang === "id"
+                        ? "Saya ingin mencari & memilih nama pemandu sendiri (Opsional)"
+                        : lang === "en"
+                        ? "I want to manually search & choose a specific guide (Optional)"
+                        : "Voglio cercare e scegliere manualmente una guida specifica (Opzionale)"}
+                    </span>
+                    <span className="block text-[11px] text-forest-body mt-0.5">
+                      {lang === "id"
+                        ? "Biarkan tidak dicentang jika ingin tim LOTTA menugaskan pemandu terbaik secara otomatis sesuai preferensi di atas."
+                        : "Leave unchecked to let LOTTA automatically assign the best matching guide."}
                     </span>
                   </div>
-                </button>
+                </label>
               </div>
             </div>
 
