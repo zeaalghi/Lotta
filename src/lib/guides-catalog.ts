@@ -98,8 +98,36 @@ export function buildSingleGateWhatsAppUrl(params: {
   remainingAmount?: number;
 }): string {
   const rawEnvPhone =
-    process.env.NEXT_PUBLIC_LOTTA_WHATSAPP_NUMBER || "6281139000800";
-  const whatsappNumber = rawEnvPhone.replace(/[^0-9]/g, "") || "6281139000800";
+    process.env.NEXT_PUBLIC_LOTTA_WHATSAPP_NUMBER || "6287728770032";
+  const whatsappNumber = rawEnvPhone.replace(/[^0-9]/g, "") || "6287728770032";
+
+  const genderLabel =
+    params.genderFilter === "Female"
+      ? params.lang === "id"
+        ? "Wanita"
+        : params.lang === "en"
+        ? "Female"
+        : "Donna"
+      : params.genderFilter === "Male"
+      ? params.lang === "id"
+        ? "Pria"
+        : params.lang === "en"
+        ? "Male"
+        : "Uomo"
+      : params.lang === "id"
+      ? "Bebas"
+      : params.lang === "en"
+      ? "Any"
+      : "Qualsiasi";
+
+  const langLabel =
+    params.specialtyFilter === "All Languages / Specialties"
+      ? params.lang === "id"
+        ? "Bebas / Indonesia"
+        : params.lang === "en"
+        ? "Any / Indonesian"
+        : "Qualsiasi"
+      : params.specialtyFilter;
 
   const guideText = params.selectedGuide
     ? `${sanitizeText(params.selectedGuide.name, 80)} (${sanitizeText(
@@ -107,10 +135,10 @@ export function buildSingleGateWhatsAppUrl(params: {
         80
       )})`
     : params.lang === "id"
-    ? "Rekomendasi / Auto-Assign Tim LOTTA"
+    ? `Auto-Assign Tim LOTTA (Preferensi: Bahasa ${langLabel}, Gender ${genderLabel})`
     : params.lang === "en"
-    ? "Auto-Assigned by LOTTA Team"
-    : "Assegnazione Automatica dal Team LOTTA";
+    ? `Auto-Assigned by LOTTA Team (Preference: ${langLabel}, Gender ${genderLabel})`
+    : `Assegnazione Automatica LOTTA (Preferenza: ${langLabel}, Genere ${genderLabel})`;
 
   const safeRoute = sanitizeText(params.selectedRoute, 160);
   const safeDate = params.tripDate ? sanitizeText(params.tripDate, 30) : "-";

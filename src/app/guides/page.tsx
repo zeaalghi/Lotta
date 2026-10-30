@@ -60,6 +60,7 @@ function GuidesContent() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const pageSize = 6;
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+  const [showSpecificRoster, setShowSpecificRoster] = useState<boolean>(false);
 
   useEffect(() => {
     if (routeParam && routeParam.trim().length > 0) {
@@ -417,7 +418,7 @@ function GuidesContent() {
         <div className="phi-grid items-start">
           {/* Left Column (61.8%): STEP 3 — Guide Selection & 326 Guides Roster */}
           <div>
-            {/* Guide Assignment Mode Selector */}
+            {/* Guide Assignment & Preference Card */}
             <div
               id="guide-roster-list"
               className="bg-forest-alt border border-forest-border rounded-2xl p-5 sm:p-6 mb-6 space-y-5 scroll-mt-20"
@@ -425,110 +426,67 @@ function GuidesContent() {
               <div>
                 <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-forest-header text-forest-sage text-[11px] font-extrabold uppercase tracking-wider mb-2">
                   {lang === "id"
-                    ? "LANGKAH 3 • PILIH GUIDE ATAU AUTO-ASSIGN"
+                    ? "LANGKAH 3 • PREFERENSI PEMANDU (GUIDE)"
                     : lang === "en"
-                    ? "STEP 3 • GUIDE SELECTION OR AUTO-ASSIGN"
-                    : "PASSO 3 • SELEZIONA GUIDA"}
+                    ? "STEP 3 • GUIDE PREFERENCES"
+                    : "PASSO 3 • PREFERENZE GUIDA"}
                 </div>
                 <h2 className="text-lg font-extrabold text-forest-header">
                   {lang === "id"
-                    ? "Preferensi Pemandu Resmi LOTTA"
+                    ? "Preferensi Bahasa & Gender Pemandu"
                     : lang === "en"
-                    ? "Official LOTTA Guide Preference"
-                    : "Preferenza Guida Ufficiale LOTTA"}
+                    ? "Language & Gender Guide Preference"
+                    : "Preferenze Lingua e Genere Guida"}
                 </h2>
+                <p className="text-xs text-forest-body mt-1 leading-relaxed">
+                  {lang === "id"
+                    ? "Pilih preferensi utama Anda. Tim LOTTA akan menugaskan pemandu berlisensi resmi HPI yang sesuai standar keramahan dan storytelling kami."
+                    : lang === "en"
+                    ? "Select your core preferences. LOTTA will assign an official HPI licensed guide matching your requested language and comfort."
+                    : "Seleziona le tue preferenze. LOTTA assegnerà la guida più adatta."}
+                </p>
               </div>
 
-              {/* Two Clear Mode Buttons */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setSelectedGuide(null)}
-                  className={`p-4 rounded-xl border-2 text-left transition ${
-                    selectedGuide === null
-                      ? "bg-forest-header text-white border-forest-header shadow-md"
-                      : "bg-white text-forest-header border-forest-border hover:border-forest-primary"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="text-xs font-extrabold uppercase tracking-wider">
-                      {lang === "id"
-                        ? "Opsi A: Auto-Assign (Rekomendasi)"
-                        : lang === "en"
-                        ? "Option A: Auto-Assigned by LOTTA"
-                        : "Opzione A: Assegnazione Automatica"}
-                    </span>
-                    {selectedGuide === null && (
-                      <span className="px-2 py-0.5 rounded bg-forest-primary text-white text-[10px] font-extrabold">
-                        {lang === "id" ? "AKTIF" : lang === "en" ? "ACTIVE" : "ATTIVA"}
-                      </span>
-                    )}
-                  </div>
-                  <p
-                    className={`text-xs leading-relaxed ${
-                      selectedGuide === null
-                        ? "text-forest-pill"
-                        : "text-forest-body"
-                    }`}
+              {/* 1. Language and Gender Preference Controls */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                {/* Language / Specialty Select */}
+                <div>
+                  <label
+                    htmlFor="specialty-select"
+                    className="block text-xs font-extrabold uppercase tracking-wider text-forest-title mb-2"
                   >
-                    {lang === "id"
-                      ? "Paling praktis: Tim LOTTA akan menugaskan Guide berlisensi HPI terbaik yang siap dan fasih berbahasa sesuai kebutuhan Anda."
-                      : lang === "en"
-                      ? "Easiest: The LOTTA team will assign the top licensed HPI guide available for your date and preferred language."
-                      : "La scelta più comoda: il team LOTTA assegnerà la migliore guida disponibile."}
-                  </p>
-                </button>
-
-                <div
-                  className={`p-4 rounded-xl border-2 text-left transition ${
-                    selectedGuide !== null
-                      ? "bg-forest-header text-white border-forest-header shadow-md"
-                      : "bg-white text-forest-header border-forest-border"
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2 mb-1">
-                    <span className="text-xs font-extrabold uppercase tracking-wider">
-                      {lang === "id"
-                        ? "Opsi B: Pilih Guide Spesifik"
-                        : lang === "en"
-                        ? "Option B: Pick from Roster"
-                        : "Opzione B: Scegli dal Catalogo"}
-                    </span>
-                    {selectedGuide !== null && (
-                      <span className="px-2 py-0.5 rounded bg-forest-primary text-white text-[10px] font-extrabold">
-                        {lang === "id" ? "TERPILIH" : lang === "en" ? "SELECTED" : "SELEZIONATA"}
-                      </span>
-                    )}
-                  </div>
-                  <p
-                    className={`text-xs leading-relaxed ${
-                      selectedGuide !== null
-                        ? "text-forest-pill"
-                        : "text-forest-body"
-                    }`}
+                    {t.filterLangLabel}
+                  </label>
+                  <select
+                    id="specialty-select"
+                    value={specialtyFilter}
+                    onChange={(e) => {
+                      setSpecialtyFilter(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-forest-input text-sm font-bold text-forest-header focus:outline-none focus:ring-2 focus:ring-forest-primary"
                   >
-                    {selectedGuide
-                      ? `${selectedGuide.name} (${selectedGuide.specialty})`
-                      : lang === "id"
-                      ? "Klik '+ Pilih Guide Ini' pada kartu di bawah jika ingin mengajukan pemandu favorit tertentu."
-                      : lang === "en"
-                      ? "Click '+ Select This Guide' on any card below to request a specific guide."
-                      : "Clicca '+ Seleziona Guida' per richiedere una guida specifica."}
-                  </p>
+                    {SPECIALTY_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {SPECIALTY_LABELS[opt]?.[lang] || opt}{" "}
+                        ({opt === "All Languages / Specialties"
+                          ? ALL_GUIDES.length
+                          : specialtyCounts[opt] || 0})
+                      </option>
+                    ))}
+                  </select>
                 </div>
-              </div>
 
-              {/* Guide Filters & Search */}
-              <div className="pt-4 border-t border-forest-border/80 space-y-4">
+                {/* Gender Select */}
                 <div>
                   <div className="text-xs font-extrabold uppercase tracking-wider text-forest-title mb-2">
                     {t.filterGenderLabel}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="grid grid-cols-3 gap-1.5">
                     {[
-                      { value: "all" as const, label: `${t.genderAll} (${ALL_GUIDES.length})` },
-                      { value: "Female" as const, label: `${t.genderFemale} (${genderCounts.Female})` },
-                      { value: "Male" as const, label: `${t.genderMale} (${genderCounts.Male})` },
+                      { value: "all" as const, label: lang === "id" ? "Bebas" : lang === "en" ? "Any" : "Tutti" },
+                      { value: "Female" as const, label: lang === "id" ? "Wanita" : lang === "en" ? "Female" : "Donna" },
+                      { value: "Male" as const, label: lang === "id" ? "Pria" : lang === "en" ? "Male" : "Uomo" },
                     ].map((btn) => (
                       <button
                         key={btn.value}
@@ -537,7 +495,7 @@ function GuidesContent() {
                           setGenderFilter(btn.value);
                           setCurrentPage(1);
                         }}
-                        className={`px-3.5 py-2 rounded-xl text-xs font-extrabold transition ${
+                        className={`py-2.5 px-2 rounded-xl text-xs font-extrabold text-center transition ${
                           genderFilter === btn.value
                             ? "bg-forest-header text-white shadow-sm"
                             : "bg-white border border-forest-border text-forest-header hover:bg-forest-card"
@@ -548,296 +506,341 @@ function GuidesContent() {
                     ))}
                   </div>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="specialty-select"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-forest-title mb-2"
-                    >
-                      {t.filterLangLabel}
-                    </label>
-                    <select
-                      id="specialty-select"
-                      value={specialtyFilter}
-                      onChange={(e) => {
-                        setSpecialtyFilter(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-forest-input text-sm font-bold text-forest-header focus:outline-none focus:ring-2 focus:ring-forest-primary"
-                    >
-                      {SPECIALTY_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {SPECIALTY_LABELS[opt]?.[lang] || opt}{" "}
-                          ({opt === "All Languages / Specialties"
-                            ? ALL_GUIDES.length
-                            : specialtyCounts[opt] || 0})
-                        </option>
-                      ))}
-                    </select>
+              {/* 2. Assignment Status & Credibility Card */}
+              {selectedGuide === null ? (
+                <div className="p-4 rounded-xl bg-forest-card/80 border border-forest-border flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-full bg-forest-header text-forest-sage flex items-center justify-center text-[11px] font-black shrink-0 mt-0.5 tracking-wider">
+                    HPI
                   </div>
-
-                  <div>
-                    <label
-                      htmlFor="guide-search"
-                      className="block text-xs font-extrabold uppercase tracking-wider text-forest-title mb-2"
-                    >
-                      {t.searchNamePlaceholder}
-                    </label>
-                    <input
-                      id="guide-search"
-                      type="search"
-                      value={searchQuery}
-                      onChange={(e) => {
-                        setSearchQuery(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                      placeholder={t.searchNamePlaceholder}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-forest-input text-sm text-forest-header placeholder:text-forest-body/60 focus:outline-none focus:ring-2 focus:ring-forest-primary"
-                    />
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-forest-header">
+                        {lang === "id" ? "Penugasan Otomatis Terstandarisasi (Auto-Assign)" : "LOTTA Curated Auto-Assign"}
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-forest-primary text-white text-[10px] font-extrabold">
+                        {lang === "id" ? "REKOMENDASI" : "RECOMMENDED"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-forest-body leading-relaxed">
+                      {lang === "id"
+                        ? `Tim LOTTA akan menugaskan pemandu berlisensi resmi HPI terbaik yang siap pada tanggal Anda dengan kriteria bahasa (${specialtyFilter === "All Languages / Specialties" ? "Semua Bahasa / Indonesia" : specialtyFilter}) dan gender (${genderFilter === "Female" ? "Wanita" : genderFilter === "Male" ? "Pria" : "Bebas"}). Seluruh pemandu terikat SOP storytelling dan keselamatan LOTTA.`
+                        : `LOTTA will assign a licensed HPI guide tailored to your requested language (${specialtyFilter}) and gender (${genderFilter}) preferences.`}
+                    </p>
                   </div>
                 </div>
+              ) : (
+                <div className="p-4 rounded-xl bg-forest-card border-2 border-forest-header flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-forest-header text-forest-sage flex items-center justify-center text-base shrink-0 font-extrabold">
+                      ✓
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-forest-header text-white">
+                          {lang === "id" ? "Pemandu Spesifik Terpilih" : "Specific Guide Selected"}
+                        </span>
+                      </div>
+                      <div className="font-extrabold text-sm sm:text-base text-forest-header mt-0.5">
+                        {selectedGuide.name}
+                      </div>
+                      <div className="text-xs text-forest-body">
+                        {selectedGuide.gender === "Female" ? (lang === "id" ? "Pemandu Wanita" : "Female") : (lang === "id" ? "Pemandu Pria" : "Male")} • {selectedGuide.specialty} • Lisensi HPI NTB
+                      </div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedGuide(null)}
+                    className="px-3.5 py-2 rounded-xl bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border text-xs font-extrabold transition shrink-0"
+                  >
+                    {lang === "id" ? "Gunakan Auto-Assign Saja" : "Switch to Auto-Assign"}
+                  </button>
+                </div>
+              )}
 
-                <div className="text-xs font-bold text-forest-body flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-forest-border/70">
+              {/* 3. Progressive Disclosure Toggle */}
+              <div className="pt-2 border-t border-forest-border/80">
+                <button
+                  type="button"
+                  onClick={() => setShowSpecificRoster((prev) => !prev)}
+                  className="w-full flex items-center justify-between p-3.5 sm:p-4 rounded-xl border border-forest-border bg-white hover:bg-forest-card transition text-left"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-forest-pill text-forest-title flex items-center justify-center text-xs font-black shrink-0">
+                      +
+                    </div>
+                    <div>
+                      <div className="text-xs sm:text-sm font-extrabold text-forest-header">
+                        {lang === "id"
+                          ? "Punya rekomendasi nama atau ingin memilih pemandu tertentu? (Opsional)"
+                          : lang === "en"
+                          ? "Want to request a specific guide by name? (Optional)"
+                          : "Vuoi richiedere una guida specifica per nome? (Opzionale)"}
+                      </div>
+                      <div className="text-[11px] text-forest-body">
+                        {lang === "id"
+                          ? "Buka katalog untuk mencari dan memilih dari 326 pemandu resmi berlisensi HPI"
+                          : "Browse our full roster of 326 certified HPI local guides"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-forest-pill text-xs font-extrabold text-forest-title">
+                    <span>
+                      {showSpecificRoster
+                        ? (lang === "id" ? "▲ Tutup Daftar" : "▲ Close Roster")
+                        : (lang === "id" ? "▼ Pilih Dari Daftar" : "▼ Choose from List")}
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            {/* Collapsible Roster Content */}
+            {showSpecificRoster && (
+              <div className="space-y-4 mb-8 p-4 sm:p-5 rounded-2xl bg-white border border-forest-border shadow-sm">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-sm font-extrabold uppercase tracking-wider text-forest-header">
+                      {lang === "id" ? "Katalog Pemandu Resmi HPI NTB" : "Official HPI Guide Roster"}
+                    </h3>
+                    <p className="text-xs text-forest-body">
+                      {lang === "id"
+                        ? "Pilih pemandu favorit Anda di bawah atau gunakan kolom cari nama."
+                        : "Pick your preferred guide below or use the name search."}
+                    </p>
+                  </div>
+                  {hasActiveFilter && (
+                    <button
+                      type="button"
+                      onClick={resetAllGuideFilters}
+                      className="px-3 py-1 rounded-lg bg-forest-header text-white text-xs font-extrabold hover:bg-forest-title transition shrink-0"
+                    >
+                      {lang === "id" ? "Reset Filter" : "Reset Filters"}
+                    </button>
+                  )}
+                </div>
+
+                {/* Search Bar */}
+                <div>
+                  <input
+                    id="guide-search"
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                    placeholder={t.searchNamePlaceholder}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-forest-alt border border-forest-input text-sm text-forest-header placeholder:text-forest-body/60 focus:outline-none focus:ring-2 focus:ring-forest-primary"
+                  />
+                </div>
+
+                <div className="text-xs font-bold text-forest-body flex items-center justify-between pt-1">
                   <span>
                     {filteredGuides.length > 0 ? (
                       <>
                         {lang === "id"
                           ? `Menampilkan ${startIndex + 1}–${endIndex} dari ${filteredGuides.length} Guide`
-                          : lang === "en"
-                          ? `Showing ${startIndex + 1}–${endIndex} of ${filteredGuides.length} Guides`
-                          : `Mostrando ${startIndex + 1}–${endIndex} di ${filteredGuides.length} Guide`}
+                          : `Showing ${startIndex + 1}–${endIndex} of ${filteredGuides.length} Guides`}
                         {" • "}
                         <span className="text-forest-header font-extrabold">
                           {t.pageLabel} {safeCurrentPage} / {totalPages}
                         </span>
                       </>
                     ) : (
-                      <span>
-                        {lang === "id"
-                          ? "0 Guide ditemukan"
-                          : lang === "en"
-                          ? "0 Guides found"
-                          : "0 Guide trovate"}
-                      </span>
+                      <span>{lang === "id" ? "0 Guide ditemukan" : "0 Guides found"}</span>
                     )}
                   </span>
-                  {hasActiveFilter && (
+                </div>
+
+                {/* Guides Grid / Empty State */}
+                {displayedGuides.length === 0 ? (
+                  <div className="p-8 sm:p-10 rounded-2xl bg-forest-alt border border-forest-border text-center space-y-3">
+                    <div className="font-extrabold text-base text-forest-header">
+                      {lang === "id"
+                        ? "Tidak ada pemandu yang cocok dengan filter"
+                        : "No guides match your filter criteria"}
+                    </div>
+                    <p className="text-xs text-forest-body max-w-md mx-auto leading-relaxed">
+                      {lang === "id"
+                        ? "Silakan coba ubah kata kunci pencarian nama atau reset filter untuk menampilkan kembali seluruh 326 pemandu resmi."
+                        : "Try adjusting your search query or reset the filter to browse the full 326 official guide roster."}
+                    </p>
                     <button
                       type="button"
                       onClick={resetAllGuideFilters}
-                      className="px-3 py-1 rounded-lg bg-forest-header text-white font-extrabold hover:bg-forest-title transition"
+                      className="px-4 py-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition shadow-sm"
                     >
-                      {lang === "id" ? "Reset Filter" : lang === "en" ? "Reset Filters" : "Reimposta"}
+                      {lang === "id" ? "Tampilkan Semua 326 Guide" : "Show All 326 Guides"}
                     </button>
-                  )}
-                </div>
-              </div>
-            </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {displayedGuides.map((guide) => {
+                      const isSelected = selectedGuide?.id === guide.id;
+                      return (
+                        <div
+                          key={guide.id}
+                          className={`p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col justify-between gap-4 ${
+                            isSelected
+                              ? "bg-forest-card/90 border-forest-header shadow-md"
+                              : "bg-white border-forest-border hover:border-forest-primary"
+                          }`}
+                        >
+                          <div>
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="font-extrabold text-sm sm:text-base text-forest-header leading-snug">
+                                {guide.name}
+                              </div>
+                              {isSelected && (
+                                <span className="shrink-0 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-forest-header text-white">
+                                  {lang === "id" ? "Terpilih" : "Selected"}
+                                </span>
+                              )}
+                            </div>
 
-            {/* Guides Grid / Empty State */}
-            {displayedGuides.length === 0 ? (
-              <div className="p-8 sm:p-10 rounded-2xl bg-white border border-forest-border text-center space-y-3">
-                <div className="font-extrabold text-base text-forest-header">
-                  {lang === "id"
-                    ? "Tidak ada pemandu yang cocok dengan filter"
-                    : lang === "en"
-                    ? "No guides match your filter criteria"
-                    : "Nessuna guida corrisponde ai criteri"}
-                </div>
-                <p className="text-xs text-forest-body max-w-md mx-auto leading-relaxed">
-                  {lang === "id"
-                    ? "Silakan coba ubah kata kunci pencarian nama atau reset filter untuk menampilkan kembali seluruh 326 pemandu resmi."
-                    : lang === "en"
-                    ? "Try adjusting your search query or reset the filter to browse the full 326 official guide roster."
-                    : "Prova a modificare la ricerca o reimposta i filtri per vedere tutte le 326 guide."}
-                </p>
-                <button
-                  type="button"
-                  onClick={resetAllGuideFilters}
-                  className="px-4 py-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition shadow-sm"
-                >
-                  {lang === "id"
-                    ? "Tampilkan Semua 326 Guide"
-                    : lang === "en"
-                    ? "Show All 326 Guides"
-                    : "Mostra Tutte le 326 Guide"}
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {displayedGuides.map((guide) => {
-                  const isSelected = selectedGuide?.id === guide.id;
-                  return (
-                    <div
-                      key={guide.id}
-                      className={`p-4 sm:p-5 rounded-2xl border-2 transition flex flex-col justify-between gap-4 ${
-                        isSelected
-                          ? "bg-forest-card/90 border-forest-header shadow-md"
-                          : "bg-white border-forest-border hover:border-forest-primary"
-                      }`}
-                    >
-                      <div>
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="font-extrabold text-sm sm:text-base text-forest-header leading-snug">
-                            {guide.name}
+                            <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
+                              <span className="font-semibold text-forest-title">
+                                {guide.gender === "Female"
+                                  ? lang === "id"
+                                    ? "Pemandu Wanita"
+                                    : "Female Guide"
+                                  : lang === "id"
+                                  ? "Pemandu Pria"
+                                  : "Male Guide"}
+                              </span>
+                              <span className="text-forest-border">•</span>
+                              <span className="text-[11px] font-bold text-forest-body">
+                                Lisensi HPI NTB
+                              </span>
+                            </div>
+
+                            <div className="mt-2.5 flex flex-wrap gap-1">
+                              {guide.specialties.map((spec) => (
+                                <span
+                                  key={spec}
+                                  className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-forest-pill text-forest-title border border-forest-border/60"
+                                >
+                                  {SPECIALTY_LABELS[spec]?.[lang] || spec}
+                                </span>
+                              ))}
+                            </div>
                           </div>
-                          {isSelected && (
-                            <span className="shrink-0 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-forest-header text-white">
-                              {lang === "id" ? "Terpilih" : lang === "en" ? "Selected" : "Scelta"}
-                            </span>
-                          )}
-                        </div>
 
-                        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs">
-                          <span className="font-semibold text-forest-title">
-                            {guide.gender === "Female"
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (isSelected) {
+                                setSelectedGuide(null);
+                              } else {
+                                setSelectedGuide(guide);
+                              }
+                            }}
+                            className={`w-full py-2.5 px-3 rounded-xl font-extrabold text-xs transition uppercase tracking-wider ${
+                              isSelected
+                                ? "bg-forest-header text-white hover:bg-forest-title"
+                                : "bg-forest-alt hover:bg-forest-primary text-forest-header hover:text-white border border-forest-border"
+                            }`}
+                          >
+                            {isSelected
                               ? lang === "id"
-                                ? "Pemandu Wanita"
-                                : lang === "en"
-                                ? "Female Guide"
-                                : "Guida Donna"
+                                ? "✓ Guide Terpilih (Klik untuk Batal)"
+                                : "✓ Selected (Click to Remove)"
                               : lang === "id"
-                              ? "Pemandu Pria"
-                              : lang === "en"
-                              ? "Male Guide"
-                              : "Guida Uomo"}
-                          </span>
-                          <span className="text-forest-border">•</span>
-                          <span className="text-[11px] font-bold text-forest-body">
-                            Lisensi HPI NTB
-                          </span>
+                              ? "+ Pilih Guide Ini"
+                              : "+ Select This Guide"}
+                          </button>
                         </div>
+                      );
+                    })}
+                  </div>
+                )}
 
-                        <div className="mt-2.5 flex flex-wrap gap-1">
-                          {guide.specialties.map((spec) => (
-                            <span
-                              key={spec}
-                              className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-forest-pill text-forest-title border border-forest-border/60"
-                            >
-                              {SPECIALTY_LABELS[spec]?.[lang] || spec}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <nav
+                    aria-label="Navigasi Halaman Guide"
+                    className="mt-6 p-3.5 sm:p-4 rounded-2xl bg-forest-alt border border-forest-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3"
+                  >
+                    <div className="flex items-center justify-between gap-2 w-full sm:w-auto order-2 sm:order-1">
+                      <button
+                        type="button"
+                        disabled={safeCurrentPage <= 1}
+                        onClick={() => handlePageChange(safeCurrentPage - 1)}
+                        className={`flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                          safeCurrentPage <= 1
+                            ? "bg-white text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                            : "bg-white hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                        }`}
+                      >
+                        <span>←</span>
+                        <span>{t.pagePrevBtn}</span>
+                      </button>
 
                       <button
                         type="button"
-                        onClick={() => {
-                          if (isSelected) {
-                            setSelectedGuide(null);
-                          } else {
-                            setSelectedGuide(guide);
-                          }
-                        }}
-                        className={`w-full py-2.5 px-3 rounded-xl font-extrabold text-xs transition uppercase tracking-wider ${
-                          isSelected
-                            ? "bg-forest-header text-white hover:bg-forest-title"
-                            : "bg-forest-alt hover:bg-forest-primary text-forest-header hover:text-white border border-forest-border"
+                        disabled={safeCurrentPage >= totalPages}
+                        onClick={() => handlePageChange(safeCurrentPage + 1)}
+                        className={`sm:hidden flex-1 px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
+                          safeCurrentPage >= totalPages
+                            ? "bg-white text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                            : "bg-white hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
                         }`}
                       >
-                        {isSelected
-                          ? lang === "id"
-                            ? "✓ Guide Terpilih (Klik untuk Batal)"
-                            : lang === "en"
-                            ? "✓ Selected (Click to Remove)"
-                            : "✓ Selezionata (Clicca per Rimuovere)"
-                          : lang === "id"
-                          ? "+ Pilih Guide Ini"
-                          : lang === "en"
-                          ? "+ Select This Guide"
-                          : "+ Seleziona Guida"}
+                        <span>{t.pageNextBtn}</span>
+                        <span>→</span>
                       </button>
                     </div>
-                  );
-                })}
+
+                    <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center order-1 sm:order-2">
+                      {paginationRange.map((item, idx) => {
+                        if (typeof item === "string") {
+                          return (
+                            <span
+                              key={`ellipsis-${idx}`}
+                              className="px-1.5 py-1 text-xs font-bold text-forest-body/60 select-none"
+                            >
+                              …
+                            </span>
+                          );
+                        }
+                        const isActive = item === safeCurrentPage;
+                        return (
+                          <button
+                            key={item}
+                            type="button"
+                            onClick={() => handlePageChange(item)}
+                            aria-current={isActive ? "page" : undefined}
+                            className={`min-w-[34px] sm:min-w-[36px] h-9 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center ${
+                              isActive
+                                ? "bg-forest-primary text-white shadow-md font-black"
+                                : "bg-white hover:bg-forest-card text-forest-header border border-forest-border/80"
+                            }`}
+                          >
+                            {item}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <button
+                      type="button"
+                      disabled={safeCurrentPage >= totalPages}
+                      onClick={() => handlePageChange(safeCurrentPage + 1)}
+                      className={`hidden sm:flex px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition items-center justify-center gap-1.5 order-3 ${
+                        safeCurrentPage >= totalPages
+                          ? "bg-white text-forest-body/40 cursor-not-allowed border border-forest-border/40"
+                          : "bg-white hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
+                      }`}
+                    >
+                      <span>{t.pageNextBtn}</span>
+                      <span>→</span>
+                    </button>
+                  </nav>
+                )}
               </div>
-            )}
-
-            {/* Pagination Controls */}
-            {totalPages > 1 && (
-              <nav
-                aria-label="Navigasi Halaman Guide"
-                className="mt-6 p-3.5 sm:p-4 rounded-2xl bg-white border border-forest-border shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3"
-              >
-                {/* Previous & Next Buttons Wrapper for Mobile (side-by-side) / Desktop */}
-                <div className="flex items-center justify-between gap-2 w-full sm:w-auto order-2 sm:order-1">
-                  <button
-                    type="button"
-                    disabled={safeCurrentPage <= 1}
-                    onClick={() => handlePageChange(safeCurrentPage - 1)}
-                    className={`flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
-                      safeCurrentPage <= 1
-                        ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
-                        : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
-                    }`}
-                  >
-                    <span>←</span>
-                    <span>{t.pagePrevBtn}</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={safeCurrentPage >= totalPages}
-                    onClick={() => handlePageChange(safeCurrentPage + 1)}
-                    className={`sm:hidden flex-1 px-3.5 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition flex items-center justify-center gap-1.5 ${
-                      safeCurrentPage >= totalPages
-                        ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
-                        : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
-                    }`}
-                  >
-                    <span>{t.pageNextBtn}</span>
-                    <span>→</span>
-                  </button>
-                </div>
-
-                {/* Page Number Pills (Smart Windowing) */}
-                <div className="flex items-center gap-1 sm:gap-1.5 flex-wrap justify-center order-1 sm:order-2">
-                  {paginationRange.map((item, idx) => {
-                    if (typeof item === "string") {
-                      return (
-                        <span
-                          key={`ellipsis-${idx}`}
-                          className="px-1.5 py-1 text-xs font-bold text-forest-body/60 select-none"
-                        >
-                          …
-                        </span>
-                      );
-                    }
-                    const isActive = item === safeCurrentPage;
-                    return (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={() => handlePageChange(item)}
-                        aria-current={isActive ? "page" : undefined}
-                        className={`min-w-[34px] sm:min-w-[36px] h-9 px-2 rounded-xl text-xs font-extrabold transition flex items-center justify-center ${
-                          isActive
-                            ? "bg-forest-primary text-white shadow-md font-black"
-                            : "bg-forest-canvas hover:bg-forest-card text-forest-header border border-forest-border/80"
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Next Button (Desktop) */}
-                <button
-                  type="button"
-                  disabled={safeCurrentPage >= totalPages}
-                  onClick={() => handlePageChange(safeCurrentPage + 1)}
-                  className={`hidden sm:flex px-4 py-2.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition items-center justify-center gap-1.5 order-3 ${
-                    safeCurrentPage >= totalPages
-                      ? "bg-forest-alt text-forest-body/40 cursor-not-allowed border border-forest-border/40"
-                      : "bg-forest-alt hover:bg-forest-header hover:text-white text-forest-header border border-forest-border shadow-sm"
-                  }`}
-                >
-                  <span>{t.pageNextBtn}</span>
-                  <span>→</span>
-                </button>
-              </nav>
             )}
           </div>
 
@@ -895,8 +898,12 @@ function GuidesContent() {
 
               <div className="flex items-center justify-between text-xs">
                 <span className="text-forest-sage font-bold">Guide:</span>
-                <span className="font-extrabold text-forest-sage text-right truncate max-w-[180px]">
-                  {selectedGuide ? selectedGuide.name : t.teamAssignedOption}
+                <span className="font-extrabold text-forest-sage text-right truncate max-w-[200px]">
+                  {selectedGuide
+                    ? selectedGuide.name
+                    : lang === "id"
+                    ? `Auto-Assign (${specialtyFilter === "All Languages / Specialties" ? "Semua Bhs" : specialtyFilter.replace(" Guide", "")}, ${genderFilter === "Female" ? "Wanita" : genderFilter === "Male" ? "Pria" : "Bebas"})`
+                    : t.teamAssignedOption}
                 </span>
               </div>
             </div>
@@ -1077,6 +1084,8 @@ function GuidesContent() {
                 <span className="font-extrabold text-forest-header">
                   {selectedGuide
                     ? `${selectedGuide.name} (${selectedGuide.specialty})`
+                    : lang === "id"
+                    ? `Auto-Assign Tim LOTTA (Preferensi: ${specialtyFilter === "All Languages / Specialties" ? "Semua Bahasa" : specialtyFilter.replace(" Guide", "")}, ${genderFilter === "Female" ? "Wanita" : genderFilter === "Male" ? "Pria" : "Bebas"})`
                     : t.teamAssignedOption}
                 </span>
               </div>
