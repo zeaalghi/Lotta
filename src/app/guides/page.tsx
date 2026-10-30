@@ -191,17 +191,17 @@ function GuidesContent() {
         {/* Page Header */}
         <div className="bg-forest-header text-white rounded-3xl p-6 sm:p-9 mb-8 border border-forest-title shadow-md">
           <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-2">
-            326 HPI-CERTIFIED MULTILINGUAL GUIDES • BOOKING RESMI SATU PINTU • DP 30%
+            {lang === "id"
+              ? "PEMANDU LOKAL RESMI BERLISENSI HPI NTB • KURASI HOSPITALITY LOTTA"
+              : lang === "en"
+              ? "HPI-CERTIFIED LOCAL HOSTS • CURATED BY LOTTA CONCIERGE"
+              : "GUIDE LOCALI CERTIFICATE HPI • CURATE DA LOTTA"}
           </div>
           <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2">
             {t.guidesHeader}
           </h1>
           <p className="text-sm sm:text-base text-forest-pill max-w-3xl leading-relaxed mb-6">
-            {lang === "id"
-              ? "Pesan paket perjalanan & pemandu resmi LOTTA dengan sistem harga transparan. Tentukan destinasi, tanggal, dan jumlah peserta di bawah ini untuk melihat simulasi total biaya serta rincian DP 30%."
-              : lang === "en"
-              ? "Book your official LOTTA trip & licensed guide with transparent pricing. Select your destination, date, and traveler count below to review the total estimated cost and 30% deposit requirement."
-              : "Prenota il tuo tour LOTTA con prezzi trasparenti. Seleziona destinazione, data e partecipanti qui sotto per calcolare il costo totale e l'acconto del 30%."}
+            {t.guidesSub}
           </p>
 
           {/* 4-Step Progress Navigation */}
@@ -214,7 +214,9 @@ function GuidesContent() {
                 <div className="text-[11px] font-extrabold uppercase text-white truncate">
                   {lang === "id" ? "1. Destinasi" : lang === "en" ? "1. Destination" : "1. Destinazione"}
                 </div>
-                <div className="text-[10px] text-forest-pill/80 truncate">24 Pilihan Resmi</div>
+                <div className="text-[10px] text-forest-pill/80 truncate">
+                  {lang === "id" ? "Pilihan Rute" : lang === "en" ? "Curated Routes" : "Itinerario"}
+                </div>
               </div>
             </div>
 
@@ -224,9 +226,11 @@ function GuidesContent() {
               </span>
               <div className="min-w-0">
                 <div className="text-[11px] font-extrabold uppercase text-white truncate">
-                  {lang === "id" ? "2. Tanggal & Pax" : lang === "en" ? "2. Date & Pax" : "2. Data e Pax"}
+                  {lang === "id" ? "2. Jadwal & Tamu" : lang === "en" ? "2. Date & Guests" : "2. Data e Ospiti"}
                 </div>
-                <div className="text-[10px] text-forest-pill/80 truncate">Jadwal & Tamu</div>
+                <div className="text-[10px] text-forest-pill/80 truncate">
+                  {lang === "id" ? "Waktu & Peserta" : lang === "en" ? "Schedule & Pax" : "Orari e Pax"}
+                </div>
               </div>
             </div>
 
@@ -236,9 +240,11 @@ function GuidesContent() {
               </span>
               <div className="min-w-0">
                 <div className="text-[11px] font-extrabold uppercase text-white truncate">
-                  {lang === "id" ? "3. Pilihan Guide" : lang === "en" ? "3. Guide Roster" : "3. Scelta Guida"}
+                  {lang === "id" ? "3. Preferensi Guide" : lang === "en" ? "3. Guide Preferences" : "3. Preferenza Guida"}
                 </div>
-                <div className="text-[10px] text-forest-pill/80 truncate">326 Guide / Auto</div>
+                <div className="text-[10px] text-forest-pill/80 truncate">
+                  {lang === "id" ? "Bahasa & Gender" : lang === "en" ? "Language & Gender" : "Lingua e Genere"}
+                </div>
               </div>
             </div>
 
@@ -248,9 +254,11 @@ function GuidesContent() {
               </span>
               <div className="min-w-0">
                 <div className="text-[11px] font-extrabold uppercase text-white truncate">
-                  {lang === "id" ? "4. Rincian & DP" : lang === "en" ? "4. Price & DP" : "4. Prezzo e DP"}
+                  {lang === "id" ? "4. Rincian Biaya" : lang === "en" ? "4. Price Breakdown" : "4. Dettaglio Prezzo"}
                 </div>
-                <div className="text-[10px] text-forest-pill/80 truncate">Down Payment 30%</div>
+                <div className="text-[10px] text-forest-pill/80 truncate">
+                  {lang === "id" ? "Transparansi Biaya" : lang === "en" ? "Transparent Pricing" : "Prezzo Trasparente"}
+                </div>
               </div>
             </div>
           </div>
@@ -661,15 +669,15 @@ function GuidesContent() {
                     </div>
                     <p className="text-xs text-forest-body max-w-md mx-auto leading-relaxed">
                       {lang === "id"
-                        ? "Silakan coba ubah kata kunci pencarian nama atau reset filter untuk menampilkan kembali seluruh 326 pemandu resmi."
-                        : "Try adjusting your search query or reset the filter to browse the full 326 official guide roster."}
+                        ? "Silakan coba ubah kata kunci pencarian nama atau reset filter untuk menampilkan kembali seluruh pemandu resmi."
+                        : "Try adjusting your search query or reset the filter to browse the full official guide roster."}
                     </p>
                     <button
                       type="button"
                       onClick={resetAllGuideFilters}
                       className="px-4 py-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition shadow-sm"
                     >
-                      {lang === "id" ? "Tampilkan Semua 326 Guide" : "Show All 326 Guides"}
+                      {lang === "id" ? "Tampilkan Semua Pemandu" : "Show All Guides"}
                     </button>
                   </div>
                 ) : (

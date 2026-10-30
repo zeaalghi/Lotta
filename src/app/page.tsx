@@ -115,17 +115,17 @@ export default function HomePage() {
                   <div className="min-w-0">
                     <div className="text-xl sm:text-2xl font-extrabold text-forest-sage">
                       {lang === "id"
-                        ? "326 Guide"
+                        ? "100% Berlisensi"
                         : lang === "en"
-                        ? "326 Guides"
-                        : "326 Guide"}
+                        ? "100% Certified"
+                        : "100% Certificate"}
                     </div>
                     <div className="text-xs text-forest-pill/80 mt-0.5">
                       {lang === "id"
-                        ? "36 Wanita • 290 Pria • 14 Bahasa"
+                        ? "Pemandu Resmi HPI NTB • 14 Bahasa"
                         : lang === "en"
-                        ? "36 Female • 290 Male • 14 Languages"
-                        : "36 Donne • 290 Uomini • 14 Lingue"}
+                        ? "Official HPI NTB Guides • 14 Languages"
+                        : "Guide Ufficiali HPI • 14 Lingue"}
                     </div>
                   </div>
                 </div>
@@ -512,10 +512,10 @@ export default function HomePage() {
             <div className="max-w-2xl">
               <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-2">
                 {lang === "id"
-                  ? "JARINGAN 326 GUIDE BERSERTIFIKAT HPI NTB"
+                  ? "JARINGAN PEMANDU LOKAL RESMI BERLISENSI HPI NTB"
                   : lang === "en"
-                  ? "OFFICIAL NETWORK OF 326 CERTIFIED GUIDES (HPI NTB)"
-                  : "RETE UFFICIALE DI 326 GUIDE CERTIFICATE (HPI NTB)"}
+                  ? "OFFICIAL NETWORK OF LICENSED HPI LOCAL HOSTS"
+                  : "RETE UFFICIALE DI GUIDE LOCALI CERTIFICATE HPI"}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-3">
                 {t.guidesHeader}

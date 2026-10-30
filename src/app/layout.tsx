@@ -11,11 +11,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
   description:
-    "Informative & Persuasive Lombok Tourism Platform: Local Destination Stories, Rinjani 7 Summits & Overnight Hills, Regency Beaches, Cultural Heritage & 326 Licensed Multilingual Guides.",
+    "Lombok Tourism & Private Guides Platform: Living Heritage Stories, Rinjani Summits & Overnight Hills, Regency Beaches, and Certified Multilingual Local Hosts.",
   openGraph: {
     title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
     description:
-      "Explore Lombok's complete Mountain, Beach, and Cultural Heritage destinations, monitor live Rinjani summit weather & coastal swells, and connect with 326 certified LOTTA Guides.",
+      "Explore Lombok's complete Mountain, Beach, and Cultural Heritage destinations, monitor live Rinjani summit weather & coastal swells, and travel with certified LOTTA local hosts.",
     type: "website",
     locale: "id_ID",
     alternateLocale: ["en_US", "it_IT"],

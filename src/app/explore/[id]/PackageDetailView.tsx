@@ -179,7 +179,7 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
             <div>
               <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-forest-title text-forest-sage text-[11px] font-extrabold uppercase tracking-wider mb-3">
                 {lang === "id"
-                  ? "BOOKING RESMI SATU PINTU"
+                  ? "RESERVASI RESMI & TERVERIFIKASI"
                   : lang === "en"
                   ? "OFFICIAL DIRECT RESERVATION"
                   : "PRENOTAZIONE UFFICIALE"}
