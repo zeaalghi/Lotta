@@ -410,50 +410,56 @@ export default function HomePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
 
-                    {/* Top Left: Destination Name */}
+                    {/* Top Left: Clean Short Pillar Tag */}
                     <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
-                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-primary text-white shadow-sm">
-                        {story.destinationName}
+                      <span className="px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-primary text-white shadow-xs">
+                        {story.pillar === "mountain"
+                          ? (lang === "id" ? "GUNUNG" : lang === "en" ? "MOUNTAIN" : "MONTAGNA")
+                          : story.pillar === "beach"
+                          ? (lang === "id" ? "PANTAI" : lang === "en" ? "BEACH" : "SPIAGGIA")
+                          : (lang === "id" ? "BUDAYA" : lang === "en" ? "CULTURE" : "CULTURA")}
                       </span>
                     </div>
 
-                    {/* Top Right: Elevation or Depth */}
+                    {/* Top Right: Short Story Counter Badge */}
                     <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
-                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
-                        {story.elevationOrDepth}
+                      <span className="px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-xs">
+                        {lang === "id" ? "38 Kisah" : lang === "en" ? "38 Stories" : "38 Frasi"}
                       </span>
                     </div>
                   </div>
 
                   {/* Body */}
-                  <div className="p-2.5 sm:p-4">
-                    <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
-                      <span className="truncate uppercase font-extrabold tracking-wider">
-                        {formatRegency(story.regency, lang)}
-                      </span>
-                      <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
-                        {formatPillar(story.pillar, lang)}
-                      </span>
+                  <div className="p-3 sm:p-4">
+                    {/* Regency & Elevation */}
+                    <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
+                      <span>{formatRegency(story.regency, lang)}</span>
+                      <span className="text-forest-body/70 font-semibold ml-1.5">• {story.elevationOrDepth}</span>
                     </div>
 
-                    <h3 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2 mb-1">
                       {story.title[lang]}
                     </h3>
+
+                    {/* Destination Name */}
+                    <p className="text-[11px] sm:text-xs text-forest-body font-medium truncate">
+                      {story.destinationName}
+                    </p>
                   </div>
                 </div>
 
                 {/* Footer */}
-                <div className="p-2.5 sm:p-4 pt-0">
-                  <div className="pt-2 border-t border-forest-border/60 flex items-center justify-between gap-1">
-                    <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
+                <div className="p-3 sm:p-4 pt-0">
+                  <div className="pt-2.5 border-t border-forest-border/60 flex items-center justify-between gap-1">
+                    <span className="text-[10px] sm:text-xs font-semibold text-forest-body">
                       {lang === "id"
-                        ? "38 Kisah"
+                        ? "Kisah Lokal"
                         : lang === "en"
-                        ? "38 Sentences"
-                        : "38 Frasi"}
+                        ? "Local Story"
+                        : "Storia Locale"}
                     </span>
-                    <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
-                      {lang === "id" ? "Baca →" : lang === "en" ? "Read →" : "Leggi →"}
+                    <span className="text-[11px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
+                      {lang === "id" ? "Baca Kisah →" : lang === "en" ? "Read Story →" : "Leggi →"}
                     </span>
                   </div>
                 </div>
@@ -523,15 +529,11 @@ export default function HomePage() {
                   </div>
 
                   {/* E-Commerce Product Card Body */}
-                  <div className="p-2.5 sm:p-4">
+                  <div className="p-3 sm:p-4">
                     {/* Regency & Category Meta */}
-                    <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
-                      <span className="truncate uppercase font-extrabold tracking-wider">
-                        {formatRegency(pkg.regency, lang)}
-                      </span>
-                      <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
-                        {formatPillar(pkg.pillar, lang)}
-                      </span>
+                    <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
+                      <span>{formatRegency(pkg.regency, lang)}</span>
+                      <span className="text-forest-body/70 font-semibold ml-1.5">• {formatPillar(pkg.pillar, lang)}</span>
                     </div>
 
                     {/* Product Title (2 lines clamp) */}
@@ -542,8 +544,8 @@ export default function HomePage() {
                 </div>
 
                 {/* E-Commerce Price & CTA Footer */}
-                <div className="p-2.5 sm:p-4 pt-0">
-                  <div className="pt-2 border-t border-forest-border/60 flex items-end justify-between gap-1">
+                <div className="p-3 sm:p-4 pt-0">
+                  <div className="pt-2.5 border-t border-forest-border/60 flex items-end justify-between gap-1">
                     <div>
                       <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
                         {lang === "id"

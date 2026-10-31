@@ -89,6 +89,13 @@ export default function ExplorePage() {
 
   const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE) || 1;
 
+  const startItem =
+    filteredPackages.length === 0 ? 0 : (currentPage - 1) * ITEMS_PER_PAGE + 1;
+  const endItem = Math.min(
+    currentPage * ITEMS_PER_PAGE,
+    filteredPackages.length
+  );
+
   const paginatedPackages = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredPackages.slice(start, start + ITEMS_PER_PAGE);
@@ -223,7 +230,17 @@ export default function ExplorePage() {
 
             <div className="flex items-center gap-3 text-xs font-bold text-forest-body">
               <span>
-                {t.showingCount} {filteredPackages.length} / {PACKAGES.length}
+                {filteredPackages.length === 0
+                  ? (lang === "id"
+                    ? "0 destinasi"
+                    : lang === "en"
+                    ? "0 destinations"
+                    : "0 destinazioni")
+                  : lang === "id"
+                  ? `${t.showingCount} ${startItem}–${endItem} dari ${filteredPackages.length} destinasi`
+                  : lang === "en"
+                  ? `${t.showingCount} ${startItem}–${endItem} of ${filteredPackages.length} destinations`
+                  : `${t.showingCount} ${startItem}–${endItem} di ${filteredPackages.length} destinazioni`}
               </span>
               {hasActiveFilter && (
                 <button
@@ -312,15 +329,11 @@ export default function ExplorePage() {
                     </div>
 
                     {/* E-Commerce Product Card Body */}
-                    <div className="p-2.5 sm:p-4">
+                    <div className="p-3 sm:p-4">
                       {/* Regency & Category Meta */}
-                      <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
-                        <span className="truncate uppercase font-extrabold tracking-wider">
-                          {formatRegency(pkg.regency, lang)}
-                        </span>
-                        <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
-                          {formatPillar(pkg.pillar, lang)}
-                        </span>
+                      <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
+                        <span>{formatRegency(pkg.regency, lang)}</span>
+                        <span className="text-forest-body/70 font-semibold ml-1.5">• {formatPillar(pkg.pillar, lang)}</span>
                       </div>
 
                       {/* Product Title (2 lines clamp) */}
@@ -331,8 +344,8 @@ export default function ExplorePage() {
                   </div>
 
                   {/* E-Commerce Price & CTA Footer */}
-                  <div className="p-2.5 sm:p-4 pt-0">
-                    <div className="pt-2 border-t border-forest-border/60 flex items-end justify-between gap-1">
+                  <div className="p-3 sm:p-4 pt-0">
+                    <div className="pt-2.5 border-t border-forest-border/60 flex items-end justify-between gap-1">
                       <div>
                         <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
                           {lang === "id"
