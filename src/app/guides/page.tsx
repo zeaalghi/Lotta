@@ -186,7 +186,7 @@ function GuidesContent() {
   };
 
   return (
-    <div className="py-8 sm:py-12 bg-forest-canvas min-h-screen pb-36">
+    <div className="py-8 sm:py-12 bg-forest-canvas min-h-screen pb-44 sm:pb-20">
       <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="bg-forest-header text-white rounded-3xl p-6 sm:p-9 mb-8 border border-forest-title shadow-md">
@@ -913,76 +913,95 @@ function GuidesContent() {
             </div>
 
             {/* Price Calculation Card */}
-            <div className="p-5 rounded-2xl bg-white text-forest-header space-y-3 shadow-inner">
-              <div className="flex items-center justify-between text-xs">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white text-forest-header space-y-3 shadow-inner">
+              <div className="flex items-center justify-between text-xs gap-2">
                 <span className="text-forest-body">
-                  {t.pricePerPerson} ({adults}x):
+                  {lang === "id"
+                    ? `Dewasa (${adults}x @ ${formatPrice(unitPrice, lang)}):`
+                    : lang === "en"
+                    ? `Adults (${adults}x @ ${formatPrice(unitPrice, lang)}):`
+                    : `Adulti (${adults}x @ ${formatPrice(unitPrice, lang)}):`}
                 </span>
-                <span className="font-bold">{formatPrice(adultsTotal, lang)}</span>
+                <span className="font-bold shrink-0 whitespace-nowrap">{formatPrice(adultsTotal, lang)}</span>
               </div>
 
               {children > 0 && (
-                <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center justify-between text-xs gap-2">
                   <span className="text-forest-body">
-                    Anak-anak (50% x {children}):
+                    {lang === "id"
+                      ? `Anak-anak (50% x ${children}):`
+                      : lang === "en"
+                      ? `Children (50% x ${children}):`
+                      : `Bambini (50% x ${children}):`}
                   </span>
-                  <span className="font-bold">{formatPrice(childrenTotal, lang)}</span>
+                  <span className="font-bold shrink-0 whitespace-nowrap">{formatPrice(childrenTotal, lang)}</span>
                 </div>
               )}
 
-              <div className="pt-2 border-t border-forest-border flex items-baseline justify-between">
+              <div className="pt-2 border-t border-forest-border flex items-baseline justify-between gap-2">
                 <span className="text-xs font-extrabold text-forest-header uppercase">
                   {t.totalPriceLabel}:
                 </span>
-                <span className="text-lg sm:text-xl font-extrabold text-forest-header">
+                <span className="text-lg sm:text-xl font-extrabold text-forest-header shrink-0 whitespace-nowrap">
                   {formatPrice(totalPrice, lang)}
                 </span>
               </div>
 
               {/* DP 30% Box */}
-              <div className="p-3 rounded-xl bg-forest-pill border border-forest-border space-y-1">
-                <div className="flex items-center justify-between text-xs">
+              <div className="p-3 rounded-xl bg-forest-pill border border-forest-border space-y-1.5">
+                <div className="flex items-center justify-between text-xs gap-2">
                   <span className="font-extrabold text-forest-title">
                     {t.deposit30Label}:
                   </span>
-                  <span className="font-extrabold text-forest-title text-base">
+                  <span className="font-extrabold text-forest-title text-base shrink-0 whitespace-nowrap">
                     {formatPrice(depositAmount, lang)}
                   </span>
                 </div>
-                <div className="flex items-center justify-between text-[11px] text-forest-body">
+                <div className="flex items-center justify-between text-[11px] text-forest-body gap-2">
                   <span>{t.balance70Label}:</span>
-                  <span className="font-bold">{formatPrice(remainingAmount, lang)}</span>
+                  <span className="font-bold shrink-0 whitespace-nowrap">{formatPrice(remainingAmount, lang)}</span>
                 </div>
               </div>
             </div>
 
             {/* Official Bank Mandiri Copy Box */}
-            <div className="p-4 rounded-2xl bg-forest-title/80 border border-forest-primary/50 text-xs space-y-2">
+            <div className="p-4 rounded-2xl bg-forest-title/90 border border-forest-primary/50 text-xs space-y-2.5">
               <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-sage">
                 {t.bankTransferTitle}
               </div>
-              <div className="flex items-center justify-between gap-2 bg-forest-header p-2.5 rounded-xl border border-forest-sage/30">
-                <div className="min-w-0">
-                  <div className="text-[11px] text-forest-pill">Bank Mandiri</div>
-                  <div className="font-extrabold text-sm tracking-wide text-white font-mono">
-                    1610007723179
+              <div className="bg-forest-header p-3 rounded-xl border border-forest-sage/30 space-y-2">
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-forest-pill tracking-wider">Bank Mandiri</div>
+                    <div className="font-mono font-extrabold text-base tracking-wider text-white">
+                      1610007723179
+                    </div>
                   </div>
-                  <div className="text-[10px] text-forest-sage truncate">
-                    a.n MUHAMMAD ZEA AL GHIF
-                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyBank}
+                    className="shrink-0 px-3 py-1.5 rounded-lg bg-forest-primary hover:bg-forest-hover active:scale-95 text-white text-xs font-extrabold transition shadow-sm whitespace-nowrap"
+                  >
+                    {copiedBank ? t.copiedNotice : t.copyAccountBtn}
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={handleCopyBank}
-                  className="shrink-0 px-3 py-2 rounded-lg bg-forest-primary hover:bg-forest-hover text-white text-[11px] font-extrabold transition shadow-sm"
-                >
-                  {copiedBank ? t.copiedNotice : t.copyAccountBtn}
-                </button>
+                <div className="pt-2 border-t border-forest-sage/20 text-[11px] text-forest-sage font-medium flex items-center justify-between">
+                  <span>
+                    {lang === "id"
+                      ? "Atas Nama:"
+                      : lang === "en"
+                      ? "Account Name:"
+                      : "Intestatario:"}
+                  </span>
+                  <span className="font-bold text-white tracking-wide">MUHAMMAD ZEA AL GHIF</span>
+                </div>
               </div>
-              <p className="text-[10px] text-forest-pill/80 leading-normal">
+              <p className="text-[10px] text-forest-pill/80 leading-relaxed">
                 {lang === "id"
                   ? "*Bukti transfer DP 30% dapat dikirimkan langsung ke WhatsApp Tim LOTTA saat mengonfirmasi pesanan."
-                  : "*Transfer receipt for the 30% deposit can be shared directly via WhatsApp upon confirmation."}
+                  : lang === "en"
+                  ? "*Transfer receipt for the 30% deposit can be shared directly via WhatsApp upon confirmation."
+                  : "*La ricevuta del bonifico per l'acconto del 30% puo essere inviata direttamente via WhatsApp al momento della conferma."}
               </p>
             </div>
 

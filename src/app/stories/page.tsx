@@ -311,8 +311,8 @@ export default function StoriesPage() {
 
                     {/* Card Body */}
                     <div className="p-3 sm:p-4">
-                      {/* Regency & Elevation */}
-                      <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
+                      {/* Regency & Elevation (Desktop only to prevent awkward truncated text on mobile 2-col grid) */}
+                      <div className="hidden sm:block text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
                         <span>{formatRegency(story.regency, lang)}</span>
                         <span className="text-forest-body/70 font-semibold ml-1.5">• {story.elevationOrDepth}</span>
                       </div>

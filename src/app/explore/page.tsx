@@ -330,8 +330,8 @@ export default function ExplorePage() {
 
                     {/* E-Commerce Product Card Body */}
                     <div className="p-3 sm:p-4">
-                      {/* Regency & Category Meta */}
-                      <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
+                      {/* Regency & Category Meta (Desktop only to prevent awkward truncated text on mobile 2-col grid) */}
+                      <div className="hidden sm:block text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1 truncate">
                         <span>{formatRegency(pkg.regency, lang)}</span>
                         <span className="text-forest-body/70 font-semibold ml-1.5">• {formatPillar(pkg.pillar, lang)}</span>
                       </div>
