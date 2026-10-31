@@ -17,10 +17,17 @@ import {
 } from "@/lib/weather-telemetry";
 import type { GuideRecord } from "@/lib/guides-catalog";
 import { TripDetailTabs } from "@/components/TripDetailTabs";
+import {
+  getLangFromPathname,
+  localizedPath,
+  stripLangPrefix,
+  switchLanguagePath,
+} from "@/lib/seo";
 
 interface LottaContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
+  localizeHref: (href: string) => string;
   weatherData: WeatherTelemetryResponse;
   activeTrailer: StoryTrailer | null;
   setActiveTrailer: (trailer: StoryTrailer | null) => void;
@@ -47,7 +54,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [lang, setLangState] = useState<Lang>("id");
+  const [lang, setLangState] = useState<Lang>(() => getLangFromPathname(pathname));
   const [weatherData, setWeatherData] = useState<WeatherTelemetryResponse>(
     FALLBACK_WEATHER_TELEMETRY
   );
@@ -59,24 +66,42 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
   );
   const [selectedGuide, setSelectedGuide] = useState<GuideRecord | null>(null);
 
+  // Sync language with URL pathname
   useEffect(() => {
+    const urlLang = getLangFromPathname(pathname);
+    setLangState(urlLang);
     try {
-      const saved = window.localStorage.getItem("lotta_lang");
-      if (saved === "id" || saved === "en" || saved === "it") {
-        setLangState(saved);
-      }
+      document.documentElement.lang = urlLang;
     } catch {
-      // ignore storage error
+      // ignore
     }
-  }, []);
+  }, [pathname]);
 
   const setLang = (nextLang: Lang) => {
     setLangState(nextLang);
     try {
       window.localStorage.setItem("lotta_lang", nextLang);
+      document.documentElement.lang = nextLang;
     } catch {
       // ignore storage error
     }
+    const target = switchLanguagePath(pathname, nextLang);
+    if (target !== pathname) {
+      router.push(target);
+    }
+  };
+
+  const localizeHref = (href: string): string => {
+    if (
+      href.startsWith("http://") ||
+      href.startsWith("https://") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:") ||
+      href.startsWith("#")
+    ) {
+      return href;
+    }
+    return localizedPath(href, lang);
   };
 
   useEffect(() => {
@@ -111,7 +136,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
     setSelectedRoute(routeTitle);
     setActiveTrailer(null);
     setActivePackageModal(null);
-    router.push(`/guides?route=${encodeURIComponent(routeTitle)}`);
+    router.push(localizeHref(`/guides?route=${encodeURIComponent(routeTitle)}`));
   };
 
   const t = UI_TEXT[lang];
@@ -154,8 +179,9 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
   ];
 
   const isRouteActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname?.startsWith(`${href}/`);
+    const clean = stripLangPrefix(pathname);
+    if (href === "/") return clean === "/";
+    return clean === href || clean.startsWith(`${href}/`);
   };
 
   return (
@@ -163,6 +189,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
       value={{
         lang,
         setLang,
+        localizeHref,
         weatherData,
         activeTrailer,
         setActiveTrailer,
@@ -181,7 +208,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
           <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
               <Link
-                href="/"
+                href={localizeHref("/")}
                 className="flex items-center gap-2.5 transition shrink-0 group py-1"
                 aria-label="LOTTA Tour & Travel Home"
               >
@@ -202,7 +229,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                 return (
                   <Link
                     key={item.href}
-                    href={item.href}
+                    href={localizeHref(item.href)}
                     className={`px-3.5 py-2 rounded-xl transition whitespace-nowrap ${
                       active
                         ? "bg-forest-primary text-white shadow-sm font-bold"
@@ -292,7 +319,9 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <Link
-                    href={`/explore/${activeTrailer.packageId || "pkg-explore-rinjani"}`}
+                    href={localizeHref(
+                      `/explore/${activeTrailer.packageId || "pkg-explore-rinjani"}`
+                    )}
                     onClick={() => setActiveTrailer(null)}
                     className="py-3 px-4 rounded-xl bg-forest-header hover:bg-forest-title text-white font-extrabold text-xs uppercase tracking-wider text-center transition shadow-sm"
                   >
@@ -461,7 +490,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                 <ul className="space-y-2.5 text-xs text-forest-body">
                   <li>
                     <Link
-                      href="/explore"
+                      href={localizeHref("/explore")}
                       className="hover:text-white transition font-medium"
                     >
                       {lang === "id"
@@ -473,7 +502,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                   </li>
                   <li>
                     <Link
-                      href="/stories"
+                      href={localizeHref("/stories")}
                       className="hover:text-white transition font-medium"
                     >
                       {lang === "id"
@@ -485,7 +514,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                   </li>
                   <li>
                     <Link
-                      href="/guides"
+                      href={localizeHref("/guides")}
                       className="hover:text-white transition font-medium"
                     >
                       {lang === "id"
@@ -497,7 +526,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                   </li>
                   <li>
                     <Link
-                      href="/weather"
+                      href={localizeHref("/weather")}
                       className="hover:text-white transition font-medium"
                     >
                       {lang === "id"
@@ -513,31 +542,47 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
               {/* Support Column (matches user's reference) */}
               <div>
                 <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-4">
-                  SUPPORT
+                  {lang === "id"
+                    ? "BANTUAN & LEGAL"
+                    : lang === "en"
+                    ? "SUPPORT & LEGAL"
+                    : "ASSISTENZA E NOTE LEGALI"}
                 </div>
                 <ul className="space-y-2.5 text-xs text-forest-body">
                   <li>
                     <Link
-                      href="/faq"
+                      href={localizeHref("/faq")}
                       className="hover:text-white transition font-medium"
                     >
-                      FAQ (Pertanyaan Umum)
+                      {lang === "id"
+                        ? "FAQ (Pertanyaan Umum)"
+                        : lang === "en"
+                        ? "FAQ (Frequently Asked Questions)"
+                        : "Domande Frequenti (FAQ)"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/terms"
+                      href={localizeHref("/terms")}
                       className="hover:text-white transition font-medium"
                     >
-                      Terms &amp; Conditions
+                      {lang === "id"
+                        ? "Syarat & Ketentuan"
+                        : lang === "en"
+                        ? "Terms & Conditions"
+                        : "Termini e Condizioni"}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/privacy"
+                      href={localizeHref("/privacy")}
                       className="hover:text-white transition font-medium"
                     >
-                      Privacy Policy
+                      {lang === "id"
+                        ? "Kebijakan Privasi"
+                        : lang === "en"
+                        ? "Privacy Policy"
+                        : "Informativa sulla Privacy"}
                     </Link>
                   </li>
                 </ul>
@@ -546,7 +591,11 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
               {/* Contact Column (matches user's reference) */}
               <div>
                 <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-4">
-                  CONTACT
+                  {lang === "id"
+                    ? "KONTAK KAMI"
+                    : lang === "en"
+                    ? "CONTACT US"
+                    : "CONTATTI"}
                 </div>
                 <div className="space-y-3 text-xs text-forest-body">
                   <div>
@@ -568,7 +617,11 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                       Email
                     </div>
                     <span className="text-forest-sage/70 font-medium">
-                      On Progress
+                      {lang === "id"
+                        ? "Sedang Disiapkan"
+                        : lang === "en"
+                        ? "In Progress"
+                        : "In Preparazione"}
                     </span>
                   </div>
 
@@ -590,7 +643,11 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
                 &copy; {new Date().getFullYear()} LOTTA. All rights reserved.
               </div>
               <div className="text-center sm:text-right">
-                Pemberdayaan Pemandu Lokal Resmi Lombok &amp; HPI DPD NTB
+                {lang === "id"
+                  ? "Pemberdayaan Pemandu Lokal Resmi Lombok & HPI DPD NTB"
+                  : lang === "en"
+                  ? "Official Licensed Lombok Tour Guides & HPI NTB Empowerment"
+                  : "Valorizzazione delle Guide Turistiche Ufficiali di Lombok e HPI NTB"}
               </div>
             </div>
           </div>
@@ -607,7 +664,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
               return (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={localizeHref(item.href)}
                   className={`flex flex-col items-center justify-center text-center min-h-[48px] px-1 py-1.5 rounded-xl transition-all ${
                     active
                       ? "bg-forest-primary text-white shadow-sm"

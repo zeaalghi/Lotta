@@ -15,6 +15,7 @@ import { useLotta } from "@/components/LottaShell";
 export default function ExplorePage() {
   const {
     lang,
+    localizeHref,
     setActivePackageModal,
     chooseRouteAndGoToGuides,
   } = useLotta();
@@ -354,7 +355,7 @@ export default function ExplorePage() {
 
                 <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <Link
-                    href={`/explore/${pkg.id}`}
+                    href={localizeHref(`/explore/${pkg.id}`)}
                     className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
                   >
                     {lang === "id"

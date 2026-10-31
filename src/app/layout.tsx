@@ -3,6 +3,7 @@ import "./globals.css";
 import { LottaShell } from "@/components/LottaShell";
 import { JsonLd } from "@/components/JsonLd";
 import {
+  buildHreflangAlternates,
   BUSINESS,
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
@@ -22,12 +23,12 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: DEFAULT_TITLE,
+    default: DEFAULT_TITLE.id,
     template: `%s | ${SITE_NAME}`,
   },
-  description: DEFAULT_DESCRIPTION,
+  description: DEFAULT_DESCRIPTION.id,
   applicationName: SITE_NAME,
-  alternates: { canonical: "/" },
+  alternates: buildHreflangAlternates("/"),
   robots: {
     index: true,
     follow: true,
@@ -44,8 +45,8 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESCRIPTION,
+    title: DEFAULT_TITLE.id,
+    description: DEFAULT_DESCRIPTION.id,
     url: "/",
     siteName: SITE_NAME,
     type: "website",
@@ -55,8 +56,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESCRIPTION,
+    title: DEFAULT_TITLE.id,
+    description: DEFAULT_DESCRIPTION.id,
     images: [OG_IMAGE.url],
   },
 };
@@ -69,7 +70,7 @@ const structuredData = {
       "@id": ORGANIZATION_ID,
       name: BUSINESS.name,
       url: SITE_URL,
-      description: DEFAULT_DESCRIPTION,
+      description: DEFAULT_DESCRIPTION.id,
       logo: `${SITE_URL}/icon-512.png`,
       image: `${SITE_URL}${OG_IMAGE.url}`,
       telephone: BUSINESS.telephone,

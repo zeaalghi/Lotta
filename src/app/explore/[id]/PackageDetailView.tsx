@@ -18,7 +18,7 @@ interface PackageDetailViewProps {
 }
 
 export function PackageDetailView({ packageId }: PackageDetailViewProps) {
-  const { lang, chooseRouteAndGoToGuides } = useLotta();
+  const { lang, localizeHref, chooseRouteAndGoToGuides } = useLotta();
   const pkg = findPackage(packageId);
   const t = UI_TEXT[lang];
   const relatedStory = STORY_TRAILERS.find((s) => s.packageId === pkg.id);
@@ -33,11 +33,11 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
           aria-label="Breadcrumb"
           className="flex items-center gap-2 text-xs text-forest-body font-semibold mb-6 flex-wrap"
         >
-          <Link href="/" className="hover:text-forest-header transition">
+          <Link href={localizeHref("/")} className="hover:text-forest-header transition">
             {t.navHome}
           </Link>
           <span>/</span>
-          <Link href="/explore" className="hover:text-forest-header transition">
+          <Link href={localizeHref("/explore")} className="hover:text-forest-header transition">
             {t.navExplore}
           </Link>
           <span>/</span>
@@ -239,10 +239,10 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
             {/* Back to Catalog Link */}
             <div className="pt-2 text-center border-t border-forest-title">
               <Link
-                href="/explore"
+                href={localizeHref("/explore")}
                 className="text-xs font-extrabold text-forest-sage hover:text-white transition"
               >
-                ← {lang === "id" ? "Kembali ke Katalog Destinasi" : "Back to All Destinations"}
+                ← {lang === "id" ? "Kembali ke Katalog Destinasi" : lang === "en" ? "Back to All Destinations" : "Torna a Tutte le Destinazioni"}
               </Link>
             </div>
           </aside>

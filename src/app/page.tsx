@@ -17,6 +17,7 @@ import { localizeWeatherMetric } from "@/lib/weather-telemetry";
 export default function HomePage() {
   const {
     lang,
+    localizeHref,
     weatherData,
     setActiveTrailer,
     setActivePackageModal,
@@ -61,19 +62,19 @@ export default function HomePage() {
               <div>
                 <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 mb-7">
                   <Link
-                    href="/explore"
+                    href={localizeHref("/explore")}
                     className="text-center px-6 py-3.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md"
                   >
                     {t.btnExplore}
                   </Link>
                   <Link
-                    href="/guides"
+                    href={localizeHref("/guides")}
                     className="text-center px-6 py-3.5 rounded-xl bg-forest-title hover:bg-forest-primary/40 text-forest-pill border border-forest-sage/30 font-bold text-sm transition"
                   >
                     {t.btnFindGuide}
                   </Link>
                   <Link
-                    href="/stories"
+                    href={localizeHref("/stories")}
                     className="text-center px-5 py-3.5 rounded-xl bg-forest-header hover:bg-forest-title text-forest-sage border border-forest-sage/30 font-bold text-sm transition"
                   >
                     {t.viewAllStoriesBtn}
@@ -210,7 +211,7 @@ export default function HomePage() {
                       : "Controlla vento e onde"}
                   </span>
                   <Link
-                    href="/weather"
+                    href={localizeHref("/weather")}
                     className="px-3.5 py-1.5 rounded-lg bg-forest-header text-white text-xs font-extrabold uppercase tracking-wider hover:bg-forest-title transition whitespace-nowrap"
                   >
                     {t.navWeather} →
@@ -256,7 +257,7 @@ export default function HomePage() {
                   Desa Sade, Ende, Sukarara, Sembalun Bumbung, Masbagik, Masjid Kuno Bayan Beleq, Senaru, Pura Lingsar, Taman Narmada.
                 </p>
                 <Link
-                  href="/explore"
+                  href={localizeHref("/explore")}
                   className="inline-block w-full sm:w-auto text-center px-4 py-2.5 rounded-xl bg-forest-primary text-white text-xs font-extrabold uppercase tracking-wider hover:bg-forest-hover transition"
                 >
                   {t.viewAllDestinationsBtn} →
@@ -287,7 +288,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/stories"
+              href={localizeHref("/stories")}
               className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
             >
               {t.viewAllStoriesBtn} →
@@ -302,7 +303,7 @@ export default function HomePage() {
               >
                 <div>
                   <Link
-                    href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                     className="block relative h-48 overflow-hidden bg-forest-header"
                   >
                     <img
@@ -330,7 +331,7 @@ export default function HomePage() {
                     </div>
                     <h3 className="text-lg font-extrabold text-forest-header mb-2 leading-snug">
                       <Link
-                        href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                        href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                         className="hover:text-forest-primary transition"
                       >
                         {story.title[lang]}
@@ -351,7 +352,7 @@ export default function HomePage() {
                     {t.readTrailerLink}
                   </button>
                   <Link
-                    href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                     className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
                   >
                     {t.viewTripDetailBtn}
@@ -379,7 +380,7 @@ export default function HomePage() {
               </p>
             </div>
             <Link
-              href="/explore"
+              href={localizeHref("/explore")}
               className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
             >
               {t.viewAllDestinationsBtn} →
@@ -482,7 +483,7 @@ export default function HomePage() {
 
                 <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <Link
-                    href={`/explore/${pkg.id}`}
+                    href={localizeHref(`/explore/${pkg.id}`)}
                     className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
                   >
                     {lang === "id"
@@ -526,7 +527,7 @@ export default function HomePage() {
                 </p>
               </div>
               <Link
-                href="/explore"
+                href={localizeHref("/explore")}
                 className="text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
               >
                 {t.viewAllDestinationsBtn} →
@@ -535,7 +536,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <Link
-                href="/explore?pillar=mountain"
+                href={localizeHref("/explore?pillar=mountain")}
                 className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
                 <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
@@ -550,7 +551,7 @@ export default function HomePage() {
               </Link>
 
               <Link
-                href="/explore?pillar=beach"
+                href={localizeHref("/explore?pillar=beach")}
                 className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
                 <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
@@ -565,7 +566,7 @@ export default function HomePage() {
               </Link>
 
               <Link
-                href="/explore?pillar=heritage"
+                href={localizeHref("/explore?pillar=heritage")}
                 className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
                 <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
@@ -604,13 +605,13 @@ export default function HomePage() {
             </div>
             <div className="flex flex-wrap gap-3.5 shrink-0 w-full sm:w-auto">
               <Link
-                href="/guides"
+                href={localizeHref("/guides")}
                 className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md"
               >
                 {t.btnFindGuide}
               </Link>
               <Link
-                href="/explore"
+                href={localizeHref("/explore")}
                 className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl bg-forest-title hover:bg-forest-primary/40 text-forest-pill border border-forest-sage/30 font-bold text-sm transition"
               >
                 {t.viewAllDestinationsBtn}

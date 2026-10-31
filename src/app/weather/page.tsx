@@ -7,7 +7,7 @@ import { useLotta } from "@/components/LottaShell";
 import { localizeWeatherMetric } from "@/lib/weather-telemetry";
 
 export default function WeatherPage() {
-  const { lang, weatherData } = useLotta();
+  const { lang, localizeHref, weatherData } = useLotta();
   const [weatherZone, setWeatherZone] = useState<"summit" | "south" | "gili">(
     "summit"
   );
@@ -233,13 +233,13 @@ export default function WeatherPage() {
               </div>
               <div className="flex flex-col gap-2.5">
                 <Link
-                  href="/guides"
+                  href={localizeHref("/guides")}
                   className="w-full text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-xs uppercase tracking-wider transition"
                 >
                   {t.btnFindGuide}
                 </Link>
                 <Link
-                  href="/explore"
+                  href={localizeHref("/explore")}
                   className="w-full text-center px-5 py-2.5 rounded-xl bg-forest-header hover:bg-forest-primary/30 text-forest-sage border border-forest-sage/30 font-extrabold text-xs uppercase tracking-wider transition"
                 >
                   {t.viewAllDestinationsBtn}

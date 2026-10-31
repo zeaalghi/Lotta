@@ -8,6 +8,7 @@ import { useLotta } from "@/components/LottaShell";
 export default function StoriesPage() {
   const {
     lang,
+    localizeHref,
     setActiveTrailer,
     chooseRouteAndGoToGuides,
   } = useLotta();
@@ -243,7 +244,7 @@ export default function StoriesPage() {
               >
                 <div>
                   <Link
-                    href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                     className="block relative h-52 overflow-hidden bg-forest-header"
                   >
                     <img
@@ -271,7 +272,7 @@ export default function StoriesPage() {
                     </div>
                     <h2 className="text-lg font-extrabold text-forest-header mb-2 leading-snug">
                       <Link
-                        href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                        href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                         className="hover:text-forest-primary transition"
                       >
                         {story.title[lang]}
@@ -292,7 +293,7 @@ export default function StoriesPage() {
                     {t.readTrailerLink}
                   </button>
                   <Link
-                    href={`/explore/${story.packageId || "pkg-explore-rinjani"}`}
+                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                     className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
                   >
                     {t.viewTripDetailBtn}
@@ -323,13 +324,13 @@ export default function StoriesPage() {
           </div>
           <div className="flex flex-wrap gap-3 shrink-0 w-full sm:w-auto">
             <Link
-              href="/explore"
+              href={localizeHref("/explore")}
               className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition"
             >
               {t.viewAllDestinationsBtn}
             </Link>
             <Link
-              href="/guides"
+              href={localizeHref("/guides")}
               className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition"
             >
               {t.btnFindGuide}
