@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  formatDuration,
   formatPillar,
   formatPrice,
   formatRegency,
@@ -17,8 +16,6 @@ export default function ExplorePage() {
   const {
     lang,
     localizeHref,
-    setActivePackageModal,
-    chooseRouteAndGoToGuides,
   } = useLotta();
 
   const [activePillar, setActivePillar] = useState<
@@ -251,134 +248,81 @@ export default function ExplorePage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
             {filteredPackages.map((pkg) => (
-              <article
+              <Link
                 key={pkg.id}
-                className="bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
+                href={localizeHref(`/explore/${pkg.id}`)}
+                className="group bg-white border border-forest-border hover:border-forest-primary rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition"
               >
                 <div>
-                  {/* Clean Visual Image without Cramped Text */}
-                  <div className="relative h-44 sm:h-48 overflow-hidden bg-forest-header">
+                  {/* Clean Visual Cover Photo */}
+                  <div className="relative aspect-[4/3] sm:h-44 w-full overflow-hidden bg-forest-header">
                     <img
                       src={pkg.image}
                       alt={pkg.destinationNames}
-                      className="w-full h-full object-cover transition duration-300 hover:scale-105"
+                      className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
 
                     {/* Top Left: Clean Best Seller Badge (if applicable) */}
                     {pkg.isBestSeller && (
-                      <div className="absolute top-3 left-3">
-                        <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
+                      <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
+                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
                           BEST SELLER
                         </span>
                       </div>
                     )}
 
-                    {/* Top Right: Short Duration Badge - Never collides with left badge */}
-                    <div className="absolute top-3 right-3">
-                      <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-sm border border-white/20 shadow-sm">
+                    {/* Top Right: Short Duration Badge */}
+                    <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
+                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
                         {formatShortDuration(pkg.duration, lang)}
                       </span>
                     </div>
                   </div>
 
-                  {/* Card Content with Generous Breathing Room */}
-                  <div className="p-4 sm:p-6">
+                  {/* E-Commerce Product Card Body */}
+                  <div className="p-2.5 sm:p-4">
                     {/* Regency & Category Meta */}
-                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-1.5 sm:mb-2 gap-2">
-                      <span className="flex items-center gap-1.5 min-w-0">
-                        <span className="w-1.5 h-1.5 rounded-full bg-forest-primary shrink-0" />
-                        <span className="truncate font-extrabold tracking-wider uppercase text-[11px]">
-                          {formatRegency(pkg.regency, lang)}
-                        </span>
+                    <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
+                      <span className="truncate uppercase font-extrabold tracking-wider">
+                        {formatRegency(pkg.regency, lang)}
                       </span>
-                      <span className="text-[10px] font-bold text-forest-body bg-forest-canvas px-2.5 py-0.5 rounded-md border border-forest-border/60 shrink-0">
+                      <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
                         {formatPillar(pkg.pillar, lang)}
                       </span>
                     </div>
 
-                    <h2 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
+                    {/* Product Title (2 lines clamp) */}
+                    <h2 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
                       {pkg.title[lang]}
                     </h2>
-
-                    {/* Rute & Destinasi - 1 line on mobile, 2 lines on desktop */}
-                    <div className="text-[11px] sm:text-xs text-forest-title font-medium leading-relaxed mb-2.5 sm:mb-3 bg-forest-canvas/70 p-2 sm:p-2.5 rounded-xl border border-forest-border/50 line-clamp-1 sm:line-clamp-2">
-                      <span className="font-extrabold text-forest-header">
-                        {lang === "id"
-                          ? "Destinasi: "
-                          : lang === "en"
-                          ? "Destinations: "
-                          : "Destinazioni: "}
-                      </span>
-                      {pkg.destinationNames}
-                    </div>
-
-                    <p className="text-xs text-forest-body leading-relaxed mb-3 sm:mb-4 line-clamp-2">
-                      {pkg.desc[lang]}
-                    </p>
-
-                    {/* Explicit Highlights List - Cleanly tucked into desktop view, omitted on mobile to prevent scroll fatigue */}
-                    <ul className="hidden sm:block space-y-1.5 pt-3 border-t border-forest-border/60 text-xs text-forest-title mb-4">
-                      {pkg.highlights[lang].map((hl) => (
-                        <li key={hl} className="flex items-start gap-2">
-                          <span className="font-bold text-forest-primary">•</span>
-                          <span>{hl}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Spacious All-In Price Section */}
-                    <div className="pt-2.5 sm:pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
-                      <div>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-forest-body block">
-                          {lang === "id"
-                            ? "Harga per Pax (All-in)"
-                            : lang === "en"
-                            ? "Price per Pax (All-in)"
-                            : "Prezzo per Persona"}
-                        </span>
-                        <span className="text-lg sm:text-xl font-extrabold text-forest-header tracking-tight">
-                          {formatPrice(pkg.priceIdr, lang)}
-                        </span>
-                      </div>
-                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-0.5 sm:py-1 rounded-md border border-forest-primary/20 shrink-0">
-                        {lang === "id"
-                          ? "All-In & Berlisensi"
-                          : lang === "en"
-                          ? "All-In & Licensed"
-                          : "Tutto Incluso"}
-                      </span>
-                    </div>
                   </div>
                 </div>
 
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
-                  <Link
-                    href={localizeHref(`/explore/${pkg.id}`)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
-                  >
-                    {lang === "id"
-                      ? "Detail Trip →"
-                      : lang === "en"
-                      ? "Trip Details →"
-                      : "Dettagli →"}
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => chooseRouteAndGoToGuides(pkg.id)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
-                  >
-                    {lang === "id"
-                      ? "Pilih Guide →"
-                      : lang === "en"
-                      ? "Pick Guide →"
-                      : "Scegli Guida →"}
-                  </button>
+                {/* E-Commerce Price & CTA Footer */}
+                <div className="p-2.5 sm:p-4 pt-0">
+                  <div className="pt-2 border-t border-forest-border/60 flex items-end justify-between gap-1">
+                    <div>
+                      <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
+                        {lang === "id"
+                          ? "All-In / pax"
+                          : lang === "en"
+                          ? "All-In / pax"
+                          : "Tutto Incluso"}
+                      </span>
+                      <span className="text-xs sm:text-sm font-extrabold text-forest-header tracking-tight block">
+                        {formatPrice(pkg.priceIdr, lang)}
+                      </span>
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
+                      {lang === "id" ? "Detail →" : lang === "en" ? "Details →" : "Dettagli →"}
+                    </span>
+                  </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}
