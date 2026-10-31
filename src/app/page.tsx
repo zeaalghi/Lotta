@@ -56,11 +56,9 @@ export default function HomePage() {
                 <p className="text-forest-pill text-xs sm:text-base leading-relaxed max-w-2xl mb-5 sm:mb-7">
                   {t.heroSubtitle}
                 </p>
-              </div>
 
-              <div>
-                {/* Mobile-First Button Cluster */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mb-5 sm:mb-7">
+                {/* Mobile-First Button Cluster — placed directly under subtitle */}
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mb-6 sm:mb-8">
                   <Link
                     href={localizeHref("/explore")}
                     className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
@@ -82,41 +80,41 @@ export default function HomePage() {
                     </Link>
                   </div>
                 </div>
+              </div>
 
-                {/* Metric Summary Strip (3-col inline on all screens) */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 sm:pt-5 border-t border-forest-title/80 text-center sm:text-left">
-                  <div className="min-w-0">
-                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
-                      24
-                    </div>
-                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
-                      {lang === "id" ? "Destinasi" : lang === "en" ? "Destinations" : "Destinazioni"}
-                    </div>
-                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id" ? "Paket All-In" : lang === "en" ? "All-In Packages" : "Tutto Incluso"}
-                    </div>
+              {/* Metric Summary Strip (3-col inline on all screens) */}
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 sm:pt-5 border-t border-forest-title/80 text-center sm:text-left mt-4 sm:mt-6">
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                    24
                   </div>
-                  <div className="min-w-0">
-                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
-                      12
-                    </div>
-                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
-                      {lang === "id" ? "Kisah Budaya" : lang === "en" ? "Local Stories" : "Storie Locali"}
-                    </div>
-                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id" ? "Legenda Asli" : lang === "en" ? "Oral Legends" : "Tradizioni"}
-                    </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                    {lang === "id" ? "Destinasi" : lang === "en" ? "Destinations" : "Destinazioni"}
                   </div>
-                  <div className="min-w-0">
-                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
-                      100%
-                    </div>
-                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
-                      {lang === "id" ? "Pemandu HPI" : lang === "en" ? "Certified HPI" : "Guide HPI"}
-                    </div>
-                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id" ? "Berlisensi NTB" : lang === "en" ? "Official NTB" : "Ufficiali NTB"}
-                    </div>
+                  <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
+                    {lang === "id" ? "Paket All-In" : lang === "en" ? "All-In Packages" : "Tutto Incluso"}
+                  </div>
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                    12
+                  </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                    {lang === "id" ? "Kisah Budaya" : lang === "en" ? "Local Stories" : "Storie Locali"}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
+                    {lang === "id" ? "Legenda Asli" : lang === "en" ? "Oral Legends" : "Tradizioni"}
+                  </div>
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                    100%
+                  </div>
+                  <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                    {lang === "id" ? "Pemandu HPI" : lang === "en" ? "Certified HPI" : "Guide HPI"}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
+                    {lang === "id" ? "Berlisensi NTB" : lang === "en" ? "Official NTB" : "Ufficiali NTB"}
                   </div>
                 </div>
               </div>
@@ -302,49 +300,49 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Destination Directory Card */}
-              <div className="bg-forest-pill border border-forest-border rounded-3xl p-4 sm:p-6 shadow-sm">
-                <div className="text-xs font-extrabold uppercase tracking-wider text-forest-title mb-1.5">
-                  {lang === "id"
-                    ? "CAKUPAN DESTINASI LENGKAP LOMBOK"
-                    : lang === "en"
-                    ? "COMPLETE LOMBOK DESTINATION COVERAGE"
-                    : "COPERTURA COMPLETA DELLE DESTINAZIONI"}
+              {/* Destination Directory Card — Compact 3-Pillar Overview */}
+              <div className="bg-forest-pill border border-forest-border rounded-3xl p-4 sm:p-5 shadow-sm space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <div className="text-xs font-extrabold uppercase tracking-wider text-forest-title">
+                    {lang === "id"
+                      ? "CAKUPAN 24 DESTINASI RESMI"
+                      : lang === "en"
+                      ? "OFFICIAL 24 DESTINATION COVERAGE"
+                      : "COPERTURA DI 24 DESTINAZIONI"}
+                  </div>
+                  <Link
+                    href={localizeHref("/explore")}
+                    className="text-xs font-extrabold text-forest-primary hover:underline shrink-0"
+                  >
+                    {t.viewAllDestinationsBtn} →
+                  </Link>
                 </div>
-                <p className="text-xs text-forest-body leading-relaxed mb-3 line-clamp-3 sm:line-clamp-none">
-                  <strong>
-                    {lang === "id"
-                      ? "Gunung & Bukit:"
-                      : lang === "en"
-                      ? "Mountains & Hills:"
-                      : "Montagne e Colline:"}
-                  </strong>{" "}
-                  Puncak Rinjani 3.726m, Segara Anak, Torean, Pergasingan, Sempana, Anak Dara, Nanggi, Kondo, Bao Ritip, Dandaun.
-                  <br />
-                  <strong>
-                    {lang === "id"
-                      ? "Pantai & Gili:"
-                      : lang === "en"
-                      ? "Beaches & Gilis:"
-                      : "Spiagge e Isole Gili:"}
-                  </strong>{" "}
-                  Tanjung Aan, Mawun, Selong Belanak, Merese, Pink Tangsi, Tanjung Ringgit, Gili Kondo, Gili Trawangan, Meno, Air, Nanggu.
-                  <br />
-                  <strong>
-                    {lang === "id"
-                      ? "Heritage Budaya:"
-                      : lang === "en"
-                      ? "Cultural Heritage:"
-                      : "Patrimonio Culturale:"}
-                  </strong>{" "}
-                  Desa Sade, Ende, Sukarara, Sembalun Bumbung, Masbagik, Masjid Kuno Bayan Beleq, Senaru, Pura Lingsar, Taman Narmada.
-                </p>
-                <Link
-                  href={localizeHref("/explore")}
-                  className="inline-block w-full sm:w-auto text-center px-4 py-2.5 rounded-xl bg-forest-primary text-white text-xs font-extrabold uppercase tracking-wider hover:bg-forest-hover transition"
-                >
-                  {t.viewAllDestinationsBtn} →
-                </Link>
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div className="p-2.5 rounded-xl bg-white/80 border border-forest-border/60">
+                    <div className="text-xs font-extrabold text-forest-header">
+                      {lang === "id" ? "8 Gunung" : lang === "en" ? "8 Peaks" : "8 Vette"}
+                    </div>
+                    <div className="text-[10px] text-forest-body mt-0.5 truncate">
+                      {lang === "id" ? "Rinjani & Bukit" : lang === "en" ? "Rinjani & Hills" : "Rinjani e Colline"}
+                    </div>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/80 border border-forest-border/60">
+                    <div className="text-xs font-extrabold text-forest-header">
+                      {lang === "id" ? "8 Pantai" : lang === "en" ? "8 Beaches" : "8 Spiagge"}
+                    </div>
+                    <div className="text-[10px] text-forest-body mt-0.5 truncate">
+                      {lang === "id" ? "Selatan & Gili" : lang === "en" ? "South & Gilis" : "Costa Sud e Gili"}
+                    </div>
+                  </div>
+                  <div className="p-2.5 rounded-xl bg-white/80 border border-forest-border/60">
+                    <div className="text-xs font-extrabold text-forest-header">
+                      {lang === "id" ? "8 Budaya" : lang === "en" ? "8 Culture" : "8 Cultura"}
+                    </div>
+                    <div className="text-[10px] text-forest-body mt-0.5 truncate">
+                      {lang === "id" ? "Desa & Heritage" : lang === "en" ? "Villages & Sites" : "Borghi e Tradizioni"}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
