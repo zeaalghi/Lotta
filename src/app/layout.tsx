@@ -1,39 +1,97 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LottaShell } from "@/components/LottaShell";
+import { JsonLd } from "@/components/JsonLd";
+import {
+  BUSINESS,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  OG_IMAGE,
+  ORGANIZATION_ID,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: "#1A3A26",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lotta.id"),
-  title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
-  description:
-    "Lombok Tourism & Private Guides Platform: Living Heritage Stories, Rinjani Summits & Overnight Hills, Regency Beaches, and Certified Multilingual Local Hosts.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",
     shortcut: "/favicon.ico",
   },
   openGraph: {
-    title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
-    description:
-      "Explore Lombok's complete Mountain, Beach, and Cultural Heritage destinations, monitor live Rinjani summit weather & coastal swells, and travel with certified LOTTA local hosts.",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: "/",
+    siteName: SITE_NAME,
     type: "website",
     locale: "id_ID",
     alternateLocale: ["en_US", "it_IT"],
-    images: [
-      {
-        url: "/lotta-logo-banner.png",
-        width: 780,
-        height: 280,
-        alt: "LOTTA Tour & Travel",
-      },
-    ],
+    images: [OG_IMAGE],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE.url],
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TravelAgency",
+      "@id": ORGANIZATION_ID,
+      name: BUSINESS.name,
+      url: SITE_URL,
+      description: DEFAULT_DESCRIPTION,
+      logo: `${SITE_URL}/icon-512.png`,
+      image: `${SITE_URL}${OG_IMAGE.url}`,
+      telephone: BUSINESS.telephone,
+      address: {
+        "@type": "PostalAddress",
+        ...BUSINESS.address,
+      },
+      areaServed: {
+        "@type": "AdministrativeArea",
+        name: "Lombok, Nusa Tenggara Barat, Indonesia",
+      },
+      knowsLanguage: ["id", "en", "it"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      inLanguage: ["id", "en", "it"],
+      publisher: { "@id": ORGANIZATION_ID },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -56,6 +114,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans bg-forest-canvas text-forest-header min-h-screen antialiased pb-20 md:pb-0 selection:bg-forest-sage selection:text-forest-header">
+        <JsonLd data={structuredData} />
         <LottaShell>{children}</LottaShell>
       </body>
     </html>
