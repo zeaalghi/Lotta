@@ -24,12 +24,12 @@ export default function HomePage() {
   const t = UI_TEXT[lang];
   const featuredStories = STORY_TRAILERS.slice(0, 6);
   const featuredDestinations = [
-    PACKAGES[0], // 7 Summits Sembalun
-    PACKAGES[4], // Bukit Pergasingan
-    PACKAGES[8], // Pantai Tanjung Aan & Bukit Merese
-    PACKAGES[10], // Pantai Pink Tangsi & Tanjung Ringgit
-    PACKAGES[16], // Desa Adat Sade & Desa Adat Ende
-    PACKAGES[18], // Masjid Kuno Bayan Beleq
+    PACKAGES.find((p) => p.id === "pkg-secret-gili-sekotong") || PACKAGES[14], // Secret Gili Snorkeling (Nanggu, Sudak, Kedis)
+    PACKAGES.find((p) => p.id === "pkg-pink-beach-tangsi") || PACKAGES[10], // Pink Beach & Pulau Pasir
+    PACKAGES.find((p) => p.id === "pkg-tanjung-aan-merese") || PACKAGES[8], // Tanjung Aan, Selong Belanak & Merese
+    PACKAGES.find((p) => p.id === "pkg-bukit-pergasingan") || PACKAGES[4], // Bukit Pergasingan 2D1N Sembalun
+    PACKAGES.find((p) => p.id === "pkg-desa-adat-senaru") || PACKAGES[19], // Air Terjun Sendang Gile & Tiu Kelep
+    PACKAGES.find((p) => p.id === "pkg-desa-sade-ende") || PACKAGES[16], // Desa Adat Sade, Ende & Tenun Sukarara
   ];
 
   const summitZone = weatherData.zones.summit;
@@ -361,19 +361,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. FEATURED DESTINATIONS ACROSS 3 PILLARS (Links to /explore for all 24 destinations) */}
+      {/* 3. FEATURED BEST SELLER PACKAGES & 3 PILLARS */}
       <section className="py-12 sm:py-16 border-b border-forest-border bg-forest-alt">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1.5">
-                3 PILAR WISATA LOMBOK — 24 DESTINASI LENGKAP
+                {t.bestSellersEyebrow}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-forest-header tracking-tight">
-                {t.pillarsHeader}
+                {t.bestSellersHeader}
               </h2>
               <p className="text-sm sm:text-base text-forest-body mt-1 max-w-3xl">
-                {t.pillarsSub}
+                {t.bestSellersSub}
               </p>
             </div>
             <Link
@@ -384,55 +384,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* 3 Pillar Quick Navigation Cards with All Destination Names Written Out */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-            <Link
-              href="/explore?pillar=mountain"
-              className="p-6 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
-            >
-              <div className="text-xs font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                PILAR 1 • 8 PROGRAM MENGINAP
-              </div>
-              <h3 className="text-lg font-extrabold text-forest-header group-hover:text-forest-primary transition mb-2">
-                {t.pillarMountain}
-              </h3>
-              <p className="text-xs text-forest-body leading-relaxed">
-                Puncak Gunung Rinjani 3.726m, Danau Segara Anak, Aik Kalak, Jalur Lembah Torean, Bukit Pergasingan, Bukit Sempana, Bukit Anak Dara, Bukit Nanggi, Bukit Kondo, Bukit Bao Ritip, Bukit Dandaun.
-              </p>
-            </Link>
-
-            <Link
-              href="/explore?pillar=beach"
-              className="p-6 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
-            >
-              <div className="text-xs font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                PILAR 2 • 8 ZONA PESISIR &amp; GILI
-              </div>
-              <h3 className="text-lg font-extrabold text-forest-header group-hover:text-forest-primary transition mb-2">
-                {t.pillarBeach}
-              </h3>
-              <p className="text-xs text-forest-body leading-relaxed">
-                Lombok Tengah (Tanjung Aan, Mawun, Selong Belanak, Merese), Lombok Timur (Pantai Pink Tangsi, Tanjung Ringgit, Gili Kondo, Bidara, Petagan), Lombok Utara (Gili Trawangan, Meno, Air, Pantai Sire), Lombok Barat (Gili Kedis, Sudak, Nanggu, Mekaki).
-              </p>
-            </Link>
-
-            <Link
-              href="/explore?pillar=heritage"
-              className="p-6 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
-            >
-              <div className="text-xs font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                PILAR 3 • 8 KORIDOR BUDAYA SASAK
-              </div>
-              <h3 className="text-lg font-extrabold text-forest-header group-hover:text-forest-primary transition mb-2">
-                {t.pillarHeritage}
-              </h3>
-              <p className="text-xs text-forest-body leading-relaxed">
-                Lombok Tengah (Desa Adat Sade, Desa Ende, Desa Tenun Sukarara, Bau Nyale), Lombok Timur (7 Rumah Adat Sembalun Bumbung, Gerabah Masbagik), Lombok Utara (Masjid Kuno Bayan Beleq, Desa Adat Senaru), Lombok Barat (Pura Lingsar, Taman Narmada).
-              </p>
-            </Link>
-          </div>
-
-          {/* 6 Highlighted Destination Cards */}
+          {/* 6 Curated Best Seller Destination Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredDestinations.map((pkg) => (
               <article
@@ -448,10 +400,15 @@ export default function HomePage() {
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest-header/90 via-forest-header/20 to-transparent" />
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
                       <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-forest-primary text-white shadow-sm">
                         {pkg.duration}
                       </span>
+                      {pkg.isBestSeller && (
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm">
+                          BEST SELLER
+                        </span>
+                      )}
                     </div>
                     <div className="absolute top-3 right-3">
                       <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-forest-header/90 text-forest-sage border border-forest-sage/40 shadow-sm">
@@ -501,6 +458,80 @@ export default function HomePage() {
                 </div>
               </article>
             ))}
+          </div>
+
+          {/* 3 Pillar Quick Navigation Directory with All 24 Destinations */}
+          <div className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-forest-border">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+              <div>
+                <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
+                  {lang === "id"
+                    ? "3 PILAR WISATA LOMBOK • 24 DESTINASI LENGKAP"
+                    : lang === "en"
+                    ? "3 LOMBOK TOURISM PILLARS • 24 COMPLETE DESTINATIONS"
+                    : "3 PILASTRI DI LOMBOK • 24 DESTINAZIONI COMPLETE"}
+                </div>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-forest-header">
+                  {t.pillarsHeader}
+                </h3>
+                <p className="text-xs sm:text-sm text-forest-body mt-1 max-w-2xl">
+                  {t.pillarsSub}
+                </p>
+              </div>
+              <Link
+                href="/explore"
+                className="text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
+              >
+                {t.viewAllDestinationsBtn} →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <Link
+                href="/explore?pillar=mountain"
+                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+              >
+                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                  PILAR 1 • 8 PROGRAM MENGINAP
+                </div>
+                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                  {t.pillarMountain}
+                </h4>
+                <p className="text-xs text-forest-body leading-relaxed">
+                  Puncak Rinjani 3.726m, Danau Segara Anak, Aik Kalak, Lembah Torean, Bukit Pergasingan, Bukit Sempana, Bukit Nanggi, Kondo, Dandaun.
+                </p>
+              </Link>
+
+              <Link
+                href="/explore?pillar=beach"
+                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+              >
+                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                  PILAR 2 • 8 ZONA PESISIR &amp; GILI
+                </div>
+                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                  {t.pillarBeach}
+                </h4>
+                <p className="text-xs text-forest-body leading-relaxed">
+                  Tanjung Aan, Mawun, Selong Belanak, Merese, Pantai Pink Tangsi, Tanjung Ringgit, Gili Kondo, Gili Trawangan, Meno, Air, Nanggu.
+                </p>
+              </Link>
+
+              <Link
+                href="/explore?pillar=heritage"
+                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+              >
+                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                  PILAR 3 • 8 KORIDOR BUDAYA SASAK
+                </div>
+                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                  {t.pillarHeritage}
+                </h4>
+                <p className="text-xs text-forest-body leading-relaxed">
+                  Desa Adat Sade, Desa Ende, Tenun Sukarara, 7 Rumah Adat Sembalun, Masjid Kuno Bayan Beleq, Senaru, Pura Lingsar, Taman Narmada.
+                </p>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

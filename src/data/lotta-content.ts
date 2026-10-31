@@ -29,6 +29,7 @@ export interface DestinationPackage {
   highlights: Record<Lang, string[]>;
   storyTeaser: Record<Lang, string>;
   priceIdr: number;
+  isBestSeller?: boolean;
 }
 
 export const SPECIALTY_OPTIONS = [
@@ -200,6 +201,9 @@ export const UI_TEXT: Record<
     storiesHeader: string;
     storiesSub: string;
     readTrailerLink: string;
+    bestSellersEyebrow: string;
+    bestSellersHeader: string;
+    bestSellersSub: string;
     pillarsHeader: string;
     pillarsSub: string;
     pillarMountain: string;
@@ -272,6 +276,10 @@ export const UI_TEXT: Record<
     storiesHeader: "Katalog Cerita Lokal & Legenda Destinasi Lombok",
     storiesSub: "Pengantar kisah di tiap destinasi — cerita utuhnya dituturkan langsung oleh Guide LOTTA saat Anda tiba di lokasi",
     readTrailerLink: "Baca Pengantar Cerita",
+    bestSellersEyebrow: "PAKET WISATA FAVORIT • BEST SELLERS",
+    bestSellersHeader: "Paket Wisata Paling Diminati di Lombok",
+    bestSellersSub:
+      "6 rute terfavorit pilihan wisatawan dengan pemandu lokal berlisensi resmi HPI — harga all-in transparan tanpa biaya tersembunyi.",
     pillarsHeader: "Daftar Lengkap Semua Destinasi Wisata Lombok",
     pillarsSub:
       "Seluruh program Gunung & Bukit dikemas wajib menginap (camping). Destinasi Laut/Pantai dan Heritage Budaya ditulis lengkap per Kabupaten.",
@@ -347,6 +355,10 @@ export const UI_TEXT: Record<
     storiesHeader: "Lombok Local Stories & Destination Legends Catalog",
     storiesSub: "Opening stories from each destination — the complete oral history is shared live on-site by your LOTTA Guide",
     readTrailerLink: "Read Opening Story",
+    bestSellersEyebrow: "FEATURED EXPERIENCES • BEST SELLERS",
+    bestSellersHeader: "Most Popular Tour Packages in Lombok",
+    bestSellersSub:
+      "6 top-rated curated routes with officially licensed HPI local guides — transparent all-inclusive pricing with zero hidden fees.",
     pillarsHeader: "Complete Directory of Lombok Destinations",
     pillarsSub:
       "All Mountain & Hill programs are strictly overnight camping experiences. Coastal Beaches and Cultural Heritage destinations are listed in full by Regency.",
@@ -422,6 +434,10 @@ export const UI_TEXT: Record<
     storiesHeader: "Catalogo delle Storie Locali e Leggende di Lombok",
     storiesSub: "Storie introduttive per ogni destinazione — il racconto completo è condiviso dal vivo sul posto dalla tua guida LOTTA",
     readTrailerLink: "Leggi l'Introduzione",
+    bestSellersEyebrow: "I PIÙ RICHIESTI • BEST SELLERS",
+    bestSellersHeader: "I Pacchetti Più Amati a Lombok",
+    bestSellersSub:
+      "6 itinerari più scelti con guide locali con licenza ufficiale HPI — prezzi trasparenti tutto compreso senza costi nascosti.",
     pillarsHeader: "Elenco Completo delle Destinazioni di Lombok",
     pillarsSub:
       "Tutti i pacchetti Montagna e Collina prevedono il pernottamento in tenda. Le spiagge e il patrimonio culturale sono elencati per distretto.",
@@ -1047,7 +1063,8 @@ export const PACKAGES: DestinationPackage[] = [
       en: "The origin of the giant wooden spinning-top tradition atop Pergasingan Hill.",
       it: "L'origine della tradizione delle grandi trottole di legno su Bukit Pergasingan.",
     },
-    priceIdr: 1900000,
+    priceIdr: 1520000,
+    isBestSeller: true,
   },
   {
     id: "pkg-bukit-sempana",
@@ -1192,6 +1209,7 @@ export const PACKAGES: DestinationPackage[] = [
       it: "Perché i sacri Nyale compaiono solo una volta all'anno lungo questa scogliera?",
     },
     priceIdr: 700000,
+    isBestSeller: true,
   },
   {
     id: "pkg-mawun-selong-belanak",
@@ -1262,6 +1280,7 @@ export const PACKAGES: DestinationPackage[] = [
       it: "Il segreto della sorgente d'acqua dolce alla base delle scogliere di Tanjung Ringgit.",
     },
     priceIdr: 1250000,
+    isBestSeller: true,
   },
   {
     id: "pkg-gili-kondo-petagan",
@@ -1402,6 +1421,7 @@ export const PACKAGES: DestinationPackage[] = [
       it: "Come le baie protette di Sekotong sono diventate celebri per le perle dei Mari del Sud.",
     },
     priceIdr: 800000,
+    isBestSeller: true,
   },
   {
     id: "pkg-teluk-mekaki",
@@ -1476,6 +1496,7 @@ export const PACKAGES: DestinationPackage[] = [
       it: "Perché l'ingresso di ogni casa tradizionale Bale Tani è costruito basso?",
     },
     priceIdr: 750000,
+    isBestSeller: true,
   },
   {
     id: "pkg-tenun-sukarara-mandalika",
@@ -1581,6 +1602,7 @@ export const PACKAGES: DestinationPackage[] = [
       it: "Come la legge tradizionale Awiq-Awiq ha protetto le sorgenti del Rinjani per secoli.",
     },
     priceIdr: 855000,
+    isBestSeller: true,
   },
   {
     id: "pkg-sembalun-bumbung",
