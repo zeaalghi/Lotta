@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   formatDuration,
+  formatPillar,
   formatPrice,
   formatRegency,
   formatShortDuration,
@@ -267,18 +268,14 @@ export default function ExplorePage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
 
-                    {/* Top Left: Clean Best Seller or Pillar Badge */}
-                    <div className="absolute top-3 left-3">
-                      {pkg.isBestSeller ? (
+                    {/* Top Left: Clean Best Seller Badge (if applicable) */}
+                    {pkg.isBestSeller && (
+                      <div className="absolute top-3 left-3">
                         <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
                           BEST SELLER
                         </span>
-                      ) : (
-                        <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-forest-header/90 text-white shadow-sm border border-white/20">
-                          {formatRegency(pkg.regency, lang)}
-                        </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
 
                     {/* Top Right: Short Duration Badge - Never collides with left badge */}
                     <div className="absolute top-3 right-3">
@@ -290,11 +287,16 @@ export default function ExplorePage() {
 
                   {/* Card Content with Generous Breathing Room */}
                   <div className="p-5 sm:p-6">
-                    {/* Regency & Duration Meta */}
-                    <div className="flex items-center justify-between text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1.5 gap-2">
-                      <span className="truncate">{formatRegency(pkg.regency, lang)}</span>
-                      <span className="text-[10px] font-semibold text-forest-body bg-forest-canvas px-2 py-0.5 rounded border border-forest-border/60 shrink-0">
-                        {formatDuration(pkg.duration, lang)}
+                    {/* Regency & Category Meta */}
+                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-2 gap-2">
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-forest-primary shrink-0" />
+                        <span className="truncate font-extrabold tracking-wider uppercase text-[11px]">
+                          {formatRegency(pkg.regency, lang)}
+                        </span>
+                      </span>
+                      <span className="text-[10px] font-bold text-forest-body bg-forest-canvas px-2.5 py-0.5 rounded-md border border-forest-border/60 shrink-0">
+                        {formatPillar(pkg.pillar, lang)}
                       </span>
                     </div>
 

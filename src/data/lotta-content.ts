@@ -132,44 +132,77 @@ export function formatRegency(regency: string, lang: Lang): string {
   if (!regency) return "";
   if (lang === "en") {
     return regency
-      .replace(/Kab\.\s+Lombok\s+Timur/gi, "East Lombok Regency")
-      .replace(/Kab\.\s+Lombok\s+Tengah/gi, "Central Lombok Regency")
-      .replace(/Kab\.\s+Lombok\s+Barat/gi, "West Lombok Regency")
-      .replace(/Kab\.\s+Lombok\s+Utara/gi, "North Lombok Regency")
-      .replace(/Kota\s+Mataram/gi, "Mataram City");
+      .replace(/Kab\.\s*/gi, "")
+      .replace(/Lombok\s+Timur/gi, "East Lombok")
+      .replace(/Lombok\s+Tengah/gi, "Central Lombok")
+      .replace(/Lombok\s+Barat/gi, "West Lombok")
+      .replace(/Lombok\s+Utara/gi, "North Lombok")
+      .replace(/Kota\s+Mataram/gi, "Mataram");
   }
   if (lang === "it") {
     return regency
-      .replace(/Kab\.\s+Lombok\s+Timur/gi, "Distretto di Lombok Est")
-      .replace(/Kab\.\s+Lombok\s+Tengah/gi, "Distretto di Lombok Centrale")
-      .replace(/Kab\.\s+Lombok\s+Barat/gi, "Distretto di Lombok Ovest")
-      .replace(/Kab\.\s+Lombok\s+Utara/gi, "Distretto di Lombok Nord")
-      .replace(/Kota\s+Mataram/gi, "Città di Mataram");
+      .replace(/Kab\.\s*/gi, "")
+      .replace(/Lombok\s+Timur/gi, "Lombok Est")
+      .replace(/Lombok\s+Tengah/gi, "Lombok Centrale")
+      .replace(/Lombok\s+Barat/gi, "Lombok Ovest")
+      .replace(/Lombok\s+Utara/gi, "Lombok Nord")
+      .replace(/Kota\s+Mataram/gi, "Mataram");
   }
-  return regency;
+  return regency.replace(/Kab\.\s*/gi, "");
 }
 
 export function formatDuration(duration: string, lang: Lang): string {
   if (!duration) return "";
-  if (lang === "id") {
-    return duration
-      .replace(/Overnight Camping/gi, "Camping Menginap")
-      .replace(/Day Trip/gi, "Tur Harian")
-      .replace(/Half Day/gi, "Setengah Hari")
-      .replace(/Full Day/gi, "Sehari Penuh")
-      .replace(/Island Hopping/gi, "Jelajah Antarpulau")
-      .replace(/Coastal Beach/gi, "Wisata Pesisir")
-      .replace(/Heritage/gi, "Heritage Budaya");
+  const d = duration.toLowerCase();
+
+  if (d.includes("4d3n") || (d.includes("3d2n") && d.includes("4d3n"))) {
+    return lang === "id"
+      ? "3 Hari 2 Malam / 4 Hari 3 Malam"
+      : lang === "en"
+      ? "3 Days 2 Nights / 4 Days 3 Nights"
+      : "3 Giorni 2 Notti / 4 Giorni 3 Notti";
   }
-  if (lang === "it") {
-    return duration
-      .replace(/Overnight Camping/gi, "Tenda Notturna")
-      .replace(/Day Trip/gi, "Escursione Giornaliera")
-      .replace(/Half Day/gi, "Mezza Giornata")
-      .replace(/Full Day/gi, "Giornata Intera")
-      .replace(/Island Hopping/gi, "Giro delle Isole")
-      .replace(/Coastal Beach/gi, "Spiaggia e Costa")
-      .replace(/Heritage/gi, "Patrimonio Storico");
+  if (d.includes("3d2n")) {
+    return lang === "id"
+      ? "3 Hari 2 Malam"
+      : lang === "en"
+      ? "3 Days 2 Nights"
+      : "3 Giorni 2 Notti";
+  }
+  if (d.includes("2d1n")) {
+    return lang === "id"
+      ? "2 Hari 1 Malam (Menginap)"
+      : lang === "en"
+      ? "2 Days 1 Night (Overnight)"
+      : "2 Giorni 1 Notte (Tenda)";
+  }
+  if (d.includes("multi-expedition")) {
+    return lang === "id"
+      ? "Ekspedisi Multi-Hari"
+      : lang === "en"
+      ? "Multi-Day Expedition"
+      : "Spedizione Più Giorni";
+  }
+  if (d.includes("half / full")) {
+    return lang === "id"
+      ? "1/2 - 1 Hari (Fleksibel)"
+      : lang === "en"
+      ? "Half / Full Day (Flexible)"
+      : "Mezza / Giornata Intera";
+  }
+  if (d.includes("half day")) {
+    return lang === "id"
+      ? "Setengah Hari"
+      : lang === "en"
+      ? "Half Day Trip"
+      : "Mezza Giornata";
+  }
+  if (d.includes("full day")) {
+    return lang === "id"
+      ? "1 Hari Penuh"
+      : lang === "en"
+      ? "Full Day Trip"
+      : "Giornata Intera";
   }
   return duration;
 }
@@ -189,6 +222,31 @@ export function formatShortDuration(duration: string, lang: Lang): string {
     return lang === "id" ? "Multi Hari" : lang === "en" ? "Multi Day" : "Più Giorni";
   }
   return lang === "id" ? "1 Hari" : lang === "en" ? "1 Day" : "1 Giorno";
+}
+
+export function formatPillar(
+  pillar: "mountain" | "beach" | "heritage",
+  lang: Lang
+): string {
+  if (pillar === "mountain") {
+    return lang === "id"
+      ? "Gunung & Bukit"
+      : lang === "en"
+      ? "Mountain & Hill"
+      : "Montagna";
+  }
+  if (pillar === "beach") {
+    return lang === "id"
+      ? "Pantai & Gili"
+      : lang === "en"
+      ? "Beach & Gili"
+      : "Spiaggia e Gili";
+  }
+  return lang === "id"
+    ? "Budaya Sasak"
+    : lang === "en"
+    ? "Sasak Heritage"
+    : "Patrimonio Sasak";
 }
 
 export function formatPrice(priceIdr: number, lang: Lang): string {
