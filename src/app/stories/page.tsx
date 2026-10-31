@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { formatRegency, STORY_TRAILERS, UI_TEXT } from "@/data/lotta-content";
+import { formatPillar, formatRegency, STORY_TRAILERS, UI_TEXT } from "@/data/lotta-content";
 import { useLotta } from "@/components/LottaShell";
 
 export default function StoriesPage() {
@@ -10,7 +10,6 @@ export default function StoriesPage() {
     lang,
     localizeHref,
     setActiveTrailer,
-    chooseRouteAndGoToGuides,
   } = useLotta();
 
   const [selectedPillar, setSelectedPillar] = useState<
@@ -18,6 +17,12 @@ export default function StoriesPage() {
   >("all");
   const [selectedRegency, setSelectedRegency] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const ITEMS_PER_PAGE = 6;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedPillar, selectedRegency, searchQuery]);
 
   const t = UI_TEXT[lang];
 
@@ -38,6 +43,7 @@ export default function StoriesPage() {
     setSelectedPillar("all");
     setSelectedRegency("all");
     setSearchQuery("");
+    setCurrentPage(1);
   };
 
   const filteredStories = useMemo(() => {
@@ -62,6 +68,26 @@ export default function StoriesPage() {
       return true;
     });
   }, [selectedPillar, selectedRegency, searchQuery, lang]);
+
+  const totalPages = Math.ceil(filteredStories.length / ITEMS_PER_PAGE) || 1;
+
+  const paginatedStories = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredStories.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredStories, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    if (typeof window !== "undefined") {
+      const el = document.getElementById("stories-catalog-grid");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 220, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <div className="py-8 sm:py-12 bg-forest-canvas min-h-screen">
@@ -236,72 +262,129 @@ export default function StoriesPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredStories.map((story) => (
-              <article
-                key={story.id}
-                className="group bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
-              >
-                <div>
-                  <Link
-                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="block relative h-44 sm:h-52 overflow-hidden bg-forest-header"
-                  >
-                    <img
-                      src={story.image}
-                      alt={story.destinationName}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/90 via-forest-header/20 to-transparent" />
-                    <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 max-w-[60%]">
-                      <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-header/90 text-forest-sage border border-forest-sage/40 backdrop-blur-sm shadow-sm truncate">
-                        {t.tourPackageAvailableBadge}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-3 left-3 right-3">
-                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-extrabold bg-forest-primary text-white shadow-sm">
-                        {story.destinationName}
-                      </span>
-                    </div>
-                  </Link>
+          <>
+            <div id="stories-catalog-grid" className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+              {paginatedStories.map((story) => (
+                <article
+                  key={story.id}
+                  onClick={() => setActiveTrailer(story)}
+                  className="group bg-white border border-forest-border hover:border-forest-primary rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition cursor-pointer"
+                >
+                  <div>
+                    {/* Clean Visual Cover Photo */}
+                    <div className="relative aspect-[4/3] sm:h-44 w-full overflow-hidden bg-forest-header">
+                      <img
+                        src={story.image}
+                        alt={story.destinationName}
+                        className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
 
-                  <div className="p-4 sm:p-6">
-                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                      {formatRegency(story.regency, lang)} • {story.elevationOrDepth}
+                      {/* Top Left: Destination Name */}
+                      <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
+                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-primary text-white shadow-sm">
+                          {story.destinationName}
+                        </span>
+                      </div>
+
+                      {/* Top Right: Elevation or Depth */}
+                      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
+                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
+                          {story.elevationOrDepth}
+                        </span>
+                      </div>
                     </div>
-                    <h2 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
-                      <Link
-                        href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                        className="hover:text-forest-primary transition"
-                      >
+
+                    {/* Card Body */}
+                    <div className="p-2.5 sm:p-4">
+                      {/* Regency & Category Meta */}
+                      <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
+                        <span className="truncate uppercase font-extrabold tracking-wider">
+                          {formatRegency(story.regency, lang)}
+                        </span>
+                        <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
+                          {formatPillar(story.pillar, lang)}
+                        </span>
+                      </div>
+
+                      {/* Story Title */}
+                      <h2 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
                         {story.title[lang]}
-                      </Link>
-                    </h2>
-                    <p className="text-xs sm:text-sm text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-3">
-                      {story.summary38[lang]}
-                    </p>
+                      </h2>
+                    </div>
                   </div>
+
+                  {/* Footer */}
+                  <div className="p-2.5 sm:p-4 pt-0">
+                    <div className="pt-2 border-t border-forest-border/60 flex items-center justify-between gap-1">
+                      <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
+                        {lang === "id"
+                          ? "Kisah 38 Kalimat"
+                          : lang === "en"
+                          ? "38-Sentence Story"
+                          : "38 Frasi"}
+                      </span>
+                      <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
+                        {lang === "id" ? "Baca →" : lang === "en" ? "Read →" : "Leggi →"}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <nav
+                aria-label="Navigasi Halaman Cerita"
+                className="mt-8 pt-6 border-t border-forest-border flex flex-col sm:flex-row items-center justify-between gap-4"
+              >
+                <div className="text-xs text-forest-body font-semibold">
+                  {lang === "id"
+                    ? `Halaman ${currentPage} dari ${totalPages} (${filteredStories.length} cerita)`
+                    : lang === "en"
+                    ? `Page ${currentPage} of ${totalPages} (${filteredStories.length} stories)`
+                    : `Pagina ${currentPage} di ${totalPages} (${filteredStories.length} storie)`}
                 </div>
 
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2.5 border-t border-forest-border/60 grid grid-cols-2 gap-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <button
                     type="button"
-                    onClick={() => setActiveTrailer(story)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1.5 rounded-lg border border-forest-border text-xs font-bold transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-forest-card"
                   >
-                    {t.readTrailerLink}
+                    {lang === "id" ? "← Sebelumnya" : lang === "en" ? "← Prev" : "← Prec"}
                   </button>
-                  <Link
-                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      onClick={() => handlePageChange(page)}
+                      className={`w-8 h-8 rounded-lg text-xs font-extrabold transition ${
+                        currentPage === page
+                          ? "bg-forest-header text-white shadow-xs"
+                          : "border border-forest-border text-forest-header hover:bg-forest-card"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1.5 rounded-lg border border-forest-border text-xs font-bold transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-forest-card"
                   >
-                    {t.viewTripDetailBtn}
-                  </Link>
+                    {lang === "id" ? "Berikutnya →" : lang === "en" ? "Next →" : "Succ →"}
+                  </button>
                 </div>
-              </article>
-            ))}
-          </div>
+              </nav>
+            )}
+          </>
         )}
 
         {/* Bottom CTA to /explore and /guides */}

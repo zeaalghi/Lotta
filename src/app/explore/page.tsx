@@ -23,6 +23,8 @@ export default function ExplorePage() {
   >("all");
   const [selectedRegency, setSelectedRegency] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const ITEMS_PER_PAGE = 8;
 
   useEffect(() => {
     try {
@@ -35,6 +37,10 @@ export default function ExplorePage() {
       // ignore
     }
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activePillar, selectedRegency, searchTerm]);
 
   const t = UI_TEXT[lang];
 
@@ -55,6 +61,7 @@ export default function ExplorePage() {
     setActivePillar("all");
     setSelectedRegency("all");
     setSearchTerm("");
+    setCurrentPage(1);
   };
 
   const filteredPackages = useMemo(() => {
@@ -79,6 +86,26 @@ export default function ExplorePage() {
       return true;
     });
   }, [activePillar, selectedRegency, searchTerm, lang]);
+
+  const totalPages = Math.ceil(filteredPackages.length / ITEMS_PER_PAGE) || 1;
+
+  const paginatedPackages = useMemo(() => {
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredPackages.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredPackages, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+    if (typeof window !== "undefined") {
+      const el = document.getElementById("explore-catalog-grid");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 220, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <div className="py-8 sm:py-12 bg-forest-canvas min-h-screen">
@@ -248,83 +275,136 @@ export default function ExplorePage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-            {filteredPackages.map((pkg) => (
-              <Link
-                key={pkg.id}
-                href={localizeHref(`/explore/${pkg.id}`)}
-                className="group bg-white border border-forest-border hover:border-forest-primary rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition"
-              >
-                <div>
-                  {/* Clean Visual Cover Photo */}
-                  <div className="relative aspect-[4/3] sm:h-44 w-full overflow-hidden bg-forest-header">
-                    <img
-                      src={pkg.image}
-                      alt={pkg.destinationNames}
-                      className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
+          <>
+            <div id="explore-catalog-grid" className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
+              {paginatedPackages.map((pkg) => (
+                <Link
+                  key={pkg.id}
+                  href={localizeHref(`/explore/${pkg.id}`)}
+                  className="group bg-white border border-forest-border hover:border-forest-primary rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition"
+                >
+                  <div>
+                    {/* Clean Visual Cover Photo */}
+                    <div className="relative aspect-[4/3] sm:h-44 w-full overflow-hidden bg-forest-header">
+                      <img
+                        src={pkg.image}
+                        alt={pkg.destinationNames}
+                        className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
 
-                    {/* Top Left: Clean Best Seller Badge (if applicable) */}
-                    {pkg.isBestSeller && (
-                      <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
-                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
-                          BEST SELLER
+                      {/* Top Left: Clean Best Seller Badge (if applicable) */}
+                      {pkg.isBestSeller && (
+                        <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
+                          <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
+                            BEST SELLER
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Top Right: Short Duration Badge */}
+                      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
+                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
+                          {formatShortDuration(pkg.duration, lang)}
                         </span>
                       </div>
-                    )}
+                    </div>
 
-                    {/* Top Right: Short Duration Badge */}
-                    <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
-                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
-                        {formatShortDuration(pkg.duration, lang)}
-                      </span>
+                    {/* E-Commerce Product Card Body */}
+                    <div className="p-2.5 sm:p-4">
+                      {/* Regency & Category Meta */}
+                      <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
+                        <span className="truncate uppercase font-extrabold tracking-wider">
+                          {formatRegency(pkg.regency, lang)}
+                        </span>
+                        <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
+                          {formatPillar(pkg.pillar, lang)}
+                        </span>
+                      </div>
+
+                      {/* Product Title (2 lines clamp) */}
+                      <h2 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
+                        {pkg.title[lang]}
+                      </h2>
                     </div>
                   </div>
 
-                  {/* E-Commerce Product Card Body */}
-                  <div className="p-2.5 sm:p-4">
-                    {/* Regency & Category Meta */}
-                    <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
-                      <span className="truncate uppercase font-extrabold tracking-wider">
-                        {formatRegency(pkg.regency, lang)}
-                      </span>
-                      <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
-                        {formatPillar(pkg.pillar, lang)}
+                  {/* E-Commerce Price & CTA Footer */}
+                  <div className="p-2.5 sm:p-4 pt-0">
+                    <div className="pt-2 border-t border-forest-border/60 flex items-end justify-between gap-1">
+                      <div>
+                        <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
+                          {lang === "id"
+                            ? "All-In / pax"
+                            : lang === "en"
+                            ? "All-In / pax"
+                            : "Tutto Incluso"}
+                        </span>
+                        <span className="text-xs sm:text-sm font-extrabold text-forest-header tracking-tight block">
+                          {formatPrice(pkg.priceIdr, lang)}
+                        </span>
+                      </div>
+                      <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
+                        {lang === "id" ? "Detail →" : lang === "en" ? "Details →" : "Dettagli →"}
                       </span>
                     </div>
-
-                    {/* Product Title (2 lines clamp) */}
-                    <h2 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
-                      {pkg.title[lang]}
-                    </h2>
                   </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            {totalPages > 1 && (
+              <nav
+                aria-label="Navigasi Halaman Destinasi"
+                className="mt-8 pt-6 border-t border-forest-border flex flex-col sm:flex-row items-center justify-between gap-4"
+              >
+                <div className="text-xs text-forest-body font-semibold">
+                  {lang === "id"
+                    ? `Halaman ${currentPage} dari ${totalPages} (${filteredPackages.length} destinasi)`
+                    : lang === "en"
+                    ? `Page ${currentPage} of ${totalPages} (${filteredPackages.length} destinations)`
+                    : `Pagina ${currentPage} di ${totalPages} (${filteredPackages.length} destinazioni)`}
                 </div>
 
-                {/* E-Commerce Price & CTA Footer */}
-                <div className="p-2.5 sm:p-4 pt-0">
-                  <div className="pt-2 border-t border-forest-border/60 flex items-end justify-between gap-1">
-                    <div>
-                      <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
-                        {lang === "id"
-                          ? "All-In / pax"
-                          : lang === "en"
-                          ? "All-In / pax"
-                          : "Tutto Incluso"}
-                      </span>
-                      <span className="text-xs sm:text-sm font-extrabold text-forest-header tracking-tight block">
-                        {formatPrice(pkg.priceIdr, lang)}
-                      </span>
-                    </div>
-                    <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
-                      {lang === "id" ? "Detail →" : lang === "en" ? "Details →" : "Dettagli →"}
-                    </span>
-                  </div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1.5 rounded-lg border border-forest-border text-xs font-bold transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-forest-card"
+                  >
+                    {lang === "id" ? "← Sebelumnya" : lang === "en" ? "← Prev" : "← Prec"}
+                  </button>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      onClick={() => handlePageChange(page)}
+                      className={`w-8 h-8 rounded-lg text-xs font-extrabold transition ${
+                        currentPage === page
+                          ? "bg-forest-header text-white shadow-xs"
+                          : "border border-forest-border text-forest-header hover:bg-forest-card"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1.5 rounded-lg border border-forest-border text-xs font-bold transition disabled:opacity-40 disabled:cursor-not-allowed hover:bg-forest-card"
+                  >
+                    {lang === "id" ? "Berikutnya →" : lang === "en" ? "Next →" : "Succ →"}
+                  </button>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </nav>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -367,7 +367,7 @@ export default function HomePage() {
       {/* 2. FEATURED STORIES SECTION (Links to /stories for full 12-story catalog) */}
       <section className="py-8 sm:py-16 border-b border-forest-border bg-forest-canvas">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
             <div>
               <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                 {lang === "id"
@@ -383,93 +383,82 @@ export default function HomePage() {
                 {t.storiesSub}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary sm:hidden">
-                {lang === "id" ? "Geser →" : lang === "en" ? "Swipe →" : "Scorri →"}
-              </span>
-              <Link
-                href={localizeHref("/stories")}
-                className="hidden sm:inline-block px-5 py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
-              >
-                {t.viewAllStoriesBtn} →
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible">
-            {featuredStories.map((story) => (
-              <article
-                key={story.id}
-                className="min-w-[85vw] max-w-[340px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink group bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
-              >
-                <div>
-                  <Link
-                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="block relative h-44 sm:h-48 overflow-hidden bg-forest-header"
-                  >
-                    <img
-                      src={story.image}
-                      alt={story.destinationName}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/90 via-forest-header/20 to-transparent" />
-                    <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 max-w-[60%]">
-                      <span className="inline-block px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-header/90 text-forest-sage border border-forest-sage/40 backdrop-blur-sm shadow-sm truncate">
-                        {t.tourPackageAvailableBadge}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-3 left-3 right-3">
-                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-extrabold bg-forest-primary text-white shadow-sm">
-                        {story.destinationName}
-                      </span>
-                    </div>
-                  </Link>
-
-                  <div className="p-4 sm:p-6">
-                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                      {story.regency} • {story.elevationOrDepth}
-                    </div>
-                    <h3 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
-                      <Link
-                        href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                        className="hover:text-forest-primary transition"
-                      >
-                        {story.title[lang]}
-                      </Link>
-                    </h3>
-                    <p className="text-xs sm:text-sm text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-3">
-                      {story.summary38[lang]}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2.5 border-t border-forest-border/60 grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setActiveTrailer(story)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
-                  >
-                    {t.readTrailerLink}
-                  </button>
-                  <Link
-                    href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
-                  >
-                    {t.viewTripDetailBtn}
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-4 sm:hidden text-center">
             <Link
               href={localizeHref("/stories")}
-              className="inline-block px-5 py-2.5 rounded-xl bg-forest-header text-white text-xs font-extrabold uppercase tracking-wider transition"
+              className="self-start sm:self-auto px-4 py-2 sm:px-5 sm:py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm whitespace-nowrap"
             >
               {t.viewAllStoriesBtn} →
             </Link>
+          </div>
+
+          {/* 6 Curated Stories in 2-Column Grid (Uniform with Destination Cards) */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-3">
+            {featuredStories.map((story) => (
+              <article
+                key={story.id}
+                onClick={() => setActiveTrailer(story)}
+                className="group bg-white border border-forest-border hover:border-forest-primary rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md transition cursor-pointer"
+              >
+                <div>
+                  {/* Clean Visual Cover Photo */}
+                  <div className="relative aspect-[4/3] sm:h-44 w-full overflow-hidden bg-forest-header">
+                    <img
+                      src={story.image}
+                      alt={story.destinationName}
+                      className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
+
+                    {/* Top Left: Destination Name */}
+                    <div className="absolute top-2 left-2 sm:top-2.5 sm:left-2.5">
+                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider bg-forest-primary text-white shadow-sm">
+                        {story.destinationName}
+                      </span>
+                    </div>
+
+                    {/* Top Right: Elevation or Depth */}
+                    <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
+                      <span className="px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded text-[10px] sm:text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-sm">
+                        {story.elevationOrDepth}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Body */}
+                  <div className="p-2.5 sm:p-4">
+                    <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold text-forest-primary mb-1 sm:mb-1.5 gap-1">
+                      <span className="truncate uppercase font-extrabold tracking-wider">
+                        {formatRegency(story.regency, lang)}
+                      </span>
+                      <span className="shrink-0 text-[9px] sm:text-[10px] text-forest-body font-semibold">
+                        {formatPillar(story.pillar, lang)}
+                      </span>
+                    </div>
+
+                    <h3 className="text-xs sm:text-sm font-extrabold text-forest-header group-hover:text-forest-primary transition leading-snug line-clamp-2">
+                      {story.title[lang]}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="p-2.5 sm:p-4 pt-0">
+                  <div className="pt-2 border-t border-forest-border/60 flex items-center justify-between gap-1">
+                    <span className="text-[9px] sm:text-[10px] font-semibold uppercase text-forest-body block leading-tight">
+                      {lang === "id"
+                        ? "38 Kisah"
+                        : lang === "en"
+                        ? "38 Sentences"
+                        : "38 Frasi"}
+                    </span>
+                    <span className="text-[10px] sm:text-xs font-extrabold text-forest-primary group-hover:translate-x-0.5 transition-transform shrink-0">
+                      {lang === "id" ? "Baca →" : lang === "en" ? "Read →" : "Leggi →"}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -477,7 +466,7 @@ export default function HomePage() {
       {/* 3. FEATURED BEST SELLER PACKAGES & 3 PILLARS */}
       <section className="py-8 sm:py-16 border-b border-forest-border bg-forest-alt">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-3 sm:gap-4">
             <div>
               <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                 {t.bestSellersEyebrow}
@@ -491,7 +480,7 @@ export default function HomePage() {
             </div>
             <Link
               href={localizeHref("/explore")}
-              className="px-3.5 py-2 sm:px-5 sm:py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm shrink-0 whitespace-nowrap"
+              className="self-start sm:self-auto px-4 py-2 sm:px-5 sm:py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm shrink-0 whitespace-nowrap"
             >
               {t.viewAllDestinationsBtn} →
             </Link>
@@ -578,7 +567,7 @@ export default function HomePage() {
 
           {/* 3 Pillar Quick Navigation Directory with All 24 Destinations */}
           <div className="mt-8 sm:mt-16 pt-8 sm:pt-12 border-t border-forest-border">
-            <div className="flex items-end justify-between mb-4 sm:mb-6 gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-4 sm:mb-6 gap-3 sm:gap-4">
               <div>
                 <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                   {lang === "id"
@@ -595,12 +584,9 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary sm:hidden">
-                  {lang === "id" ? "Geser →" : lang === "en" ? "Swipe →" : "Scorri →"}
-                </span>
                 <Link
                   href={localizeHref("/explore")}
-                  className="hidden sm:inline-block text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
+                  className="text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
                 >
                   {t.viewAllDestinationsBtn} →
                 </Link>
