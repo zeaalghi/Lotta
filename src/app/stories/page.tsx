@@ -307,13 +307,6 @@ export default function StoriesPage() {
                             : (lang === "id" ? "BUDAYA" : lang === "en" ? "CULTURE" : "CULTURA")}
                         </span>
                       </div>
-
-                      {/* Top Right: Short Story Counter Badge */}
-                      <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
-                        <span className="px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-xs">
-                          {lang === "id" ? "38 Kisah" : lang === "en" ? "38 Stories" : "38 Frasi"}
-                        </span>
-                      </div>
                     </div>
 
                     {/* Card Body */}

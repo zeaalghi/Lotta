@@ -50,85 +50,72 @@ export default function HomePage() {
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-title border border-forest-primary/40 text-forest-sage text-[10px] sm:text-xs font-extrabold tracking-widest uppercase mb-3 sm:mb-5">
                   <span>{t.heroTag}</span>
                 </div>
-                <h1 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight leading-tight text-white mb-3 sm:mb-4">
+                <h1 className="text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-snug text-white mb-3 sm:mb-4">
                   {t.heroTitle}
                 </h1>
-                <p className="text-forest-pill text-xs sm:text-base lg:text-lg leading-relaxed max-w-2xl line-clamp-3 sm:line-clamp-none mb-5 sm:mb-7">
+                <p className="text-forest-pill text-xs sm:text-base leading-relaxed max-w-2xl mb-5 sm:mb-7">
                   {t.heroSubtitle}
                 </p>
               </div>
 
               <div>
                 {/* Mobile-First Button Cluster */}
-                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 sm:gap-3 mb-5 sm:mb-7">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 mb-5 sm:mb-7">
                   <Link
                     href={localizeHref("/explore")}
-                    className="col-span-2 sm:col-span-1 text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md"
+                    className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
                   >
                     {t.btnExplore} →
                   </Link>
-                  <Link
-                    href={localizeHref("/guides")}
-                    className="text-center px-3 py-2.5 sm:px-6 sm:py-3.5 rounded-xl bg-forest-title/90 hover:bg-forest-primary/40 text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition truncate"
-                  >
-                    {t.btnFindGuide}
-                  </Link>
-                  <Link
-                    href={localizeHref("/stories")}
-                    className="text-center px-3 py-2.5 sm:px-5 sm:py-3.5 rounded-xl bg-forest-header/90 hover:bg-forest-title text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition truncate"
-                  >
-                    {t.viewAllStoriesBtn}
-                  </Link>
+                  <div className="grid grid-cols-2 gap-2.5 sm:flex sm:gap-3">
+                    <Link
+                      href={localizeHref("/guides")}
+                      className="text-center px-3 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-forest-title/90 hover:bg-forest-primary/40 text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition whitespace-nowrap"
+                    >
+                      {lang === "id" ? "Pesan Pemandu" : lang === "en" ? "Book Guide" : "Prenota Guida"}
+                    </Link>
+                    <Link
+                      href={localizeHref("/stories")}
+                      className="text-center px-3 py-2.5 sm:px-5 sm:py-3 rounded-xl bg-forest-header/90 hover:bg-forest-title text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition whitespace-nowrap"
+                    >
+                      {lang === "id" ? "Katalog Kisah" : lang === "en" ? "Story Catalog" : "Catalogo Storie"}
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Metric Summary Strip (3-col inline on all screens) */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-4 sm:pt-5 border-t border-forest-title/80 text-center sm:text-left">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-4 sm:pt-5 border-t border-forest-title/80 text-center sm:text-left">
                   <div className="min-w-0">
-                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
-                      {lang === "id"
-                        ? "24 Destinasi"
-                        : lang === "en"
-                        ? "24 Destinations"
-                        : "24 Destinazioni"}
+                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                      24
+                    </div>
+                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                      {lang === "id" ? "Destinasi" : lang === "en" ? "Destinations" : "Destinazioni"}
                     </div>
                     <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id"
-                        ? "Gunung, Pantai & Budaya"
-                        : lang === "en"
-                        ? "Mountains, Beach, Heritage"
-                        : "Montagne, Spiagge, Cultura"}
+                      {lang === "id" ? "Paket All-In" : lang === "en" ? "All-In Packages" : "Tutto Incluso"}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
-                      {lang === "id"
-                        ? "12 Cerita"
-                        : lang === "en"
-                        ? "12 Stories"
-                        : "12 Storie"}
+                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                      12
+                    </div>
+                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                      {lang === "id" ? "Kisah Budaya" : lang === "en" ? "Local Stories" : "Storie Locali"}
                     </div>
                     <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id"
-                        ? "Legenda & Sejarah"
-                        : lang === "en"
-                        ? "Legends & History"
-                        : "Leggende e Storia"}
+                      {lang === "id" ? "Legenda Asli" : lang === "en" ? "Oral Legends" : "Tradizioni"}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
-                      {lang === "id"
-                        ? "100% Berlisensi"
-                        : lang === "en"
-                        ? "100% Certified"
-                        : "100% Certificate"}
+                    <div className="text-xl sm:text-3xl font-black text-forest-sage tracking-tight">
+                      100%
+                    </div>
+                    <div className="text-xs sm:text-sm font-extrabold text-white mt-0.5 truncate">
+                      {lang === "id" ? "Pemandu HPI" : lang === "en" ? "Certified HPI" : "Guide HPI"}
                     </div>
                     <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
-                      {lang === "id"
-                        ? "HPI NTB • 14 Bahasa"
-                        : lang === "en"
-                        ? "HPI NTB • 14 Languages"
-                        : "HPI NTB • 14 Lingue"}
+                      {lang === "id" ? "Berlisensi NTB" : lang === "en" ? "Official NTB" : "Ufficiali NTB"}
                     </div>
                   </div>
                 </div>
@@ -418,13 +405,6 @@ export default function HomePage() {
                           : story.pillar === "beach"
                           ? (lang === "id" ? "PANTAI" : lang === "en" ? "BEACH" : "SPIAGGIA")
                           : (lang === "id" ? "BUDAYA" : lang === "en" ? "CULTURE" : "CULTURA")}
-                      </span>
-                    </div>
-
-                    {/* Top Right: Short Story Counter Badge */}
-                    <div className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5">
-                      <span className="px-2 py-0.5 rounded-md text-[9px] sm:text-[10px] font-extrabold bg-black/60 text-white backdrop-blur-xs border border-white/20 shadow-xs">
-                        {lang === "id" ? "38 Kisah" : lang === "en" ? "38 Stories" : "38 Frasi"}
                       </span>
                     </div>
                   </div>

@@ -342,7 +342,7 @@ export const UI_TEXT: Record<
     navWeather: "Cuaca & Ombak",
     navGuides: "Pesan Pemandu",
     heroTag: "LAUT • GUNUNG • HERITAGE LOMBOK",
-    heroTitle: "BEYOND THE HORIZON OF LOMBOK: LIVING HERITAGE, UNTOLD STORIES.",
+    heroTitle: "Menembus Cakrawala Lombok: Warisan Budaya & Kisah Lokal",
     heroSubtitle:
       "Jelajahi seluruh destinasi Gunung & Bukit menginap, Pantai per Kabupaten, dan Desa Heritage Budaya Lombok. Baca pengantar kisah lokalnya di sini, pantau cuaca puncak Rinjani & tinggi ombak pantai secara real-time, lalu dengarkan cerita utuhnya langsung bersama Guide LOTTA di lokasi.",
     btnExplore: "Lihat Semua Destinasi",
@@ -421,7 +421,7 @@ export const UI_TEXT: Record<
     navWeather: "Weather & Wave",
     navGuides: "Book a Guide",
     heroTag: "SEA • MOUNTAIN • HERITAGE OF LOMBOK",
-    heroTitle: "BEYOND THE HORIZON OF LOMBOK: LIVING HERITAGE, UNTOLD STORIES.",
+    heroTitle: "Beyond the Horizon of Lombok: Living Heritage & Untold Stories",
     heroSubtitle:
       "Explore every overnight mountain peak, regency beach, and cultural heritage village across Lombok. Read the opening local stories here, check live Rinjani weather & coastal swells, and experience the full oral history on-site with your LOTTA Guide.",
     btnExplore: "View All Destinations",
@@ -500,7 +500,7 @@ export const UI_TEXT: Record<
     navWeather: "Meteo e Onde",
     navGuides: "Prenota Guida",
     heroTag: "MARE • MONTAGNA • PATRIMONIO DI LOMBOK",
-    heroTitle: "BEYOND THE HORIZON OF LOMBOK: LIVING HERITAGE, UNTOLD STORIES.",
+    heroTitle: "Oltre l'Orizzonte di Lombok: Patrimonio Vivente e Storie Inedite",
     heroSubtitle:
       "Esplora tutte le vette con pernottamento, le spiagge per distretto e i villaggi storici di Lombok. Leggi qui l'introduzione alle storie locali, controlla il meteo della vetta Rinjani e le onde in tempo reale, e ascolta la storia completa sul posto con la tua guida LOTTA.",
     btnExplore: "Tutte le Destinazioni",
