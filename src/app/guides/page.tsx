@@ -1008,23 +1008,21 @@ function GuidesContent() {
       </div>
 
       {/* MOBILE FLOATING SUMMARY DOCK (Total + DP 30% + WhatsApp Button) */}
-      <div className="lg:hidden fixed bottom-[64px] inset-x-0 z-30 px-3 pb-2 pointer-events-none">
-        <div className="max-w-lg mx-auto bg-forest-header text-white border-2 border-forest-sage/60 rounded-2xl p-3 shadow-2xl flex items-center justify-between gap-3 pointer-events-auto">
+      <div className="lg:hidden fixed bottom-[60px] inset-x-0 z-30 px-3 pb-1.5 pointer-events-none">
+        <div className="max-w-md mx-auto bg-forest-header/95 backdrop-blur-md text-white border border-forest-sage/50 rounded-xl px-3 py-2 shadow-2xl flex items-center justify-between gap-2.5 pointer-events-auto">
           <div className="min-w-0 flex-1">
-            <div className="text-[10px] font-extrabold uppercase tracking-wider text-forest-sage truncate">
-              {activePackageObj.destinationNames}
-            </div>
-            <div className="text-xs font-extrabold text-white">
-              Total: {formatPrice(totalPrice, lang)}
+            <div className="text-xs font-extrabold text-white flex items-baseline gap-1.5 truncate">
+              <span>{formatPrice(totalPrice, lang)}</span>
+              <span className="text-[10px] text-forest-sage font-medium">({adults} Pax)</span>
             </div>
             <div className="text-[10px] text-forest-pill truncate">
-              DP 30%: {formatPrice(depositAmount, lang)} • {adults} Pax
+              DP 30%: {formatPrice(depositAmount, lang)} • {activePackageObj.destinationNames}
             </div>
           </div>
           <button
             type="button"
             onClick={() => setShowConfirmModal(true)}
-            className="shrink-0 px-4 py-2.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold shadow-md transition"
+            className="shrink-0 px-3.5 py-2 rounded-lg bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold shadow-sm transition whitespace-nowrap"
           >
             {lang === "id" ? "Pesan via WA →" : "Book via WA →"}
           </button>

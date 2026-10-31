@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   formatDuration,
@@ -26,6 +26,7 @@ export default function HomePage() {
   } = useLotta();
 
   const t = UI_TEXT[lang];
+  const [activeHeroWeatherTab, setActiveHeroWeatherTab] = useState<"summit" | "south" | "gili">("summit");
   const featuredStories = STORY_TRAILERS.slice(0, 6);
   const featuredDestinations = [
     PACKAGES.find((p) => p.id === "pkg-secret-gili-sekotong") || PACKAGES[14], // Secret Gili Snorkeling (Nanggu, Sudak, Kedis)
@@ -43,93 +44,94 @@ export default function HomePage() {
   return (
     <div>
       {/* 1. HERO GOLDEN RATIO SECTION (1.618fr : 1fr) */}
-      <section className="relative overflow-hidden border-b border-forest-border bg-gradient-to-b from-forest-alt to-forest-canvas py-8 sm:py-12 lg:py-16">
+      <section className="relative overflow-hidden border-b border-forest-border bg-gradient-to-b from-forest-alt to-forest-canvas py-6 sm:py-12 lg:py-16">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
           <div className="phi-grid items-stretch">
             {/* Primary Column (61.8%) */}
-            <div className="flex flex-col justify-between bg-forest-header text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl relative overflow-hidden border border-forest-title">
+            <div className="flex flex-col justify-between bg-forest-header text-white rounded-3xl p-5 sm:p-10 lg:p-12 shadow-xl relative overflow-hidden border border-forest-title">
               <div>
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-forest-title border border-forest-primary/40 text-forest-sage text-xs font-extrabold tracking-widest uppercase mb-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-title border border-forest-primary/40 text-forest-sage text-[10px] sm:text-xs font-extrabold tracking-widest uppercase mb-3 sm:mb-5">
                   <span>{t.heroTag}</span>
                 </div>
-                <h1 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight leading-[1.15] text-white mb-4">
+                <h1 className="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight leading-tight text-white mb-3 sm:mb-4">
                   {t.heroTitle}
                 </h1>
-                <p className="text-forest-pill text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-7">
+                <p className="text-forest-pill text-xs sm:text-base lg:text-lg leading-relaxed max-w-2xl line-clamp-3 sm:line-clamp-none mb-5 sm:mb-7">
                   {t.heroSubtitle}
                 </p>
               </div>
 
               <div>
-                <div className="grid grid-cols-1 sm:flex sm:flex-wrap gap-3 mb-7">
+                {/* Mobile-First Button Cluster */}
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2.5 sm:gap-3 mb-5 sm:mb-7">
                   <Link
                     href={localizeHref("/explore")}
-                    className="text-center px-6 py-3.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md"
+                    className="col-span-2 sm:col-span-1 text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md"
                   >
-                    {t.btnExplore}
+                    {t.btnExplore} →
                   </Link>
                   <Link
                     href={localizeHref("/guides")}
-                    className="text-center px-6 py-3.5 rounded-xl bg-forest-title hover:bg-forest-primary/40 text-forest-pill border border-forest-sage/30 font-bold text-sm transition"
+                    className="text-center px-3 py-2.5 sm:px-6 sm:py-3.5 rounded-xl bg-forest-title/90 hover:bg-forest-primary/40 text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition truncate"
                   >
                     {t.btnFindGuide}
                   </Link>
                   <Link
                     href={localizeHref("/stories")}
-                    className="text-center px-5 py-3.5 rounded-xl bg-forest-header hover:bg-forest-title text-forest-sage border border-forest-sage/30 font-bold text-sm transition"
+                    className="text-center px-3 py-2.5 sm:px-5 sm:py-3.5 rounded-xl bg-forest-header/90 hover:bg-forest-title text-forest-sage border border-forest-sage/30 font-bold text-xs sm:text-sm transition truncate"
                   >
                     {t.viewAllStoriesBtn}
                   </Link>
                 </div>
 
-                {/* Metric Summary Strip */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-5 border-t border-forest-title/80 text-left">
+                {/* Metric Summary Strip (3-col inline on all screens) */}
+                <div className="grid grid-cols-3 gap-2 sm:gap-3.5 pt-4 sm:pt-5 border-t border-forest-title/80 text-center sm:text-left">
                   <div className="min-w-0">
-                    <div className="text-xl sm:text-2xl font-extrabold text-forest-sage">
+                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
                       {lang === "id"
                         ? "24 Destinasi"
                         : lang === "en"
                         ? "24 Destinations"
                         : "24 Destinazioni"}
                     </div>
-                    <div className="text-xs text-forest-pill/80 mt-0.5">
+                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
                       {lang === "id"
-                        ? "Gunung, Pantai & Heritage"
+                        ? "Gunung, Pantai & Budaya"
                         : lang === "en"
-                        ? "Mountains, Beaches & Heritage"
-                        : "Montagne, Spiagge e Cultura"}
+                        ? "Mountains, Beach, Heritage"
+                        : "Montagne, Spiagge, Cultura"}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xl sm:text-2xl font-extrabold text-forest-sage">
+                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
                       {lang === "id"
                         ? "12 Cerita"
                         : lang === "en"
                         ? "12 Stories"
                         : "12 Storie"}
                     </div>
-                    <div className="text-xs text-forest-pill/80 mt-0.5">
+                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
                       {lang === "id"
-                        ? "Legenda & Sejarah Lisan"
+                        ? "Legenda & Sejarah"
                         : lang === "en"
-                        ? "Legends & Oral History"
-                        : "Leggende e Storia Orale"}
+                        ? "Legends & History"
+                        : "Leggende e Storia"}
                     </div>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-xl sm:text-2xl font-extrabold text-forest-sage">
+                    <div className="text-lg sm:text-2xl font-extrabold text-forest-sage">
                       {lang === "id"
                         ? "100% Berlisensi"
                         : lang === "en"
                         ? "100% Certified"
                         : "100% Certificate"}
                     </div>
-                    <div className="text-xs text-forest-pill/80 mt-0.5">
+                    <div className="text-[10px] sm:text-xs text-forest-pill/80 mt-0.5 truncate">
                       {lang === "id"
-                        ? "Pemandu Resmi HPI NTB • 14 Bahasa"
+                        ? "HPI NTB • 14 Bahasa"
                         : lang === "en"
-                        ? "Official HPI NTB Guides • 14 Languages"
-                        : "Guide Ufficiali HPI • 14 Lingue"}
+                        ? "HPI NTB • 14 Languages"
+                        : "HPI NTB • 14 Lingue"}
                     </div>
                   </div>
                 </div>
@@ -137,10 +139,10 @@ export default function HomePage() {
             </div>
 
             {/* Secondary Column (38.2%) — Live Telemetry & Quick Destination Directory */}
-            <div className="flex flex-col justify-between gap-5">
-              <div className="bg-forest-card/80 border border-forest-border rounded-3xl p-6 flex-1 flex flex-col justify-between shadow-sm">
+            <div className="flex flex-col justify-between gap-4 sm:gap-5">
+              <div className="bg-forest-card/80 border border-forest-border rounded-3xl p-5 sm:p-6 flex-1 flex flex-col justify-between shadow-sm">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex items-center justify-between gap-2 mb-3 sm:mb-4">
                     <span className="text-xs font-extrabold uppercase tracking-wider text-forest-title">
                       {t.liveStatusLabel}
                     </span>
@@ -149,7 +151,103 @@ export default function HomePage() {
                     </span>
                   </div>
 
-                  <div className="space-y-2.5">
+                  {/* Mobile Zone Tab Switch (sm:hidden) */}
+                  <div className="flex sm:hidden items-center gap-1.5 p-1 rounded-xl bg-forest-canvas border border-forest-border mb-3">
+                    <button
+                      type="button"
+                      onClick={() => setActiveHeroWeatherTab("summit")}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-extrabold transition truncate ${
+                        activeHeroWeatherTab === "summit"
+                          ? "bg-forest-primary text-white shadow-xs"
+                          : "text-forest-body hover:text-forest-header"
+                      }`}
+                    >
+                      Rinjani
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveHeroWeatherTab("south")}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-extrabold transition truncate ${
+                        activeHeroWeatherTab === "south"
+                          ? "bg-forest-primary text-white shadow-xs"
+                          : "text-forest-body hover:text-forest-header"
+                      }`}
+                    >
+                      Pantai
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveHeroWeatherTab("gili")}
+                      className={`flex-1 py-1.5 px-2 rounded-lg text-[11px] font-extrabold transition truncate ${
+                        activeHeroWeatherTab === "gili"
+                          ? "bg-forest-primary text-white shadow-xs"
+                          : "text-forest-body hover:text-forest-header"
+                      }`}
+                    >
+                      Gili
+                    </button>
+                  </div>
+
+                  {/* Mobile Active Single Zone Display */}
+                  <div className="sm:hidden">
+                    {activeHeroWeatherTab === "summit" && (
+                      <div className="p-3.5 rounded-2xl bg-forest-canvas border border-forest-border">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-extrabold text-forest-title">
+                            {t.zoneSummit}
+                          </span>
+                          <span className="text-sm font-extrabold text-forest-header shrink-0">
+                            {localizeWeatherMetric(summitZone.temp, lang)}
+                          </span>
+                        </div>
+                        <div className="text-xs text-forest-body mt-1 flex items-center justify-between gap-2">
+                          <span className="truncate">{summitZone.status[lang]}</span>
+                          <span className="font-bold shrink-0">
+                            {lang === "id" ? "Angin" : lang === "en" ? "Wind" : "Vento"} {localizeWeatherMetric(summitZone.wind, lang)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {activeHeroWeatherTab === "south" && (
+                      <div className="p-3.5 rounded-2xl bg-forest-canvas border border-forest-border">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-extrabold text-forest-title">
+                            {t.zoneSouth}
+                          </span>
+                          <span className="text-sm font-extrabold text-forest-header shrink-0">
+                            {localizeWeatherMetric(southZone.temp, lang)}
+                          </span>
+                        </div>
+                        <div className="text-xs text-forest-body mt-1 flex items-center justify-between gap-2">
+                          <span className="truncate">{southZone.status[lang]}</span>
+                          <span className="font-bold shrink-0">
+                            {localizeWeatherMetric(southZone.wind, lang)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {activeHeroWeatherTab === "gili" && (
+                      <div className="p-3.5 rounded-2xl bg-forest-canvas border border-forest-border">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-xs font-extrabold text-forest-title">
+                            {t.zoneGili}
+                          </span>
+                          <span className="text-sm font-extrabold text-forest-header shrink-0">
+                            {localizeWeatherMetric(giliZone.temp, lang)}
+                          </span>
+                        </div>
+                        <div className="text-xs text-forest-body mt-1 flex items-center justify-between gap-2">
+                          <span className="truncate">{giliZone.status[lang]}</span>
+                          <span className="font-bold shrink-0">
+                            {localizeWeatherMetric(giliZone.visibility, lang)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Desktop Full Stack of 3 Zones (hidden sm:block) */}
+                  <div className="hidden sm:block space-y-2.5">
                     <div className="p-3.5 rounded-2xl bg-forest-canvas border border-forest-border">
                       <div className="flex items-center justify-between gap-2">
                         <span className="text-xs font-extrabold text-forest-title">
@@ -203,33 +301,33 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3.5 border-t border-forest-border/80 flex items-center justify-between gap-2">
+                <div className="mt-3.5 pt-3 border-t border-forest-border/80 flex items-center justify-between gap-2">
                   <span className="text-xs text-forest-body font-semibold">
                     {lang === "id"
-                      ? "Cek detail angin & gelombang"
+                      ? "Cek angin & ombak"
                       : lang === "en"
-                      ? "Check full wind & wave data"
+                      ? "Check wind & waves"
                       : "Controlla vento e onde"}
                   </span>
                   <Link
                     href={localizeHref("/weather")}
-                    className="px-3.5 py-1.5 rounded-lg bg-forest-header text-white text-xs font-extrabold uppercase tracking-wider hover:bg-forest-title transition whitespace-nowrap"
+                    className="px-3 py-1.5 rounded-lg bg-forest-header text-white text-[11px] sm:text-xs font-extrabold uppercase tracking-wider hover:bg-forest-title transition whitespace-nowrap"
                   >
                     {t.navWeather} →
                   </Link>
                 </div>
               </div>
 
-              {/* Explicit Destination Directory Card */}
-              <div className="bg-forest-pill border border-forest-border rounded-3xl p-5 sm:p-6 shadow-sm">
-                <div className="text-xs font-extrabold uppercase tracking-wider text-forest-title mb-2">
+              {/* Destination Directory Card */}
+              <div className="bg-forest-pill border border-forest-border rounded-3xl p-4 sm:p-6 shadow-sm">
+                <div className="text-xs font-extrabold uppercase tracking-wider text-forest-title mb-1.5">
                   {lang === "id"
                     ? "CAKUPAN DESTINASI LENGKAP LOMBOK"
                     : lang === "en"
                     ? "COMPLETE LOMBOK DESTINATION COVERAGE"
                     : "COPERTURA COMPLETA DELLE DESTINAZIONI"}
                 </div>
-                <p className="text-xs text-forest-body leading-relaxed mb-3">
+                <p className="text-xs text-forest-body leading-relaxed mb-3 line-clamp-3 sm:line-clamp-none">
                   <strong>
                     {lang === "id"
                       ? "Gunung & Bukit:"
@@ -246,7 +344,7 @@ export default function HomePage() {
                       ? "Beaches & Gilis:"
                       : "Spiagge e Isole Gili:"}
                   </strong>{" "}
-                  Tanjung Aan, Mawun, Selong Belanak, Merese, Pink Tangsi, Tanjung Ringgit, Gili Kondo, Gili Trawangan, Gili Meno, Gili Air, Sire, Gili Kedis, Sudak, Nanggu, Mekaki.
+                  Tanjung Aan, Mawun, Selong Belanak, Merese, Pink Tangsi, Tanjung Ringgit, Gili Kondo, Gili Trawangan, Meno, Air, Nanggu.
                   <br />
                   <strong>
                     {lang === "id"
@@ -270,11 +368,11 @@ export default function HomePage() {
       </section>
 
       {/* 2. FEATURED STORIES SECTION (Links to /stories for full 12-story catalog) */}
-      <section className="py-12 sm:py-16 border-b border-forest-border bg-forest-canvas">
+      <section className="py-8 sm:py-16 border-b border-forest-border bg-forest-canvas">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
             <div>
-              <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1.5">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                 {lang === "id"
                   ? "KATALOG CERITA DESTINASI LOMBOK"
                   : lang === "en"
@@ -284,28 +382,33 @@ export default function HomePage() {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-forest-header tracking-tight">
                 {t.storiesHeader}
               </h2>
-              <p className="text-sm sm:text-base text-forest-body mt-1">
+              <p className="text-xs sm:text-base text-forest-body mt-1">
                 {t.storiesSub}
               </p>
             </div>
-            <Link
-              href={localizeHref("/stories")}
-              className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
-            >
-              {t.viewAllStoriesBtn} →
-            </Link>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary sm:hidden">
+                {lang === "id" ? "Geser →" : lang === "en" ? "Swipe →" : "Scorri →"}
+              </span>
+              <Link
+                href={localizeHref("/stories")}
+                className="hidden sm:inline-block px-5 py-3 rounded-xl bg-forest-header hover:bg-forest-title text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
+              >
+                {t.viewAllStoriesBtn} →
+              </Link>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible">
             {featuredStories.map((story) => (
               <article
                 key={story.id}
-                className="group bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
+                className="min-w-[85vw] max-w-[340px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink group bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
               >
                 <div>
                   <Link
                     href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="block relative h-48 overflow-hidden bg-forest-header"
+                    className="block relative h-44 sm:h-48 overflow-hidden bg-forest-header"
                   >
                     <img
                       src={story.image}
@@ -326,11 +429,11 @@ export default function HomePage() {
                     </div>
                   </Link>
 
-                  <div className="p-5 sm:p-6">
-                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1.5">
+                  <div className="p-4 sm:p-6">
+                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
                       {story.regency} • {story.elevationOrDepth}
                     </div>
-                    <h3 className="text-lg font-extrabold text-forest-header mb-2 leading-snug">
+                    <h3 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
                       <Link
                         href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                         className="hover:text-forest-primary transition"
@@ -338,23 +441,23 @@ export default function HomePage() {
                         {story.title[lang]}
                       </Link>
                     </h3>
-                    <p className="text-sm text-forest-body leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-3">
                       {story.summary38[lang]}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-3 border-t border-forest-border/60 flex flex-col sm:grid sm:grid-cols-2 gap-2">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2.5 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setActiveTrailer(story)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
                   >
                     {t.readTrailerLink}
                   </button>
                   <Link
                     href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
                   >
                     {t.viewTripDetailBtn}
                   </Link>
@@ -362,42 +465,56 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+
+          <div className="mt-4 sm:hidden text-center">
+            <Link
+              href={localizeHref("/stories")}
+              className="inline-block px-5 py-2.5 rounded-xl bg-forest-header text-white text-xs font-extrabold uppercase tracking-wider transition"
+            >
+              {t.viewAllStoriesBtn} →
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* 3. FEATURED BEST SELLER PACKAGES & 3 PILLARS */}
-      <section className="py-12 sm:py-16 border-b border-forest-border bg-forest-alt">
+      <section className="py-8 sm:py-16 border-b border-forest-border bg-forest-alt">
         <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div className="flex items-end justify-between mb-6 sm:mb-8 gap-4">
             <div>
-              <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1.5">
+              <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                 {t.bestSellersEyebrow}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-forest-header tracking-tight">
                 {t.bestSellersHeader}
               </h2>
-              <p className="text-sm sm:text-base text-forest-body mt-1 max-w-3xl">
+              <p className="text-xs sm:text-base text-forest-body mt-1 max-w-3xl">
                 {t.bestSellersSub}
               </p>
             </div>
-            <Link
-              href={localizeHref("/explore")}
-              className="w-full sm:w-auto text-center px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
-            >
-              {t.viewAllDestinationsBtn} →
-            </Link>
+            <div className="flex items-center gap-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary sm:hidden">
+                {lang === "id" ? "Geser →" : lang === "en" ? "Swipe →" : "Scorri →"}
+              </span>
+              <Link
+                href={localizeHref("/explore")}
+                className="hidden sm:inline-block px-5 py-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
+              >
+                {t.viewAllDestinationsBtn} →
+              </Link>
+            </div>
           </div>
 
-          {/* 6 Curated Best Seller Destination Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* 6 Curated Best Seller Destination Cards in Horizontal Snap Carousel on Mobile */}
+          <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-6 sm:overflow-visible">
             {featuredDestinations.map((pkg) => (
               <article
                 key={pkg.id}
-                className="bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
+                className="min-w-[85vw] max-w-[340px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
               >
                 <div>
                   {/* Clean Visual Image without Cramped Text */}
-                  <div className="relative h-48 overflow-hidden bg-forest-header">
+                  <div className="relative h-44 sm:h-48 overflow-hidden bg-forest-header">
                     <img
                       src={pkg.image}
                       alt={pkg.destinationNames}
@@ -424,9 +541,9 @@ export default function HomePage() {
                   </div>
 
                   {/* Card Content with Generous Breathing Room */}
-                  <div className="p-5 sm:p-6">
+                  <div className="p-4 sm:p-6">
                     {/* Regency & Category Meta */}
-                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-2 gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-1.5 sm:mb-2 gap-2">
                       <span className="flex items-center gap-1.5 min-w-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-forest-primary shrink-0" />
                         <span className="truncate font-extrabold tracking-wider uppercase text-[11px]">
@@ -438,12 +555,12 @@ export default function HomePage() {
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-extrabold text-forest-header mb-2 leading-snug line-clamp-2">
+                    <h3 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
                       {pkg.title[lang]}
                     </h3>
 
-                    {/* Rute & Destinasi - Formatted clearly in its own box */}
-                    <div className="text-xs text-forest-title font-medium leading-relaxed mb-3 bg-forest-canvas/70 p-2.5 rounded-xl border border-forest-border/50 line-clamp-2">
+                    {/* Rute & Destinasi - 1 line on mobile, 2 lines on desktop */}
+                    <div className="text-[11px] sm:text-xs text-forest-title font-medium leading-relaxed mb-2.5 sm:mb-3 bg-forest-canvas/70 p-2 sm:p-2.5 rounded-xl border border-forest-border/50 line-clamp-1 sm:line-clamp-2">
                       <span className="font-extrabold text-forest-header">
                         {lang === "id"
                           ? "Destinasi: "
@@ -454,12 +571,12 @@ export default function HomePage() {
                       {pkg.destinationNames}
                     </div>
 
-                    <p className="text-xs text-forest-body leading-relaxed line-clamp-2 mb-4">
+                    <p className="text-xs text-forest-body leading-relaxed line-clamp-2 mb-3 sm:mb-4">
                       {pkg.desc[lang]}
                     </p>
 
-                    {/* Spacious All-In Price Section */}
-                    <div className="pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
+                    {/* All-In Price Section */}
+                    <div className="pt-2.5 sm:pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
                       <div>
                         <span className="text-[10px] font-bold uppercase tracking-wider text-forest-body block">
                           {lang === "id"
@@ -468,11 +585,11 @@ export default function HomePage() {
                             ? "Price per Pax (All-in)"
                             : "Prezzo per Persona"}
                         </span>
-                        <span className="text-xl font-extrabold text-forest-header tracking-tight">
+                        <span className="text-lg sm:text-xl font-extrabold text-forest-header tracking-tight">
                           {formatPrice(pkg.priceIdr, lang)}
                         </span>
                       </div>
-                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-1 rounded-md border border-forest-primary/20 shrink-0">
+                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-0.5 sm:py-1 rounded-md border border-forest-primary/20 shrink-0">
                         {lang === "id"
                           ? "All-In & Berlisensi"
                           : lang === "en"
@@ -483,10 +600,10 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <Link
                     href={localizeHref(`/explore/${pkg.id}`)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
                   >
                     {lang === "id"
                       ? "Detail Trip →"
@@ -497,7 +614,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => chooseRouteAndGoToGuides(pkg.id)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
                   >
                     {lang === "id"
                       ? "Pilih Guide →"
@@ -510,9 +627,18 @@ export default function HomePage() {
             ))}
           </div>
 
+          <div className="mt-4 sm:hidden text-center">
+            <Link
+              href={localizeHref("/explore")}
+              className="inline-block px-5 py-2.5 rounded-xl bg-forest-primary text-white text-xs font-extrabold uppercase tracking-wider transition shadow-sm"
+            >
+              {t.viewAllDestinationsBtn} →
+            </Link>
+          </div>
+
           {/* 3 Pillar Quick Navigation Directory with All 24 Destinations */}
-          <div className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-forest-border">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-4">
+          <div className="mt-8 sm:mt-16 pt-8 sm:pt-12 border-t border-forest-border">
+            <div className="flex items-end justify-between mb-4 sm:mb-6 gap-4">
               <div>
                 <div className="text-xs font-extrabold uppercase tracking-widest text-forest-primary mb-1">
                   {lang === "id"
@@ -528,57 +654,62 @@ export default function HomePage() {
                   {t.pillarsSub}
                 </p>
               </div>
-              <Link
-                href={localizeHref("/explore")}
-                className="text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
-              >
-                {t.viewAllDestinationsBtn} →
-              </Link>
+              <div className="flex items-center gap-3">
+                <span className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary sm:hidden">
+                  {lang === "id" ? "Geser →" : lang === "en" ? "Swipe →" : "Scorri →"}
+                </span>
+                <Link
+                  href={localizeHref("/explore")}
+                  className="hidden sm:inline-block text-xs font-extrabold text-forest-primary hover:text-forest-hover transition"
+                >
+                  {t.viewAllDestinationsBtn} →
+                </Link>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-3 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible">
               <Link
                 href={localizeHref("/explore?pillar=mountain")}
-                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+                className="min-w-[80vw] max-w-[300px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink p-4 sm:p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
-                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
                   PILAR 1 • 8 PROGRAM MENGINAP
                 </div>
-                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                <h4 className="text-sm sm:text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1 sm:mb-1.5">
                   {t.pillarMountain}
                 </h4>
-                <p className="text-xs text-forest-body leading-relaxed">
+                <p className="text-xs text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-none">
                   Puncak Rinjani 3.726m, Danau Segara Anak, Aik Kalak, Lembah Torean, Bukit Pergasingan, Bukit Sempana, Bukit Nanggi, Kondo, Dandaun.
                 </p>
               </Link>
 
               <Link
                 href={localizeHref("/explore?pillar=beach")}
-                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+                className="min-w-[80vw] max-w-[300px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink p-4 sm:p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
-                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
                   PILAR 2 • 8 ZONA PESISIR &amp; GILI
                 </div>
-                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                <h4 className="text-sm sm:text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1 sm:mb-1.5">
                   {t.pillarBeach}
                 </h4>
-                <p className="text-xs text-forest-body leading-relaxed">
+                <p className="text-xs text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-none">
                   Tanjung Aan, Mawun, Selong Belanak, Merese, Pantai Pink Tangsi, Tanjung Ringgit, Gili Kondo, Gili Trawangan, Meno, Air, Nanggu.
                 </p>
               </Link>
 
               <Link
                 href={localizeHref("/explore?pillar=heritage")}
-                className="p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
+                className="min-w-[80vw] max-w-[300px] sm:min-w-0 sm:max-w-none snap-start shrink-0 sm:shrink p-4 sm:p-5 rounded-2xl bg-white border border-forest-border hover:border-forest-primary transition group shadow-sm"
               >
-                <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
+                <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
                   PILAR 3 • 8 KORIDOR BUDAYA SASAK
                 </div>
-                <h4 className="text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1.5">
+                <h4 className="text-sm sm:text-base font-extrabold text-forest-header group-hover:text-forest-primary transition mb-1 sm:mb-1.5">
                   {t.pillarHeritage}
                 </h4>
-                <p className="text-xs text-forest-body leading-relaxed">
-                  Desa Adat Sade, Desa Ende, Tenun Sukarara, 7 Rumah Adat Sembalun, Masjid Kuno Bayan Beleq, Senaru, Pura Lingsar, Taman Narmada.
+                <p className="text-xs text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-none">
+                  Desa Sade, Ende, Sukarara, Sembalun Bumbung, Masbagik, Masjid Kuno Bayan Beleq, Senaru, Pura Lingsar, Taman Narmada.
                 </p>
               </Link>
             </div>

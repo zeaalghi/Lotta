@@ -88,7 +88,7 @@ export default function StoriesPage() {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             {/* Pillar Filter Buttons */}
             <div
-              className="flex flex-wrap gap-2"
+              className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:flex-wrap"
               role="group"
               aria-label="Filter Cerita Berdasarkan Pilar"
             >
@@ -119,7 +119,7 @@ export default function StoriesPage() {
                   key={tab.id}
                   type="button"
                   onClick={() => setSelectedPillar(tab.id)}
-                  className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition ${
+                  className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition shrink-0 ${
                     selectedPillar === tab.id
                       ? "bg-forest-header text-white shadow-sm"
                       : "bg-white text-forest-header border border-forest-border hover:bg-forest-card/60"
@@ -150,9 +150,9 @@ export default function StoriesPage() {
           </div>
 
           {/* Regency Filter Chips + Result Count */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-forest-border/70">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-forest-title mr-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-forest-border/70">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:flex-wrap">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-forest-title mr-1 shrink-0">
                 {lang === "id"
                   ? "Kabupaten:"
                   : lang === "en"
@@ -164,7 +164,7 @@ export default function StoriesPage() {
                   key={reg}
                   type="button"
                   onClick={() => setSelectedRegency(reg)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-extrabold transition shrink-0 ${
                     selectedRegency === reg
                       ? "bg-forest-primary text-white"
                       : "bg-white border border-forest-border text-forest-header hover:bg-forest-card"
@@ -245,7 +245,7 @@ export default function StoriesPage() {
                 <div>
                   <Link
                     href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="block relative h-52 overflow-hidden bg-forest-header"
+                    className="block relative h-44 sm:h-52 overflow-hidden bg-forest-header"
                   >
                     <img
                       src={story.image}
@@ -266,11 +266,11 @@ export default function StoriesPage() {
                     </div>
                   </Link>
 
-                  <div className="p-5 sm:p-6">
-                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1.5">
+                  <div className="p-4 sm:p-6">
+                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
                       {formatRegency(story.regency, lang)} • {story.elevationOrDepth}
                     </div>
-                    <h2 className="text-lg font-extrabold text-forest-header mb-2 leading-snug">
+                    <h2 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
                       <Link
                         href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
                         className="hover:text-forest-primary transition"
@@ -278,23 +278,23 @@ export default function StoriesPage() {
                         {story.title[lang]}
                       </Link>
                     </h2>
-                    <p className="text-sm text-forest-body leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-forest-body leading-relaxed line-clamp-2 sm:line-clamp-3">
                       {story.summary38[lang]}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-3 border-t border-forest-border/60 flex flex-col sm:grid sm:grid-cols-2 gap-2">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2.5 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setActiveTrailer(story)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
                   >
                     {t.readTrailerLink}
                   </button>
                   <Link
                     href={localizeHref(`/explore/${story.packageId || "pkg-explore-rinjani"}`)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
                   >
                     {t.viewTripDetailBtn}
                   </Link>

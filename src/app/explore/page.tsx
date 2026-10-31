@@ -103,7 +103,7 @@ export default function ExplorePage() {
         <div className="bg-forest-alt border border-forest-border rounded-2xl p-5 sm:p-6 mb-8 space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div
-              className="flex flex-wrap gap-2"
+              className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:flex-wrap"
               role="tablist"
               aria-label="Destination Pillar Filter"
             >
@@ -136,7 +136,7 @@ export default function ExplorePage() {
                   role="tab"
                   aria-selected={activePillar === tab.id}
                   onClick={() => setActivePillar(tab.id)}
-                  className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition ${
+                  className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold transition shrink-0 ${
                     activePillar === tab.id
                       ? "bg-forest-header text-white shadow-sm"
                       : "bg-white text-forest-header border border-forest-border hover:bg-forest-card/60"
@@ -166,21 +166,21 @@ export default function ExplorePage() {
           </div>
 
           {/* Regency Filter Chips + Result Counter */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-forest-border/70">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-extrabold uppercase tracking-wider text-forest-title mr-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-forest-border/70">
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 sm:flex-wrap">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-forest-title mr-1 shrink-0">
                 {lang === "id"
-                  ? "Filter Kabupaten:"
+                  ? "Filter:"
                   : lang === "en"
-                  ? "Filter by Regency:"
-                  : "Filtra per Reggenza:"}
+                  ? "Filter:"
+                  : "Filtro:"}
               </span>
               {regencies.map((reg) => (
                 <button
                   key={reg}
                   type="button"
                   onClick={() => setSelectedRegency(reg)}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition ${
+                  className={`px-3 py-1.5 rounded-lg text-xs font-extrabold transition shrink-0 ${
                     selectedRegency === reg
                       ? "bg-forest-primary text-white"
                       : "bg-white border border-forest-border text-forest-header hover:bg-forest-card"
@@ -188,10 +188,10 @@ export default function ExplorePage() {
                 >
                   {reg === "all"
                     ? lang === "id"
-                      ? "Semua Kabupaten"
+                      ? "Semua Wilayah"
                       : lang === "en"
-                      ? "All Regencies"
-                      : "Tutte le Reggenze"
+                      ? "All Regions"
+                      : "Tutte le Regioni"
                     : reg}
                 </button>
               ))}
@@ -259,7 +259,7 @@ export default function ExplorePage() {
               >
                 <div>
                   {/* Clean Visual Image without Cramped Text */}
-                  <div className="relative h-48 overflow-hidden bg-forest-header">
+                  <div className="relative h-44 sm:h-48 overflow-hidden bg-forest-header">
                     <img
                       src={pkg.image}
                       alt={pkg.destinationNames}
@@ -286,9 +286,9 @@ export default function ExplorePage() {
                   </div>
 
                   {/* Card Content with Generous Breathing Room */}
-                  <div className="p-5 sm:p-6">
+                  <div className="p-4 sm:p-6">
                     {/* Regency & Category Meta */}
-                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-2 gap-2">
+                    <div className="flex items-center justify-between text-xs font-bold text-forest-primary mb-1.5 sm:mb-2 gap-2">
                       <span className="flex items-center gap-1.5 min-w-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-forest-primary shrink-0" />
                         <span className="truncate font-extrabold tracking-wider uppercase text-[11px]">
@@ -300,12 +300,12 @@ export default function ExplorePage() {
                       </span>
                     </div>
 
-                    <h2 className="text-lg font-extrabold text-forest-header mb-2 leading-snug line-clamp-2">
+                    <h2 className="text-base sm:text-lg font-extrabold text-forest-header mb-1.5 sm:mb-2 leading-snug line-clamp-2">
                       {pkg.title[lang]}
                     </h2>
 
-                    {/* Rute & Destinasi - Formatted clearly in its own box */}
-                    <div className="text-xs text-forest-title font-medium leading-relaxed mb-3 bg-forest-canvas/70 p-2.5 rounded-xl border border-forest-border/50 line-clamp-2">
+                    {/* Rute & Destinasi - 1 line on mobile, 2 lines on desktop */}
+                    <div className="text-[11px] sm:text-xs text-forest-title font-medium leading-relaxed mb-2.5 sm:mb-3 bg-forest-canvas/70 p-2 sm:p-2.5 rounded-xl border border-forest-border/50 line-clamp-1 sm:line-clamp-2">
                       <span className="font-extrabold text-forest-header">
                         {lang === "id"
                           ? "Destinasi: "
@@ -316,12 +316,12 @@ export default function ExplorePage() {
                       {pkg.destinationNames}
                     </div>
 
-                    <p className="text-xs text-forest-body leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-xs text-forest-body leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                       {pkg.desc[lang]}
                     </p>
 
-                    {/* Explicit Highlights List */}
-                    <ul className="space-y-1.5 pt-3 border-t border-forest-border/60 text-xs text-forest-title mb-4">
+                    {/* Explicit Highlights List - Cleanly tucked into desktop view, omitted on mobile to prevent scroll fatigue */}
+                    <ul className="hidden sm:block space-y-1.5 pt-3 border-t border-forest-border/60 text-xs text-forest-title mb-4">
                       {pkg.highlights[lang].map((hl) => (
                         <li key={hl} className="flex items-start gap-2">
                           <span className="font-bold text-forest-primary">•</span>
@@ -331,7 +331,7 @@ export default function ExplorePage() {
                     </ul>
 
                     {/* Spacious All-In Price Section */}
-                    <div className="pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
+                    <div className="pt-2.5 sm:pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
                       <div>
                         <span className="text-[10px] font-bold uppercase tracking-wider text-forest-body block">
                           {lang === "id"
@@ -340,11 +340,11 @@ export default function ExplorePage() {
                             ? "Price per Pax (All-in)"
                             : "Prezzo per Persona"}
                         </span>
-                        <span className="text-xl font-extrabold text-forest-header tracking-tight">
+                        <span className="text-lg sm:text-xl font-extrabold text-forest-header tracking-tight">
                           {formatPrice(pkg.priceIdr, lang)}
                         </span>
                       </div>
-                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-1 rounded-md border border-forest-primary/20 shrink-0">
+                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-0.5 sm:py-1 rounded-md border border-forest-primary/20 shrink-0">
                         {lang === "id"
                           ? "All-In & Berlisensi"
                           : lang === "en"
@@ -355,10 +355,10 @@ export default function ExplorePage() {
                   </div>
                 </div>
 
-                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <Link
                     href={localizeHref(`/explore/${pkg.id}`)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-[11px] sm:text-xs font-extrabold transition text-center truncate"
                   >
                     {lang === "id"
                       ? "Detail Trip →"
@@ -369,7 +369,7 @@ export default function ExplorePage() {
                   <button
                     type="button"
                     onClick={() => chooseRouteAndGoToGuides(pkg.id)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
+                    className="w-full py-2 sm:py-2.5 px-2 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-[11px] sm:text-xs font-extrabold transition text-center shadow-sm truncate"
                   >
                     {lang === "id"
                       ? "Pilih Guide →"
