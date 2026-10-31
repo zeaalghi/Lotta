@@ -182,13 +182,15 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
             <div className="flex items-center gap-3 min-w-0">
               <Link
                 href="/"
-                className="font-extrabold tracking-tight text-xl sm:text-2xl text-white hover:text-forest-sage transition shrink-0"
+                className="flex items-center gap-2.5 transition shrink-0 group py-1"
+                aria-label="LOTTA Tour & Travel Home"
               >
-                LOTTA
+                <img
+                  src="/lotta-logo-navbar.png"
+                  alt="LOTTA Tour & Travel"
+                  className="h-10 sm:h-11 w-auto object-contain transition group-hover:opacity-95"
+                />
               </Link>
-              <span className="hidden xl:inline-block text-[11px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-md bg-forest-title text-forest-sage border border-forest-primary/30 whitespace-nowrap">
-                Lombok Official Guide Network
-              </span>
             </div>
 
             <nav
@@ -428,11 +430,15 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-forest-title/60">
               {/* Brand Column */}
               <div className="lg:col-span-1">
-                <div className="font-extrabold text-xl text-white tracking-tight mb-2">
-                  LOTTA
-                </div>
-                <div className="text-xs font-semibold text-forest-sage mb-3">
-                  Lombok Tourism Authority &amp; Guide Network
+                <Link href="/" className="inline-block mb-3" aria-label="LOTTA Home">
+                  <img
+                    src="/lotta-logo-navbar.png"
+                    alt="LOTTA Tour & Travel"
+                    className="h-11 sm:h-12 w-auto object-contain"
+                  />
+                </Link>
+                <div className="text-xs font-semibold text-forest-sage mb-2">
+                  Lombok Official Guide Network &amp; Tour Operator
                 </div>
                 <p className="text-xs text-forest-body leading-relaxed mb-4">
                   Beyond the Horizon of Lombok: Living Heritage, Untold Stories.

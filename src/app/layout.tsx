@@ -9,9 +9,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lotta.id"),
   title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
   description:
     "Lombok Tourism & Private Guides Platform: Living Heritage Stories, Rinjani Summits & Overnight Hills, Regency Beaches, and Certified Multilingual Local Hosts.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: "LOTTA — Beyond the Horizon of Lombok: Living Heritage, Untold Stories.",
     description:
@@ -19,6 +25,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     alternateLocale: ["en_US", "it_IT"],
+    images: [
+      {
+        url: "/lotta-logo-banner.png",
+        width: 780,
+        height: 280,
+        alt: "LOTTA Tour & Travel",
+      },
+    ],
   },
 };
 
