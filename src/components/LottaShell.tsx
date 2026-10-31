@@ -173,7 +173,7 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
       href: "/guides",
       label: t.navGuides,
       mobileLabel:
-        lang === "id" ? "Pesan Pemandu" : lang === "en" ? "Book Guide" : "Guida",
+        lang === "id" ? "Pemandu" : lang === "en" ? "Book Guide" : "Guida",
       stepCode: "05",
     },
   ];
