@@ -3,8 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import {
+  formatDuration,
   formatPrice,
   formatRegency,
+  formatShortDuration,
   PACKAGES,
   STORY_TRAILERS,
   UI_TEXT,
@@ -392,48 +394,93 @@ export default function HomePage() {
                 className="bg-white border border-forest-border rounded-2xl overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition"
               >
                 <div>
+                  {/* Clean Visual Image without Cramped Text */}
                   <div className="relative h-48 overflow-hidden bg-forest-header">
                     <img
                       src={pkg.image}
                       alt={pkg.destinationNames}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition duration-300 hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/90 via-forest-header/20 to-transparent" />
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
-                      <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-forest-primary text-white shadow-sm">
-                        {pkg.duration}
-                      </span>
-                      {pkg.isBestSeller && (
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-forest-header/60 via-transparent to-black/20" />
+
+                    {/* Top Left: Clean Best Seller Badge (if applicable) */}
+                    <div className="absolute top-3 left-3">
+                      {pkg.isBestSeller ? (
+                        <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-amber-400 text-stone-900 shadow-sm border border-amber-300/60">
                           BEST SELLER
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-forest-header/90 text-white shadow-sm border border-white/20">
+                          {formatRegency(pkg.regency, lang)}
                         </span>
                       )}
                     </div>
+
+                    {/* Top Right: Short Duration Badge - Never collides with left badge */}
                     <div className="absolute top-3 right-3">
-                      <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-forest-header/90 text-forest-sage border border-forest-sage/40 shadow-sm">
-                        {formatPrice(pkg.priceIdr, lang)}
+                      <span className="px-2.5 py-1 rounded-md text-[11px] font-extrabold bg-black/60 text-white backdrop-blur-sm border border-white/20 shadow-sm">
+                        {formatShortDuration(pkg.duration, lang)}
                       </span>
-                    </div>
-                    <div className="absolute bottom-3 left-3 right-3 text-xs font-extrabold text-white leading-snug">
-                      {pkg.destinationNames}
                     </div>
                   </div>
 
+                  {/* Card Content with Generous Breathing Room */}
                   <div className="p-5 sm:p-6">
-                    <div className="text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1">
-                      {formatRegency(pkg.regency, lang)}
+                    {/* Regency & Duration Meta */}
+                    <div className="flex items-center justify-between text-[11px] font-extrabold uppercase tracking-wider text-forest-primary mb-1.5 gap-2">
+                      <span className="truncate">{formatRegency(pkg.regency, lang)}</span>
+                      <span className="text-[10px] font-semibold text-forest-body bg-forest-canvas px-2 py-0.5 rounded border border-forest-border/60 shrink-0">
+                        {formatDuration(pkg.duration, lang)}
+                      </span>
                     </div>
-                    <h3 className="text-lg font-extrabold text-forest-header mb-2 leading-snug">
+
+                    <h3 className="text-lg font-extrabold text-forest-header mb-2 leading-snug line-clamp-2">
                       {pkg.title[lang]}
                     </h3>
-                    <p className="text-sm text-forest-body leading-relaxed">
+
+                    {/* Rute & Destinasi - Formatted clearly in its own box */}
+                    <div className="text-xs text-forest-title font-medium leading-relaxed mb-3 bg-forest-canvas/70 p-2.5 rounded-xl border border-forest-border/50 line-clamp-2">
+                      <span className="font-extrabold text-forest-header">
+                        {lang === "id"
+                          ? "Destinasi: "
+                          : lang === "en"
+                          ? "Destinations: "
+                          : "Destinazioni: "}
+                      </span>
+                      {pkg.destinationNames}
+                    </div>
+
+                    <p className="text-xs text-forest-body leading-relaxed line-clamp-2 mb-4">
                       {pkg.desc[lang]}
                     </p>
+
+                    {/* Spacious All-In Price Section */}
+                    <div className="pt-3 border-t border-forest-border/60 flex items-baseline justify-between gap-2">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-forest-body block">
+                          {lang === "id"
+                            ? "Harga per Pax (All-in)"
+                            : lang === "en"
+                            ? "Price per Pax (All-in)"
+                            : "Prezzo per Persona"}
+                        </span>
+                        <span className="text-xl font-extrabold text-forest-header tracking-tight">
+                          {formatPrice(pkg.priceIdr, lang)}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-bold text-forest-primary bg-forest-primary/10 px-2 py-1 rounded-md border border-forest-primary/20 shrink-0">
+                        {lang === "id"
+                          ? "All-In & Berlisensi"
+                          : lang === "en"
+                          ? "All-In & Licensed"
+                          : "Tutto Incluso"}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-3 border-t border-forest-border/60 flex flex-col sm:grid sm:grid-cols-2 gap-2">
+                <div className="px-5 sm:px-6 pb-5 pt-2 border-t border-forest-border/60 grid grid-cols-2 gap-2">
                   <Link
                     href={`/explore/${pkg.id}`}
                     className="w-full py-2.5 px-3 rounded-xl bg-forest-pill hover:bg-forest-card text-forest-header text-xs font-extrabold transition text-center"
@@ -447,7 +494,7 @@ export default function HomePage() {
                   <button
                     type="button"
                     onClick={() => chooseRouteAndGoToGuides(pkg.id)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center"
+                    className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center shadow-sm"
                   >
                     {lang === "id"
                       ? "Pilih Guide →"

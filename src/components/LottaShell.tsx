@@ -422,27 +422,170 @@ export function LottaShell({ children }: { children: React.ReactNode }) {
           </div>
         )}
 
-        {/* FOOTER (extra pb-24 on mobile so bottom dock never covers footer text) */}
+        {/* FOOTER (extra pb-28 on mobile so bottom dock never covers footer text) */}
         <footer className="bg-forest-header text-forest-pill border-t border-forest-title pt-12 pb-28 md:pb-12">
-          <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            <div>
-              <div className="font-extrabold text-lg text-white tracking-tight">
-                LOTTA — Lombok Tourism Authority &amp; Guide Network
+          <div className="max-w-lotta mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-forest-title/60">
+              {/* Brand Column */}
+              <div className="lg:col-span-1">
+                <div className="font-extrabold text-xl text-white tracking-tight mb-2">
+                  LOTTA
+                </div>
+                <div className="text-xs font-semibold text-forest-sage mb-3">
+                  Lombok Tourism Authority &amp; Guide Network
+                </div>
+                <p className="text-xs text-forest-body leading-relaxed mb-4">
+                  Beyond the Horizon of Lombok: Living Heritage, Untold Stories.
+                  Pemandu lokal berlisensi resmi HPI NTB dengan transparansi penuh tanpa perantara.
+                </p>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-forest-title/30 border border-forest-sage/20 text-[11px] font-bold text-forest-sage">
+                  <span>HPI NTB Official Partner</span>
+                </div>
               </div>
-              <p className="text-xs text-forest-sage mt-1">
-                Beyond the Horizon of Lombok: Living Heritage, Untold Stories.
-              </p>
+
+              {/* Navigation / Directory */}
+              <div>
+                <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-4">
+                  {lang === "id"
+                    ? "EKSPLORASI"
+                    : lang === "en"
+                    ? "EXPLORE"
+                    : "ESPLORA"}
+                </div>
+                <ul className="space-y-2.5 text-xs text-forest-body">
+                  <li>
+                    <Link
+                      href="/explore"
+                      className="hover:text-white transition font-medium"
+                    >
+                      {lang === "id"
+                        ? "24 Destinasi Lengkap"
+                        : lang === "en"
+                        ? "All 24 Destinations"
+                        : "Tutte le 24 Destinazioni"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/stories"
+                      className="hover:text-white transition font-medium"
+                    >
+                      {lang === "id"
+                        ? "Katalog Cerita & Legenda"
+                        : lang === "en"
+                        ? "Stories & Legends Catalog"
+                        : "Catalogo Storie e Leggende"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/guides"
+                      className="hover:text-white transition font-medium"
+                    >
+                      {lang === "id"
+                        ? "Pemandu Resmi Berlisensi"
+                        : lang === "en"
+                        ? "Official Licensed Guides"
+                        : "Guide Ufficiali Certificate"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/weather"
+                      className="hover:text-white transition font-medium"
+                    >
+                      {lang === "id"
+                        ? "Pantauan Cuaca & Ombak"
+                        : lang === "en"
+                        ? "Live Weather & Wave Telemetry"
+                        : "Meteo e Onde in Tempo Reale"}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Support Column (matches user's reference) */}
+              <div>
+                <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-4">
+                  SUPPORT
+                </div>
+                <ul className="space-y-2.5 text-xs text-forest-body">
+                  <li>
+                    <Link
+                      href="/faq"
+                      className="hover:text-white transition font-medium"
+                    >
+                      FAQ (Pertanyaan Umum)
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/terms"
+                      className="hover:text-white transition font-medium"
+                    >
+                      Terms &amp; Conditions
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/privacy"
+                      className="hover:text-white transition font-medium"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Contact Column (matches user's reference) */}
+              <div>
+                <div className="text-xs font-extrabold uppercase tracking-widest text-forest-sage mb-4">
+                  CONTACT
+                </div>
+                <div className="space-y-3 text-xs text-forest-body">
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-forest-sage/80 mb-0.5">
+                      {lang === "id" ? "WhatsApp / Telepon" : "WhatsApp / Phone"}
+                    </div>
+                    <a
+                      href="https://wa.me/6287728770032"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white hover:text-forest-sage transition font-bold text-sm block"
+                    >
+                      +62 877-2877-0032
+                    </a>
+                  </div>
+
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-forest-sage/80 mb-0.5">
+                      Email
+                    </div>
+                    <span className="text-forest-sage/70 font-medium">
+                      On Progress
+                    </span>
+                  </div>
+
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-forest-sage/80 mb-0.5">
+                      {lang === "id" ? "Alamat Kantor / Hub" : "Office Address"}
+                    </div>
+                    <p className="text-forest-sage/90 leading-relaxed">
+                      Sintung, Pringgarata, Lombok Tengah, NTB 83562
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-wrap gap-4 text-xs text-forest-sage">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="hover:text-white transition font-semibold"
-                >
-                  {item.label}
-                </Link>
-              ))}
+
+            {/* Copyright & Disclaimer Bar */}
+            <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-forest-sage/80 gap-3">
+              <div>
+                &copy; {new Date().getFullYear()} LOTTA. All rights reserved.
+              </div>
+              <div className="text-center sm:text-right">
+                Pemberdayaan Pemandu Lokal Resmi Lombok &amp; HPI DPD NTB
+              </div>
             </div>
           </div>
         </footer>

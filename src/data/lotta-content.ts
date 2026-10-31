@@ -174,6 +174,23 @@ export function formatDuration(duration: string, lang: Lang): string {
   return duration;
 }
 
+export function formatShortDuration(duration: string, lang: Lang): string {
+  if (!duration) return "";
+  if (duration.includes("4D3N")) return "4D / 3N";
+  if (duration.includes("3D2N")) return "3D / 2N";
+  if (duration.includes("2D1N")) return "2D / 1N";
+  if (duration.toLowerCase().includes("half / full")) {
+    return lang === "id" ? "1/2 - 1 Hari" : lang === "en" ? "1/2 - 1 Day" : "1/2 - 1 Giorno";
+  }
+  if (duration.toLowerCase().includes("half day")) {
+    return lang === "id" ? "1/2 Hari" : lang === "en" ? "Half Day" : "1/2 Giorno";
+  }
+  if (duration.toLowerCase().includes("multi-expedition")) {
+    return lang === "id" ? "Multi Hari" : lang === "en" ? "Multi Day" : "Più Giorni";
+  }
+  return lang === "id" ? "1 Hari" : lang === "en" ? "1 Day" : "1 Giorno";
+}
+
 export function formatPrice(priceIdr: number, lang: Lang): string {
   if (lang === "en") {
     return `IDR ${priceIdr.toLocaleString("en-US")}`;
