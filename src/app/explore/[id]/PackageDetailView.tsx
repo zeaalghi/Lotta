@@ -40,8 +40,9 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
     const durationStr = formatDuration(pkg.duration, lang);
     const priceStr = formatPrice(pkg.priceIdr, lang);
     const regencyStr = formatRegency(pkg.regency, lang);
+    const paxUnit = lang === "id" ? "orang" : lang === "en" ? "pax" : "persona";
 
-    return `${t.shareTextGreeting}\n\n*${pkg.title[lang]}*\n• ${regencyStr}\n• ${durationStr}\n• ${priceStr} / orang (All-In Guide HPI NTB)\n\nCek rute & itinerary lengkapnya di:\n${url}`;
+    return `${t.shareTextGreeting}\n\n*${pkg.title[lang]}*\n• ${regencyStr}\n• ${durationStr}\n• ${priceStr} / ${paxUnit} (${t.shareAllInLabel})\n\n${t.shareCheckDetails}\n${url}`;
   };
 
   const handleCopyLink = async () => {
@@ -350,7 +351,7 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
               {pkg.destinationNames}
             </div>
             <div className="text-xs font-extrabold text-white">
-              {formatPrice(pkg.priceIdr, lang)} / {lang === "id" ? "orang" : "pax"}
+              {formatPrice(pkg.priceIdr, lang)} / {lang === "id" ? "orang" : lang === "en" ? "pax" : "persona"}
             </div>
             <div className="text-[10px] text-forest-pill truncate">
               DP 30%: {formatPrice(deposit30, lang)}
@@ -362,14 +363,14 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
             className="shrink-0 px-3 py-2.5 rounded-xl bg-forest-title hover:bg-forest-title/80 text-forest-sage border border-forest-sage/30 text-xs font-extrabold transition"
             aria-label={t.shareTripBtn}
           >
-            {copiedLink ? "✓ Disalin" : t.shareTripBtn}
+            {copiedLink ? (lang === "id" ? "✓ Disalin" : lang === "en" ? "✓ Copied" : "✓ Copiato") : t.shareTripBtn}
           </button>
           <button
             type="button"
             onClick={() => chooseRouteAndGoToGuides(pkg.id)}
             className="shrink-0 px-3.5 sm:px-4 py-2.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold shadow-md transition"
           >
-            {lang === "id" ? "Pesan Rute →" : "Book Route →"}
+            {lang === "id" ? "Pesan Rute →" : lang === "en" ? "Book Route →" : "Prenota Tour →"}
           </button>
         </div>
       </div>

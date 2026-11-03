@@ -339,6 +339,8 @@ export const UI_TEXT: Record<
     shareCopyLinkBtn: string;
     shareCopiedNotice: string;
     shareTextGreeting: string;
+    shareCheckDetails: string;
+    shareAllInLabel: string;
   }
 > = {
   id: {
@@ -425,6 +427,8 @@ export const UI_TEXT: Record<
     shareCopyLinkBtn: "Salin Tautan",
     shareCopiedNotice: "✓ Tautan Berhasil Disalin!",
     shareTextGreeting: "Rekomendasi Rute Trip Lombok dari LOTTA:",
+    shareCheckDetails: "Cek rute & itinerary lengkapnya di:",
+    shareAllInLabel: "All-In dengan Guide Berlisensi HPI NTB",
   },
   en: {
     navHome: "Home",
@@ -510,6 +514,8 @@ export const UI_TEXT: Record<
     shareCopyLinkBtn: "Copy Link",
     shareCopiedNotice: "✓ Link Copied to Clipboard!",
     shareTextGreeting: "Lombok Trip Recommendation from LOTTA:",
+    shareCheckDetails: "Check full route & itinerary details here:",
+    shareAllInLabel: "All-In with Official HPI-Certified Guide",
   },
   it: {
     navHome: "Home",
@@ -595,6 +601,8 @@ export const UI_TEXT: Record<
     shareCopyLinkBtn: "Copia Link",
     shareCopiedNotice: "✓ Link Copiato!",
     shareTextGreeting: "Raccomandazione di Viaggio a Lombok da LOTTA:",
+    shareCheckDetails: "Scopri l'itinerario e tutti i dettagli qui:",
+    shareAllInLabel: "Tutto Incluso con Guida Ufficiale HPI",
   },
 };
 
