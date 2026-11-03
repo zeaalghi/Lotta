@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   findPackage,
@@ -23,7 +23,58 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
   const t = UI_TEXT[lang];
   const relatedStory = STORY_TRAILERS.find((s) => s.packageId === pkg.id);
 
+  const [copiedLink, setCopiedLink] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+
   const deposit30 = Math.round(pkg.priceIdr * 0.3);
+
+  const getShareUrl = () => {
+    if (typeof window !== "undefined") {
+      return window.location.href;
+    }
+    return `https://lotta.id/explore/${pkg.id}`;
+  };
+
+  const getShareText = () => {
+    const url = getShareUrl();
+    const durationStr = formatDuration(pkg.duration, lang);
+    const priceStr = formatPrice(pkg.priceIdr, lang);
+    const regencyStr = formatRegency(pkg.regency, lang);
+
+    return `${t.shareTextGreeting}\n\n*${pkg.title[lang]}*\n• ${regencyStr}\n• ${durationStr}\n• ${priceStr} / orang (All-In Guide HPI NTB)\n\nCek rute & itinerary lengkapnya di:\n${url}`;
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(getShareUrl());
+      setCopiedLink(true);
+      setTimeout(() => setCopiedLink(false), 2500);
+    } catch {
+      // clipboard fallback
+    }
+  };
+
+  const handleNativeOrWhatsAppShare = async () => {
+    const shareUrl = getShareUrl();
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: pkg.title[lang],
+          text: `${t.shareTextGreeting} ${pkg.title[lang]} (${formatDuration(pkg.duration, lang)})`,
+          url: shareUrl,
+        });
+        return;
+      } catch {
+        // user dismissed dialog or unsupported
+      }
+    }
+    setShowShareModal(true);
+  };
+
+  const handleDirectWhatsAppShare = () => {
+    const text = encodeURIComponent(getShareText());
+    window.open(`https://api.whatsapp.com/send?text=${text}`, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <div className="py-8 sm:py-12 bg-forest-canvas min-h-screen pb-36">
@@ -64,6 +115,18 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
               <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-forest-header/90 text-forest-sage border border-forest-sage/40 backdrop-blur-sm">
                 {formatDuration(pkg.duration, lang)}
               </span>
+            </div>
+
+            {/* Share Trip Button Overlay */}
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6">
+              <button
+                type="button"
+                onClick={handleNativeOrWhatsAppShare}
+                className="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-forest-header/80 hover:bg-forest-header text-white border border-forest-sage/40 backdrop-blur-md transition shadow-md flex items-center gap-1.5 active:scale-95"
+                aria-label={t.shareTripBtn}
+              >
+                <span>{copiedLink ? t.shareCopiedNotice : `${t.shareTripBtn} →`}</span>
+              </button>
             </div>
 
             {/* Title & Regency at Bottom of Image */}
@@ -236,6 +299,36 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
               </p>
             </div>
 
+            {/* Share This Journey Card */}
+            <div className="p-4 rounded-2xl bg-forest-title border border-forest-primary/40 space-y-2.5">
+              <div className="text-[11px] font-extrabold uppercase text-forest-sage tracking-wider">
+                {t.shareTripTitle}
+              </div>
+              <p className="text-[11px] text-forest-pill/90 leading-relaxed">
+                {lang === "id"
+                  ? "Ajak teman atau keluarga berdiskusi mengenai paket perjalanan ini."
+                  : lang === "en"
+                  ? "Invite friends or family to explore and discuss this itinerary."
+                  : "Invita amici o familiari a scoprire questo itinerario."}
+              </p>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  type="button"
+                  onClick={handleDirectWhatsAppShare}
+                  className="w-full py-2.5 px-3 rounded-xl bg-forest-header hover:bg-forest-card text-forest-sage hover:text-white border border-forest-sage/30 text-xs font-bold transition text-center truncate"
+                >
+                  {t.shareWhatsAppBtn}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCopyLink}
+                  className="w-full py-2.5 px-3 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold transition text-center truncate"
+                >
+                  {copiedLink ? t.shareCopiedNotice : t.shareCopyLinkBtn}
+                </button>
+              </div>
+            </div>
+
             {/* Back to Catalog Link */}
             <div className="pt-2 text-center border-t border-forest-title">
               <Link
@@ -249,9 +342,9 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
         </div>
       </div>
 
-      {/* MOBILE STICKY BOTTOM BAR FOR INSTANT BOOKING */}
+      {/* MOBILE STICKY BOTTOM BAR FOR INSTANT BOOKING & SHARE */}
       <div className="lg:hidden fixed bottom-[64px] inset-x-0 z-30 px-3 pb-2 pointer-events-none">
-        <div className="max-w-lg mx-auto bg-forest-header text-white border-2 border-forest-sage/60 rounded-2xl p-3 shadow-2xl flex items-center justify-between gap-3 pointer-events-auto">
+        <div className="max-w-lg mx-auto bg-forest-header text-white border-2 border-forest-sage/60 rounded-2xl p-2.5 sm:p-3 shadow-2xl flex items-center justify-between gap-2 sm:gap-3 pointer-events-auto">
           <div className="min-w-0 flex-1">
             <div className="text-[10px] font-extrabold uppercase tracking-wider text-forest-sage truncate">
               {pkg.destinationNames}
@@ -265,13 +358,93 @@ export function PackageDetailView({ packageId }: PackageDetailViewProps) {
           </div>
           <button
             type="button"
+            onClick={handleNativeOrWhatsAppShare}
+            className="shrink-0 px-3 py-2.5 rounded-xl bg-forest-title hover:bg-forest-title/80 text-forest-sage border border-forest-sage/30 text-xs font-extrabold transition"
+            aria-label={t.shareTripBtn}
+          >
+            {copiedLink ? "✓ Disalin" : t.shareTripBtn}
+          </button>
+          <button
+            type="button"
             onClick={() => chooseRouteAndGoToGuides(pkg.id)}
-            className="shrink-0 px-4 py-2.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold shadow-md transition"
+            className="shrink-0 px-3.5 sm:px-4 py-2.5 rounded-xl bg-forest-primary hover:bg-forest-hover text-white text-xs font-extrabold shadow-md transition"
           >
             {lang === "id" ? "Pesan Rute →" : "Book Route →"}
           </button>
         </div>
       </div>
+
+      {/* SHARE TRIP MODAL */}
+      {showShareModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4"
+        >
+          <div className="bg-forest-header text-white border border-forest-sage/40 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 animate-in fade-in duration-200">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-extrabold text-white">
+                {t.shareTripTitle}
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowShareModal(false)}
+                className="w-8 h-8 rounded-full bg-forest-title hover:bg-forest-card text-forest-sage hover:text-white flex items-center justify-center text-sm font-bold transition"
+                aria-label="Tutup modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Trip Preview Card */}
+            <div className="flex items-center gap-3 p-3 rounded-2xl bg-forest-title/80 border border-forest-sage/20">
+              <img
+                src={pkg.image}
+                alt={pkg.destinationNames}
+                className="w-16 h-16 rounded-xl object-cover shrink-0"
+              />
+              <div className="min-w-0 flex-1">
+                <div className="text-[10px] font-extrabold uppercase text-forest-sage tracking-wider truncate">
+                  {formatRegency(pkg.regency, lang)} • {formatDuration(pkg.duration, lang)}
+                </div>
+                <div className="text-xs font-extrabold text-white line-clamp-2 leading-snug">
+                  {pkg.title[lang]}
+                </div>
+                <div className="text-xs font-bold text-forest-sage mt-0.5">
+                  {formatPrice(pkg.priceIdr, lang)} / pax
+                </div>
+              </div>
+            </div>
+
+            <p className="text-xs text-forest-pill/90 leading-relaxed">
+              {lang === "id"
+                ? "Bagikan paket rute ini langsung ke grup WhatsApp atau salin tautannya untuk didiskusikan bersama teman & keluarga."
+                : lang === "en"
+                ? "Share this journey directly to WhatsApp or copy the link to discuss with your travel companions."
+                : "Condividi questo itinerario su WhatsApp o copia il link per discuterne con amici e familiari."}
+            </p>
+
+            {/* Action Buttons */}
+            <div className="space-y-2.5 pt-1">
+              <button
+                type="button"
+                onClick={handleDirectWhatsAppShare}
+                className="w-full py-3 px-4 rounded-xl bg-forest-primary hover:bg-forest-hover text-white font-extrabold text-sm transition shadow-md flex items-center justify-center gap-2"
+              >
+                <span>{t.shareWhatsAppBtn}</span>
+                <span className="text-xs">→</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleCopyLink}
+                className="w-full py-3 px-4 rounded-xl bg-forest-title hover:bg-forest-card text-forest-sage hover:text-white border border-forest-sage/30 font-extrabold text-sm transition text-center"
+              >
+                {copiedLink ? t.shareCopiedNotice : t.shareCopyLinkBtn}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

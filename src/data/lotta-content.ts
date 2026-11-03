@@ -333,6 +333,12 @@ export const UI_TEXT: Record<
     oralHeritageSOP: string;
     exploreStoryCatalogLink: string;
     tourPackageAvailableBadge: string;
+    shareTripBtn: string;
+    shareTripTitle: string;
+    shareWhatsAppBtn: string;
+    shareCopyLinkBtn: string;
+    shareCopiedNotice: string;
+    shareTextGreeting: string;
   }
 > = {
   id: {
@@ -413,6 +419,12 @@ export const UI_TEXT: Record<
     oralHeritageSOP: "SOP Panduan Budaya LOTTA: Di lokasi destinasi, Pemandu Resmi HPI Anda akan menuturkan secara langsung sejarah lisan, filosofi penamaan bukit/pantai, serta tata krama adat Sasak yang hidup di kawasan ini.",
     exploreStoryCatalogLink: "Lihat Seluruh 12 Kisah Budaya di Katalog Cerita",
     tourPackageAvailableBadge: "Paket Tur Tersedia",
+    shareTripBtn: "Bagikan Trip",
+    shareTripTitle: "Bagikan Rute Perjalanan Ini",
+    shareWhatsAppBtn: "Kirim ke WhatsApp",
+    shareCopyLinkBtn: "Salin Tautan",
+    shareCopiedNotice: "✓ Tautan Berhasil Disalin!",
+    shareTextGreeting: "Rekomendasi Rute Trip Lombok dari LOTTA:",
   },
   en: {
     navHome: "Home",
@@ -492,6 +504,12 @@ export const UI_TEXT: Record<
     oralHeritageSOP: "LOTTA Cultural SOP: On-site at the destination, your licensed HPI guide will personally share the oral history, sacred place-name origins, and living Sasak customs of this landscape.",
     exploreStoryCatalogLink: "Browse All 12 Cultural Stories in Catalog",
     tourPackageAvailableBadge: "Official Tour",
+    shareTripBtn: "Share Trip",
+    shareTripTitle: "Share This Journey",
+    shareWhatsAppBtn: "Share to WhatsApp",
+    shareCopyLinkBtn: "Copy Link",
+    shareCopiedNotice: "✓ Link Copied to Clipboard!",
+    shareTextGreeting: "Lombok Trip Recommendation from LOTTA:",
   },
   it: {
     navHome: "Home",
@@ -571,6 +589,12 @@ export const UI_TEXT: Record<
     oralHeritageSOP: "SOP Culturale LOTTA: Sul posto, la guida ufficiale HPI narrerà direttamente la storia orale, il significato dei luoghi e le tradizioni locali Sasak.",
     exploreStoryCatalogLink: "Esplora Tutte le 12 Storie nel Catalogo",
     tourPackageAvailableBadge: "Tour Ufficiale",
+    shareTripBtn: "Condividi Tour",
+    shareTripTitle: "Condividi Questo Tour",
+    shareWhatsAppBtn: "Condividi su WhatsApp",
+    shareCopyLinkBtn: "Copia Link",
+    shareCopiedNotice: "✓ Link Copiato!",
+    shareTextGreeting: "Raccomandazione di Viaggio a Lombok da LOTTA:",
   },
 };
 
